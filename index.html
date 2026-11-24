@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Natural Healing Atlas — A free guide to natural health options, read with modern evidence</title>
+<meta name="description" content="Free educational guide to natural health options by condition, with what Dr. Sebi, Gerson, Ehret, Morse, O'Neill and Jensen taught, what modern evidence says, and when to see a doctor.">
+<meta property="og:title" content="Natural Healing Atlas">
+<meta property="og:description" content="Natural options by condition, credited to the practitioners who taught them and graded against modern evidence. Free, no ads, no sign-up.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#121715">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23121715'/%3E%3Cpath d='M16 5c6 3.5 9 9 5.500 16-2 3.500-5.500 6-5.500 7 0-1-3.500-3.500-5.500-7C7 14 10 8.500 16 5Z' fill='%23cfa96e'/%3E%3C/svg%3E">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        obsidian: { 950: '#0b0e0d', 900: '#121715', 800: '#1a221f', 700: '#26312d' },
+        alabaster: { 50: '#ffffff', 100: '#faf9f6', 200: '#f3f1ec', 300: '#e6e2d8' },
+        sage: { 50: '#f1f6f4', 100: '#dce8e3', 200: '#b8d1c7', 600: '#275c4d', 700: '#1d473b', 800: '#14332a' },
+        champagne: { 300: '#e5cfa8', 400: '#cfa96e', 500: '#b48a4e', 600: '#936d38' }
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+<style>
+  :root {
+    --bg-canvas: #faf9f6;
+    --ink-primary: #141917;
+    --ink-muted: #525c58;
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(20, 25, 23, 0.08);
+    --glass-shadow: 0 8px 32px rgba(17, 23, 21, 0.06);
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(at 0% 0%, rgba(180, 138, 78, 0.07) 0px, transparent 48%),
+      radial-gradient(at 100% 15%, rgba(39, 92, 77, 0.06) 0px, transparent 52%);
+    color: var(--ink-primary);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .serif {
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: -0.015em;
+  }
+
+  /* View Transitions */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Lens Visibility */
+  body[data-lens="trad"] .modern { display: none !important; }
+  body[data-lens="modern"] .trad { display: none !important; }
+
+  /* Glassmorphism Surfaces */
+  .glass-header {
+    background: rgba(250, 249, 246, 0.78);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 10px 30px -10px rgba(18, 23, 21, 0.1), 0 1px 3px rgba(18, 23, 21, 0.04);
+  }
+
+  .glass-pill-bar {
+    background: rgba(20, 25, 23, 0.045);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(20, 25, 23, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(20, 25, 23, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px -4px rgba(18, 23, 21, 0.04);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px -8px rgba(18, 23, 21, 0.09);
+    border-color: rgba(180, 138, 78, 0.35);
+  }
+
+  /* Glass Pills & Tags */
+  .pill-btn {
+    padding: 0.45rem 1.05rem;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #26312d;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(20, 25, 23, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  .pill-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(180, 138, 78, 0.45);
+    transform: translateY(-1px);
+  }
+  .pill-btn.on {
+    background: #121715;
+    color: #faf9f6;
+    border-color: #121715;
+    box-shadow: 0 4px 14px rgba(18, 23, 21, 0.2);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: rgba(20, 25, 23, 0.045);
+    border: 1px solid rgba(20, 25, 23, 0.07);
+    color: #26312d;
+    margin: 2px 4px 2px 0;
+  }
+
+  /* Evidence Badges */
+  .ev {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 3px 11px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(8px);
+  }
+  .ev-some { background: rgba(39, 92, 77, 0.11); color: #14332a; border: 1px solid rgba(39, 92, 77, 0.22); }
+  .ev-limited { background: rgba(180, 138, 78, 0.14); color: #755320; border: 1px solid rgba(180, 138, 78, 0.28); }
+  .ev-none { background: rgba(163, 62, 48, 0.1); color: #7a261b; border: 1px solid rgba(163, 62, 48, 0.22); }
+  .ev-harm { background: #8c2318; color: #ffffff; border: 1px solid #6e1910; }
+
+  /* Reasoning Callouts */
+  .lensL {
+    border-left: 2.5px solid #b48a4e;
+    padding: 6px 0 6px 14px;
+    background: linear-gradient(90deg, rgba(180, 138, 78, 0.05) 0%, transparent 100%);
+    border-radius: 0 8px 8px 0;
+  }
+  .lensM {
+    border-left: 2.5px solid #275c4d;
+    padding: 6px 0 6px 14px;
+    background: linear-gradient(90deg, rgba(39, 92, 77, 0.05) 0%, transparent 100%);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* Matrix Table */
+  table.mx { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 680px; }
+  table.mx th, table.mx td {
+    padding: 15px 18px;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(20, 25, 23, 0.07);
+    font-size: 13.5px;
+    line-height: 1.55;
+    text-align: left;
+  }
+  table.mx td:first-child, table.mx th:first-child {
+    position: sticky;
+    left: 0;
+    background: rgba(250, 249, 246, 0.96);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    font-weight: 600;
+    min-width: 150px;
+    color: #121715;
+    border-right: 1px solid rgba(20, 25, 23, 0.07);
+  }
+  table.mx thead th {
+    background: #121715;
+    color: #faf9f6;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  table.mx thead th:first-child { background: #0b0e0d; color: #cfa96e; font-family: "Plus Jakarta Sans", sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Nav Pills */
+  .navlink {
+    padding: 0.42rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a4440;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .navlink:hover { color: #121715; background: rgba(20, 25, 23, 0.05); }
+  .navlink.active {
+    background: #121715;
+    color: #faf9f6;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(18, 23, 21, 0.18);
+  }
+
+  /* Form Controls */
+  input, select {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(20, 25, 23, 0.12);
+    border-radius: 12px;
+    padding: 0.55rem 0.85rem;
+    font-size: 13.5px;
+    width: 100%;
+    color: #141917;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: #b48a4e;
+    box-shadow: 0 0 0 3px rgba(180, 138, 78, 0.15);
+    background: #ffffff;
+  }
+
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .ph { cursor: pointer; transition: all 0.2s ease; }
+  .gauge{position:relative;height:22px;border-radius:11px;background:linear-gradient(90deg,#a33e30,#e3c35c 50%,#2f5a43)}
+  .gband{position:absolute;top:-5px;bottom:-5px;border:2px solid #12271e;border-radius:6px;background:rgba(255,255,255,.28)}
+  .gmk{position:absolute;top:-9px;width:5px;height:40px;background:#12271e;border-radius:3px;transform:translateX(-50%);transition:left .8s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 0 2px #fbf7ec}
+  .gtick{position:absolute;font-size:11px;color:#4a4a3f;transform:translateX(-50%)}
+  .bar{height:8px;border-radius:4px;background:#e9ddc0;overflow:hidden}.bar>i{display:block;height:100%;background:#2f5a43;border-radius:4px;transition:width .7s ease}
+  mark.cm{background:#f4b9a8;color:#5a1a0b;padding:0 2px;border-radius:3px}
+  .flagcard{border-left:6px solid #a33e30}.okcard{border-left:6px solid #2f5a43}
+  .fl{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#a33e30;color:#fff;margin:2px 3px 2px 0}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .skip{position:absolute;left:-999px;top:8px;z-index:100;background:#121715;color:#fff;padding:8px 14px;border-radius:9999px;font-size:13px}
+  .skip:focus{left:12px}
+  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #b48a4e;outline-offset:2px}
+  #toTop{position:fixed;right:16px;bottom:16px;z-index:50;display:none}
+  @media print{
+    .no-print,header,nav,#lensBarM,#toTop,footer button{display:none!important}
+    body{background:#fff}.sticky{position:static!important}
+    .view{display:none!important}.view.active{display:block!important;animation:none}
+    .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;backdrop-filter:none}
+    details>*{display:block}
+  }
+</style>
+</head>
+<body data-lens="both">
+<a href="#main" class="skip" id="skipLink">Skip to content</a>
+<noscript><p style="padding:16px;text-align:center">This guide needs JavaScript to display its content.</p></noscript>
+
+<!-- TOP EDUCATIONAL BANNER -->
+<div class="bg-obsidian-950 text-alabaster-200 text-xs px-4 py-2 text-center leading-snug border-b border-white/10 no-print" role="note">
+  <span class="inline-block w-1.5 h-1.5 rounded-full bg-champagne-400 mr-1.5 align-middle"></span>
+  <strong class="text-white font-semibold">Free educational guide, not medical advice.</strong> Use natural options alongside your doctor’s care, never instead of it; none of these protocols is proven to cure disease. <a href="#safety" class="text-champagne-300 underline hover:text-white ml-1 font-medium">Safety &amp; evidence guidelines →</a>
+</div>
+
+<!-- FLOATING GLASSIFIED HEADER -->
+<div class="sticky top-3 z-40 px-3 sm:px-6 pt-3 pointer-events-none">
+  <header class="glass-header max-w-7xl mx-auto rounded-full px-4 sm:px-6 py-2.5 pointer-events-auto transition-all">
+    <div class="flex items-center justify-between gap-3">
+      <!-- Brand -->
+      <a href="#home" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-8 h-8 rounded-full bg-obsidian-900 flex items-center justify-center shadow-sm group-hover:bg-sage-700 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+            <path d="M16 3c7 4 10 10 6 18-2 4-6 7-6 8 0-1-4-4-6-8C6 13 9 7 16 3Z" fill="#cfa96e"/>
+            <path d="M16 8v20" stroke="#121715" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="serif text-xl sm:text-2xl font-bold text-obsidian-900 tracking-tight">Natural Healing Atlas</span>
+      </a>
+
+      <!-- Desktop Glass Pill Nav -->
+      <nav class="hidden xl:flex items-center gap-1 p-1 rounded-full glass-pill-bar" id="navD"></nav>
+
+      <!-- Right Controls: Lens Switcher Pill + Mobile Trigger -->
+      <div class="flex items-center gap-2.5">
+        <div class="hidden sm:flex items-center p-1 rounded-full glass-pill-bar text-xs" id="lensBar" aria-label="Reasoning lens">
+          <button data-l="trad" class="px-3 py-1 rounded-full transition-all">Traditional</button>
+          <button data-l="both" class="px-3 py-1 rounded-full transition-all">Both</button>
+          <button data-l="modern" class="px-3 py-1 rounded-full transition-all">Modern</button>
+        </div>
+        <button id="burger" class="xl:hidden p-2 rounded-full hover:bg-black/5 text-obsidian-900 transition" aria-label="Menu">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h14M4 12h14M4 17h14"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Glass Panel -->
+  <div id="navM" class="hidden xl:hidden max-w-7xl mx-auto mt-2 glass-header rounded-3xl p-4 flex-col gap-1.5 pointer-events-auto shadow-xl"></div>
+</div>
+
+<!-- Mobile Lens Bar -->
+<div class="sm:hidden px-4 pt-3 flex justify-center">
+  <div class="inline-flex items-center p-1 rounded-full glass-pill-bar text-xs" id="lensBarM">
+    <button data-l="trad" class="px-3.5 py-1 rounded-full transition-all">Traditional</button>
+    <button data-l="both" class="px-3.5 py-1 rounded-full transition-all">Both</button>
+    <button data-l="modern" class="px-3.5 py-1 rounded-full transition-all">Modern</button>
+  </div>
+</div>
+
+<main id="main" tabindex="-1" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+
+<!-- HOME -->
+<section id="view-home" class="view">
+  <div class="rounded-[28px] bg-gradient-to-br from-obsidian-950 via-obsidian-900 to-sage-800 text-alabaster-100 p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-2xl border border-white/10">
+    <div class="absolute -right-8 -bottom-16 opacity-[0.06] text-[300px] serif select-none pointer-events-none">❦</div>
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-champagne-300 text-xs font-medium tracking-wider uppercase mb-6">
+      A free guide · no ads · no sign-up
+    </div>
+    <h1 class="text-4xl sm:text-6xl font-bold leading-[1.1] max-w-3xl text-white">
+      Natural options for your health, read alongside modern evidence.
+    </h1>
+    <p class="mt-6 max-w-2xl text-alabaster-300 text-base sm:text-lg leading-relaxed">
+      Look up a condition, a food or a herb. See what Dr. Sebi, Arnold Ehret, Dr. Robert Morse, Max Gerson, Barbara O'Neill and Bernard Jensen taught, in their own names, and what clinical science says today.
+    </p>
+    <div class="mt-9 flex flex-wrap gap-3.5">
+      <a href="#conditions" class="px-6 py-3 rounded-full bg-champagne-400 text-obsidian-950 font-semibold text-sm hover:bg-champagne-300 transition shadow-lg shadow-champagne-500/20">
+        Find options for a condition
+      </a>
+      <a href="#terrain" class="px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-sm hover:bg-white/20 transition">
+        Compare Practitioners
+      </a>
+      <a href="#protocols" class="px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-sm hover:bg-white/20 transition">
+        Explore Complex Protocols
+      </a>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8" id="homeCards"></div>
+
+  <div class="card p-7 sm:p-9 mt-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-2 border-b border-black/5 pb-5">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Methodology</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-obsidian-900 mt-1">How to read this atlas</h2>
+      </div>
+      <p class="text-xs text-stone-500">Use the floating glass lens pill in the header to filter explanations globally.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mt-6">
+      <div>
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Every module presents two parallel frameworks. <span class="font-semibold text-champagne-600">Traditional naturopathic reasoning</span> captures the practitioner's internal logic, while the <span class="font-semibold text-sage-700">modern biochemical parallel</span> examines the exact same mechanism through human physiology and clinical evidence.
+        </p>
+        <div class="mt-5 space-y-3 text-sm">
+          <div class="lensL"><strong class="text-obsidian-900">Traditional:</strong> "Mucus and acid clog the body; clear them and the body self-heals."</div>
+          <div class="lensM"><strong class="text-obsidian-900">Modern:</strong> "Diet changes urinary pH and net acid load, while blood pH stays tightly buffered at 7.35–7.45."</div>
+        </div>
+      </div>
+
+      <div class="bg-alabaster-200/60 rounded-2xl p-5 border border-black/5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-obsidian-900 mb-3">Evidence Grading Scale</p>
+        <div class="space-y-2.5 text-sm text-stone-700">
+          <div class="flex items-start gap-2.5"><span class="ev ev-some shrink-0 mt-0.5">Some support</span><span>Plausible mechanism with human clinical evidence for a related benefit.</span></div>
+          <div class="flex items-start gap-2.5"><span class="ev ev-limited shrink-0 mt-0.5">Limited</span><span>Preliminary, animal/in-vitro data, or primarily historical/traditional use.</span></div>
+          <div class="flex items-start gap-2.5"><span class="ev ev-none shrink-0 mt-0.5">Unsupported</span><span>No credible clinical evidence, or directly contradicted by physiology.</span></div>
+          <div class="flex items-start gap-2.5"><span class="ev ev-harm shrink-0 mt-0.5">Safety concern</span><span>Documented serious organ toxicity, interaction, or clinical harm.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERRAIN HUB -->
+<section id="view-terrain" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Comparative Matrix</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Philosophy &amp; Terrain Hub</h2>
+  <p class="mt-2 text-stone-600 max-w-3xl text-sm sm:text-base">Toggle practitioner pills below to compare core theories, dietary rules, targeted organs, and clinical risk profiles side by side.</p>
+
+  <div class="flex flex-wrap gap-2 mt-6" id="pChips"></div>
+  <div class="card mt-5 overflow-x-auto"><table class="mx" id="matrix"></table></div>
+
+  <div class="grid lg:grid-cols-2 gap-6 mt-8">
+    <div class="card p-7">
+      <h3 class="text-3xl font-bold text-obsidian-900">Terrain theory vs. germ theory</h3>
+      <div class="mt-5 space-y-4 text-sm text-stone-700 leading-relaxed">
+        <div class="lensL"><strong class="text-obsidian-900">Terrain theory (traditional):</strong> Disease follows an internal environment of congestion, acidity, and mineral depletion. Microbes flourish in a compromised terrain, so the remedy is to purify the internal milieu.</div>
+        <div class="lensM"><strong class="text-obsidian-900">Germ theory (modern):</strong> Specific pathogens cause specific infectious diseases. Host resilience (nutrition, immunity, microbiome) modulates severity, but an alkaline diet cannot prevent tuberculosis, HIV, or malaria—and most chronic conditions are non-infectious.</div>
+        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200/70 text-obsidian-900">
+          <strong>Clinical Synthesis:</strong> The valid kernel of terrain thinking is <em>host resilience</em>. Diet quality, sleep, metabolic health, and microbiome diversity measurably reduce chronic disease risk, though terrain does not replace antimicrobials or vaccines.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <h3 class="text-3xl font-bold text-obsidian-900">The emunctories ("channels of elimination")</h3>
+      <div id="emunct" class="mt-5 space-y-4 text-sm text-stone-700"></div>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-6 mt-6">
+    <div class="card p-7"><h3 class="text-3xl font-bold text-obsidian-900">Common threads</h3><ul id="threads" class="mt-4 space-y-2.5 text-sm text-stone-700 list-disc pl-5 leading-relaxed"></ul></div>
+    <div class="card p-7"><h3 class="text-3xl font-bold text-obsidian-900">Where they diverge</h3><ul id="diverge" class="mt-4 space-y-2.5 text-sm text-stone-700 list-disc pl-5 leading-relaxed"></ul></div>
+  </div>
+</section>
+
+<!-- DATABASE -->
+<section id="view-database" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Apothecary &amp; Nutrition</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Food &amp; Botanical Database</h2>
+  <p class="mt-2 text-stone-600 max-w-3xl text-sm sm:text-base">Foods and medicinal herbs across these traditions, indexed by practitioner, organ system, mineral profile, preparation method, and evidence grade.</p>
+
+  <div class="card p-5 mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+    <div class="lg:col-span-2"><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Search</label><input id="q" placeholder="Name, Latin binomial, compound, or action (e.g. iodine, bile, nettle)…"></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Category</label><select id="fKind"><option value="">All entries</option><option>Food</option><option>Herb</option></select></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Practitioner</label><select id="fP"></select></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Organ system</label><select id="fO"></select></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Mineral</label><select id="fM"></select></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Preparation</label><select id="fPr"></select></div>
+    <div><label class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Evidence grade</label><select id="fE"><option value="">All grades</option><option value="some">Some support</option><option value="limited">Limited</option><option value="none">Unsupported</option><option value="harm">Safety concern</option></select></div>
+  </div>
+
+  <div class="card p-5 mt-5 border-l-8 border-[#a33e30]">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <h3 class="text-2xl font-semibold text-[#8c2318]">Check contraindications</h3>
+      <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" id="hideFlag" style="width:auto"> Hide entries with a matching caution</label>
+    </div>
+    <p class="text-xs text-stone-700 mt-1">Select any that apply. Entries whose listed cautions mention that condition are flagged and the matching words are highlighted. A missing flag does not mean an item is safe; confirm with your prescriber or pharmacist.</p>
+    <div id="condChips" class="flex flex-wrap gap-2 mt-3"></div>
+    <p id="condMsg" class="text-sm font-semibold mt-3 text-[#8c2318]"></p>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 mt-5">
+    <p id="count" class="text-sm font-semibold text-obsidian-900"></p>
+    <div class="flex items-center gap-2">
+      <button class="pill-btn" id="toggleAll">Expand all cards</button>
+      <button class="pill-btn" id="reset">Reset filters</button>
+    </div>
+  </div>
+  <p class="text-xs text-stone-500 mt-2">Tip: expand all cards, then use the Traditional / Both / Modern pill in the header to see the lens change on every card.</p>
+  <div id="dbGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4"></div>
+</section>
+
+<!-- PROTOCOLS -->
+<section id="view-protocols" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Phased Clinical Frameworks</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Complex Disorder Protocol Explorer</h2>
+  <p class="mt-2 text-stone-600 max-w-3xl text-sm sm:text-base">Explore how traditional three-phase frameworks (Drainage, Deep Detoxification, Mineralization) map onto four chronic condition categories, paired with evidence verdicts and safety boundaries.</p>
+
+  <div class="flex flex-wrap gap-2 mt-6" id="catTabs"></div>
+  <div id="catBody" class="mt-6"></div>
+  <div id="apo" class="mt-12"></div>
+</section>
+
+<!-- PHYSIOLOGY -->
+<section id="view-physiology" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Biochemical Translation</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Physiology vs. Naturopathic Reasoning</h2>
+  <p class="mt-2 text-stone-600 max-w-3xl text-sm sm:text-base">Thirteen foundational naturopathic concepts translated side-by-side into modern human physiology. Filter by evidence grade below.</p>
+
+  <div class="card p-7 mt-6" id="sim">
+    <h3 class="text-3xl font-semibold text-obsidian-900">Interactive pH homeostasis simulator</h3>
+    <p class="text-sm mt-2 max-w-3xl">Diet can move <b>urine</b> pH across a wide range because the kidneys excrete the acid or base load. <b>Blood</b> pH is held at 7.35–7.45 by three tiers working at different speeds. Choose a challenge, then step through time to see which tier carries the load.</p>
+    <div id="simStates" class="flex flex-wrap gap-2 mt-4"></div>
+    <div class="flex flex-wrap items-center gap-2 mt-3"><span class="text-xs font-semibold text-stone-600">Time after the challenge:</span><div id="simTimes" class="flex gap-2 flex-wrap"></div></div>
+    <div class="grid md:grid-cols-2 gap-8 mt-6">
+      <div><div class="flex items-baseline justify-between gap-2 flex-wrap mb-3"><h4 class="font-semibold text-sage-700">Blood pH</h4><div id="bloodVal"></div></div>
+        <div class="gauge"><div class="gband" style="left:43.75%;width:12.5%"></div><div class="gmk" id="bloodMk" style="left:50%"></div></div>
+        <div class="relative h-5 mt-2"><span class="gtick" style="left:0;transform:none">7.0</span><span class="gtick" style="left:50%">7.35–7.45 target</span><span class="gtick" style="right:0;left:auto;transform:none">7.8</span></div></div>
+      <div><div class="flex items-baseline justify-between gap-2 flex-wrap mb-3"><h4 class="font-semibold text-sage-700">Urine pH</h4><div id="urineVal"></div></div>
+        <div class="gauge"><div class="gmk" id="urineMk" style="left:50%"></div></div>
+        <div class="relative h-5 mt-2"><span class="gtick" style="left:0;transform:none">4.5</span><span class="gtick" style="left:14.3%">5</span><span class="gtick" style="left:42.9%">6</span><span class="gtick" style="left:71.4%">7</span><span class="gtick" style="right:0;left:auto;transform:none">8.0</span></div></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 mt-6" id="simTiers"></div>
+    <div id="simTake" class="mt-4 p-3 rounded-lg bg-sage-50 border border-sage-200/70 text-sm"></div>
+    <p class="text-xs text-stone-600 mt-3">Simplified teaching model with typical values; real numbers vary with age, drugs and disease. A blood pH outside 7.35–7.45 from disease (diabetic ketoacidosis, sepsis, kidney failure, severe lung disease) is a medical emergency and is not caused by diet.</p>
+  </div>
+
+  <div class="flex flex-wrap gap-2 mt-6" id="vChips"></div>
+  <div id="physList" class="grid gap-4 mt-4"></div>
+</section>
+
+<!-- SAFETY -->
+<section id="view-safety" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-[#8c2318]">Clinical Boundaries</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Safety, Evidence &amp; Disclaimer</h2>
+
+  <div class="card p-7 mt-6 border-l-4 border-[#8c2318]">
+    <h3 class="text-2xl font-bold text-[#8c2318]">Essential clinical &amp; historical context</h3>
+    <ul class="mt-4 text-sm text-stone-700 space-y-2.5 list-disc pl-5 leading-relaxed">
+      <li>This atlas is compiled strictly for historical, educational, and research purposes. It is not medical advice and establishes no clinician–patient relationship.</li>
+      <li>No diet, herbal formula, fast, or cleanse described here has been proven to cure cancer, autoimmune disease, diabetes, or neurodegenerative conditions.</li>
+      <li>Patients who chose alternative therapies alone for curable cancers experienced roughly 2.5 times higher mortality in a large 2018 cohort study (<em>J Natl Cancer Inst</em>), driven by delaying or refusing evidence-based oncology care.</li>
+      <li>Botanicals are pharmacologically active compounds that interact with prescription medications and can injure the liver, kidneys, or heart.</li>
+      <li>Dr. Sebi (Alfredo Bowman) held no medical degree. In 1987 New York charged him with practising medicine without a licence after advertising an AIDS cure; he was acquitted in 1988 on grounds that the state had not proved he made a medical diagnosis, and a subsequent civil consent agreement barred therapeutic cure claims for his products.</li>
+    </ul>
+  </div>
+
+  <h3 class="text-3xl font-bold text-obsidian-900 mt-8">Documented high-risk items in these traditions</h3>
+  <div id="risks" class="grid md:grid-cols-2 gap-4 mt-4"></div>
+
+  <div class="card p-7 mt-8 bg-obsidian-900 text-alabaster-100 border-white/10">
+    <h3 class="text-2xl font-bold text-white">When to seek urgent medical care</h3>
+    <p class="text-sm text-alabaster-300 mt-2.5 leading-relaxed">
+      Seek immediate medical evaluation for chest pain, shortness of breath, confusion, fainting, persistent vomiting, severe diarrhoea, dark urine or jaundice, black or bloody stool, unexplained lumps, unintentional weight loss, symptomatic hyperglycaemia, or new neurological symptoms. Always consult your prescriber before combining herbs or fasting with insulin, sulfonylureas, anticoagulants, immunosuppressants, ACE inhibitors, diuretics, lithium, or digoxin.
+    </p>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="view-sources" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Citations</span>
+  <h2 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Primary Sources &amp; Evidence</h2>
+  <p class="mt-2 text-stone-700 max-w-3xl">The key references behind the claims in this atlas. Journal citations were written from my own knowledge, not retrieved live, so verify each in PubMed before relying on or citing it. Web links were found in a source check on 24 November 2026.</p>
+  <div id="srcBody" class="grid lg:grid-cols-2 gap-6 mt-6"></div>
+  <div class="card p-6 mt-6"><h3 class="text-2xl font-semibold text-obsidian-900">How evidence grades were assigned</h3>
+    <ul class="mt-3 text-sm space-y-2 list-disc pl-5">
+      <li><span class="ev ev-some">Some support</span> A plausible mechanism plus at least some human trial or cohort evidence for a related benefit.</li>
+      <li><span class="ev ev-limited">Limited</span> Laboratory, animal or small-trial data, or mainly traditional use.</li>
+      <li><span class="ev ev-none">Unsupported</span> No credible evidence, or contradicted by it.</li>
+      <li><span class="ev ev-harm">Safety concern</span> Documented serious harm, such as organ injury or death.</li>
+      <li>Grades judge the specific health claim, not whether the food is otherwise nutritious.</li>
+    </ul></div>
+</section>
+
+<!-- CONDITIONS -->
+<section id="view-conditions" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Find natural options by condition</span>
+  <h1 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Conditions A–Z</h1>
+  <p class="mt-2 text-stone-700 max-w-3xl text-sm sm:text-base">Twelve common conditions. Each page shows what the named practitioners taught, what modern evidence supports, which natural measures are reasonably safe to try alongside medical care, and when to see a doctor. Every traditional statement is credited to the person who made it.</p>
+  <div class="card p-4 mt-5 border-l-8 border-[#a33e30] text-sm text-stone-800"><b>Read first:</b> natural options here are meant to sit <u>beside</u> your doctor’s plan, not replace it. Never stop prescribed medicines because of something you read on this site. If you have a red-flag symptom listed under “See a doctor”, get care first.</div>
+  <div class="grid sm:grid-cols-3 gap-3 mt-5">
+    <div class="sm:col-span-2"><label for="cq" class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Search conditions</label><input id="cq" placeholder="e.g. diabetes, eczema, constipation, blood pressure"></div>
+    <div class="flex items-end"><button class="pill-btn w-full" id="printCond">Print / save as PDF</button></div>
+  </div>
+  <p id="ccount" class="text-sm font-semibold text-obsidian-900 mt-4" aria-live="polite"></p>
+  <div id="condList" class="grid lg:grid-cols-2 gap-4 mt-3"></div>
+</section>
+
+<!-- LEARN: GLOSSARY + FAQ -->
+<section id="view-learn" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Reference</span>
+  <h1 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Glossary &amp; FAQ</h1>
+  <div class="card p-6 mt-6"><h2 class="text-3xl font-semibold text-obsidian-900">Frequently asked questions</h2><div id="faq" class="mt-3 divide-y divide-black/5"></div></div>
+  <div class="card p-6 mt-6">
+    <div class="flex flex-wrap items-end justify-between gap-3"><h2 class="text-3xl font-semibold text-obsidian-900">Glossary</h2>
+      <div class="w-full sm:w-72"><label for="gq" class="sr-only">Filter glossary</label><input id="gq" placeholder="Filter terms"></div></div>
+    <dl id="gloss" class="mt-3 grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm"></dl>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="view-about" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">About this guide</span>
+  <h1 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">About the Natural Healing Atlas</h1>
+  <div class="grid lg:grid-cols-3 gap-6 mt-6">
+    <div class="card p-6 lg:col-span-2 space-y-4 text-sm leading-relaxed text-stone-800">
+      <h2 class="text-2xl font-semibold text-obsidian-900">Our aim</h2>
+      <p>This is a free guide for people who want to understand natural approaches to health. It lets you look up a condition or a food or herb, see what well-known natural-health teachers claimed about it, and see what science says today. Nothing is sold here: no supplements, no ads, no sponsors, no sign-up.</p>
+      <h2 class="text-2xl font-semibold text-obsidian-900 pt-2">Who the statements come from</h2>
+      <p>The guide does not invent new treatments. Traditional statements are credited by name to the practitioner who taught them: Dr. Sebi, Arnold Ehret, Dr. Robert Morse, Dr. Max Gerson, Barbara O’Neill and Dr. Bernard Jensen. “Modern” statements summarise mainstream clinical and physiological literature and are labelled as such. The two are kept apart so you can always tell a belief from a finding.</p>
+      <h2 class="text-2xl font-semibold text-obsidian-900 pt-2">How evidence is graded</h2>
+      <p>Each entry and doctrine carries one of four grades: some support, limited, unsupported, or safety concern. The grade judges the specific health claim, not whether a food is nutritious. The method is explained on the <a class="underline" href="#sources">Sources</a> page.</p>
+      <h2 class="text-2xl font-semibold text-obsidian-900 pt-2">Editorial standards</h2>
+      <ul class="list-disc pl-5 space-y-1.5">
+        <li>No doses and no treatment schedules. Dosing needs a clinician who knows you.</li>
+        <li>Every condition page lists red-flag symptoms and the medicines it can clash with.</li>
+        <li>Statements about real people (credentials, court and regulatory history) cite a record and are corrected when a better source appears.</li>
+        <li>Journal citations are listed for checking; verify any you plan to rely on in PubMed.</li>
+        <li>This guide has not yet been reviewed by an independent clinical panel. Treat it as a well-organised starting point, and ask your own clinician about anything you act on.</li>
+      </ul>
+    </div>
+    <aside class="space-y-4">
+      <div class="card p-5"><h2 class="text-xl font-semibold text-obsidian-900">At a glance</h2>
+        <dl class="text-sm mt-2 space-y-1.5"><div class="flex justify-between"><dt class="text-stone-600">Practitioners</dt><dd class="font-semibold">6</dd></div><div class="flex justify-between"><dt class="text-stone-600">Foods &amp; herbs</dt><dd class="font-semibold" id="aDB"></dd></div><div class="flex justify-between"><dt class="text-stone-600">Conditions</dt><dd class="font-semibold" id="aCond"></dd></div><div class="flex justify-between"><dt class="text-stone-600">Last reviewed</dt><dd class="font-semibold">24 Nov 2026</dd></div><div class="flex justify-between"><dt class="text-stone-600">Cost</dt><dd class="font-semibold">Free</dd></div></dl></div>
+      <div class="card p-5 text-sm"><h2 class="text-xl font-semibold text-obsidian-900">Found a mistake?</h2><p class="mt-1.5 text-stone-700">Please tell the person who shared this site with you, with the page name and the source you are relying on. Evidence-backed corrections are applied and the review date above is updated.</p></div>
+      <div class="card p-5 text-sm"><h2 class="text-xl font-semibold text-obsidian-900">Legal</h2><p class="mt-1.5"><a class="underline" href="#terms">Terms, privacy &amp; disclaimer</a></p></div>
+    </aside>
+  </div>
+</section>
+
+<!-- TERMS & PRIVACY -->
+<section id="view-terms" class="view">
+  <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Legal</span>
+  <h1 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Terms, Privacy &amp; Disclaimer</h1>
+  <div class="card p-6 mt-6 space-y-4 text-sm leading-relaxed text-stone-800 max-w-4xl">
+    <h2 class="text-2xl font-semibold text-obsidian-900">Medical disclaimer</h2>
+    <p>The Natural Healing Atlas is an educational resource. It is not medical advice, diagnosis or treatment, and it does not create a doctor–patient relationship. Nothing here is proven to cure any disease. Do not delay or stop medical care, and do not change or stop prescribed medicines, because of anything on this site. If you think you have an emergency, call your local emergency number.</p>
+    <h2 class="text-2xl font-semibold text-obsidian-900">Statements by practitioners</h2>
+    <p>Where a claim is credited to a named practitioner, it records what that person taught or published. Its inclusion is not an endorsement and is not a claim that it is true. Evidence grades show how far current science supports each claim.</p>
+    <h2 class="text-2xl font-semibold text-obsidian-900">Use of the site</h2>
+    <p>The site is provided free and “as is”, without warranties of any kind. To the fullest extent the law allows, its authors and publisher are not liable for loss or harm arising from use of, or reliance on, the content. Content may be out of date; check the review date and the cited sources. You may share links and print pages for personal, non-commercial use.</p>
+    <h2 class="text-2xl font-semibold text-obsidian-900">Privacy</h2>
+    <ul class="list-disc pl-5 space-y-1.5">
+      <li>There are no accounts, no forms, no advertising and no analytics on this site, and it sets no cookies of its own. Your searches and filter choices stay in your browser and are not sent anywhere.</li>
+      <li>The page loads fonts from Google Fonts and a styling library from the Tailwind CDN, so those providers can see your IP address and browser details under their own policies.</li>
+      <li>The site is hosted on Vercel, which keeps standard server logs (such as IP address and requested page) for security and operation.</li>
+    </ul>
+    <h2 class="text-2xl font-semibold text-obsidian-900">Changes</h2>
+    <p>These terms may be updated. The last review date appears on the About page and in the footer.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-obsidian-950 text-alabaster-300 text-xs mt-16 border-t border-white/10 no-print">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid md:grid-cols-3 gap-8">
+    <div class="space-y-2.5">
+      <p class="serif text-2xl text-white font-semibold">The Natural Healing Atlas</p>
+      <p class="leading-relaxed">A free educational guide. Not medical advice; it does not replace diagnosis or treatment by a licensed clinician. Doses are deliberately omitted. If you think you have an emergency, call your local emergency number.</p>
+      <p class="text-stone-500">Last reviewed 24 Nov 2026 · No ads · No tracking</p>
+    </div>
+    <nav aria-label="Footer" class="grid grid-cols-2 gap-x-6 gap-y-1.5 content-start" id="footNav"></nav>
+    <div class="space-y-3"><button class="pill-btn" onclick="window.print()">Print this page</button>
+      <p class="text-stone-500">Verify interactions against primary literature and ask your pharmacist or doctor before combining any herb with medicine.</p></div>
+  </div>
+</footer>
+<button id="toTop" class="pill-btn no-print" aria-label="Back to top">↑ Top</button>
+
+<script>
+/* ============ DATA ============ */
+const PR = {
+  Sebi:{name:'Dr. Sebi',full:'Alfredo Bowman ("Dr. Sebi")',
+    era:'1933–2016 · Honduras / USA. No medical degree. Ran the Usha Research Institute (court records also name the Ogun Herbal Research Institute) and a treatment centre in Honduras.',
+    theory:'All disease is mucus accumulating in an organ (bronchitis in the lungs, "pancreatic" diabetes, and so on). Mucus plus acidity is the root cause. The "African Bio-Mineral Balance" holds that the body needs a set of 102 minerals, and that "hybrid" or acidic foods lead to mineral loss and mucus.',
+    diet:'Approved Nutritional Guide: "electric" (alkaline, non-hybrid) foods only, such as burro bananas, key limes, Seville oranges, amaranth greens, nopales, kale, spelt, kamut, teff and walnuts. No animal products, dairy, seedless or hybridised fruit, canned, or microwaved food. About 1 gallon of spring water daily.',
+    organs:'Lymph, colon, kidney, liver, lungs (by mucus site)',
+    herbs:'Sea moss, bladderwrack, burdock, sarsaparilla, chaparral, dandelion, yellow dock, cascara sagrada, elderberry, nettle, blue vervain; "cell food" supplement compounds; "intra-cellular cleansing" and chelation of toxins.',
+    modern:'The 102-mineral claim has no physiological basis; humans need roughly 20 essential minerals. A whole-plant, high-fibre, low-ultraprocessed diet is broadly healthy, and parts of the food list are fine. "Intra-cellular chelation" by herbs is unsupported. Some herbs (chaparral) are hepatotoxic. Disease-cure claims were never validated.',
+    risk:'Chaparral hepatotoxicity; unmonitored iodine load from sea moss and bladderwrack; low protein, B12 and iron if followed strictly; delayed care.'},
+  Ehret:{name:'Arnold Ehret',full:'Arnold Ehret',
+    era:'1866–1922 · Germany / California. Teacher and lecturer, not a physician.',
+    theory:'The "Mucusless Diet Healing System": the body is a pipe system clogged by mucus and waste from starch, dairy, meat and cooked food. Disease is the body\'s effort to eliminate them. Fasting and fruit "clear the pipes".',
+    diet:'Staged transition from "mucus-forming" to "mucusless" food. Ripe fruit and non-starchy green leaves are the ideal; starches and animal products are avoided. Rational fasting alternates with fruit days.',
+    organs:'Colon, blood, lymph, skin',
+    herbs:'Little emphasis on herbs. Fruit, green leaf, fasting, sun and air bathing, and enemas.',
+    modern:'Fruit and vegetable intake is associated with lower cardiometabolic risk. The mucus theory is not supported, and dairy has not been shown to increase airway mucus. A strictly fruit-based diet risks protein, B12, iron and calcium deficiency and blood-sugar swings.',
+    risk:'Prolonged fasting and malnutrition; hypoglycaemia; electrolyte disturbance with enemas and fasting.'},
+  Morse:{name:'Dr. Robert Morse',full:'Robert Morse, ND',
+    era:'Contemporary · USA (Florida). Publisher bios describe him as a board-certified naturopathic physician (ND), biochemist and herbalist, and a protégé of Bernard Jensen. He is not an MD; his licence and degree accreditation are not independently verified here.',
+    theory:'The lymphatic system is the body\'s "sewer" and the key to health. Congested lymph, kidneys and glands cause disease; raw fruit and herbs "detox" cells and glands. Described in the Detox Miracle Sourcebook; stresses that every organ is a "gland".',
+    diet:'Mostly ripe raw fruit (a "fruitarian" lean), fresh juices and fasting. Cooked food, animal products and "dead" food are avoided. Herbal protocols are sequenced to the gland or organ.',
+    organs:'Lymph, kidneys, adrenals, liver, glands',
+    herbs:'Red clover, cleavers, echinacea, burdock, dandelion, poke root (traditionally), alterative blends, juices.',
+    modern:'The lymphatic system does circulate fluid and immune cells, but no herb is shown to "cleanse" it. Most claims are anecdotal, with no controlled trials. Fruit-heavy diets raise free-sugar load and can destabilise glycaemia.',
+    risk:'Poke root is toxic; very low protein; stopping prescribed drugs; prolonged fasting with diabetes or kidney disease.'},
+  Gerson:{name:'Dr. Max Gerson',full:'Max Gerson, MD',
+    era:'1881–1959 · Germany / USA. Licensed physician (MD); the therapy is still sold at clinics in Mexico.',
+    theory:'Degenerative disease arises from toxic, potassium-depleted, sodium-flooded cells and a failing liver. The remedy is intensive nutrition plus detoxification: "hyper-nutrition" from juices to re-establish a high-potassium, low-sodium intracellular state.',
+    diet:'About 13 fresh organic juices a day (carrot-apple and green), three plant meals, salt-free, no fats or animal protein at first; supplements (potassium, thyroid, niacin), castor oil, and coffee enemas up to several times a day.',
+    organs:'Liver, colon, kidney, thyroid',
+    herbs:'Carrot-apple juice, green-leaf juice, castor oil, coffee enemas, potassium compound, raw liver juice (historical).',
+    modern:'A 1947 NCI review of case series found no convincing evidence of benefit, and systematic reviews have found none since. The potassium-rich plant diet is cardioprotective. Coffee enemas have no proven detoxifying effect.',
+    risk:'Coffee enema deaths from electrolyte loss, sepsis and colitis; hyperkalaemia in kidney disease; hyponatraemia; delayed oncology care.'},
+  ONeill:{name:"Barbara O'Neill",full:"Barbara O'Neill",
+    era:'Contemporary · Australia. No relevant health qualifications or accredited-body membership, per the NSW Health Care Complaints Commission (HCCC). Permanently prohibited from providing any health services, paid or voluntary, by an HCCC order of 24 September 2019.',
+    theory:'The body is self-healing when given the right conditions. Teaches lifestyle foundations (nutrition, water, sunlight, rest, exercise), acid/alkaline balance, and simple home remedies such as hydrotherapy and poultices.',
+    diet:'Whole-food plant-rich diet, hydration, lemon water, limited refined sugar. Acid/alkaline balance guidance; cooking with garlic, ginger and onion.',
+    organs:'Lymph, lungs, kidney, gut, skin',
+    herbs:'Charcoal and clay poultices, ginger compress, mullein, slippery elm, garlic, onion, apple cider vinegar, cayenne, hot/cold hydrotherapy.',
+    modern:'The lifestyle foundations match mainstream prevention. Hydrotherapy gives comfort and circulatory effects. Alkaline-diet claims for disease are not supported. The HCCC cited advice such as raw goat\'s milk as an infant-formula substitute and bicarbonate for cancer, and found she discouraged mainstream cancer treatment, antibiotics and vaccination.',
+    risk:'Replacing treatment for serious illness; unsafe infant-feeding recipes; ingestion of activated charcoal alongside medicines.'},
+  Jensen:{name:'Dr. Bernard Jensen',full:'Bernard Jensen, DC, ND',
+    era:'1908–2001 · USA. Chiropractor and naturopath (not an MD); popularised iridology.',
+    theory:'"Tissue cleansing" through bowel management: a clean colon allows healing. Iridology maps organs to iris zones to diagnose.',
+    diet:'Raw vegetables, seed-and-fibre drinks, a "live food" cleanse, and a mineral-rich vegetable broth.',
+    organs:'Colon, liver, kidney, skin',
+    herbs:'Psyllium, flaxseed, bentonite clay, herbal laxative teas, vegetable broth.',
+    modern:'Fibre for bowel regularity is evidence-based. Blinded studies have shown iridology cannot reliably detect disease (e.g. JAMA 1979). The colon does not accumulate "toxic sludge" in healthy people.',
+    risk:'Laxative dependence; electrolyte loss; iridology-based false reassurance or false alarm.'}
+};
+
+const ORGANS=['Lymphatic','Hepatic','Renal','Nervous','Digestive','Respiratory','Endocrine','Circulatory','Metabolic','Skin'];
+const MINERALS=['Iron','Iodine','Potassium','Magnesium','Calcium','Selenium'];
+const PREPS=['Decoction','Infusion','Tincture','Raw','Juice','Cooked','Poultice'];
+
+const DB=[
+{n:'Sea moss',lat:'Chondrus crispus',k:'Herb',p:['Sebi'],o:['Lymphatic','Digestive','Respiratory'],m:['Iodine','Magnesium','Potassium','Calcium'],pr:['Raw','Infusion'],ev:'limited',
+ t:'Dr. Sebi taught sea moss as a "mineral-dense" food that feeds the cells and supports the lymph and mucous membranes. It is made into a gel from the soaked raw plant.',
+ mo:'Contains carrageenan, a gelling polysaccharide, plus very variable iodine. There are no clinical trials for disease. Iodine content can exceed safe limits.',
+ c:'Excess iodine can cause hyper- or hypothyroidism and thyroiditis; may accumulate heavy metals; avoid with thyroid disease and in pregnancy without guidance.'},
+{n:'Bladderwrack',lat:'Fucus vesiculosus',k:'Herb',p:['Sebi'],o:['Endocrine','Lymphatic'],m:['Iodine','Magnesium'],pr:['Decoction','Tincture'],ev:'limited',
+ t:'Used for "glandular" and thyroid support and to clear lymph; Sebi paired it with sea moss for the "bromide/mineral" balance.',
+ mo:'High in iodine and fucoidan. Small studies of fucoidan on glucose and lipids are inconclusive. Iodine and arsenic content vary by batch.',
+ c:'Can provoke thyroid disorders; may add to anticoagulant effect; heavy-metal contamination reported.'},
+{n:'Burdock root',lat:'Arctium lappa',k:'Herb',p:['Sebi','Morse'],o:['Hepatic','Lymphatic','Skin'],m:['Potassium','Iron'],pr:['Decoction','Tincture','Cooked'],ev:'limited',
+ t:'A classic "blood purifier" (alterative) for skin, lymph and liver congestion, used as a root decoction.',
+ mo:'Contains inulin, lignans and polyphenols; shows antioxidant effects in vitro and mild diuretic activity. Human trials are scarce.',
+ c:'Daisy-family allergy; additive diuretic effect; may lower glucose; avoid in pregnancy.'},
+{n:'Sarsaparilla',lat:'Smilax spp.',k:'Herb',p:['Sebi'],o:['Skin','Hepatic','Renal'],m:[],pr:['Decoction','Infusion'],ev:'limited',
+ t:'An alterative for skin and joint "toxins" and to move acids out through the kidneys.',
+ mo:'Rich in saponins (sarsasapogenin). Early studies suggest bacterial endotoxin binding in the gut, but clinical evidence is thin.',
+ c:'Saponins may irritate the stomach; theoretical interaction with digoxin and lithium.'},
+{n:'Chaparral',lat:'Larrea tridentata',k:'Herb',p:['Sebi'],o:['Hepatic','Lymphatic'],m:[],pr:['Infusion','Tincture'],ev:'harm',
+ t:'Sebi used it as a strong cleanser and "antioxidant" herb; widely used in Native American medicine as a poultice and tea.',
+ mo:'NDGA is its main active; it is a documented cause of acute liver injury, including liver failure needing transplant. The FDA issued warnings in the 1990s.',
+ c:'DO NOT ingest. Hepatotoxic, with cases of cirrhosis and liver failure; avoid with any liver or kidney disease.'},
+{n:'Dandelion (root and leaf)',lat:'Taraxacum officinale',k:'Herb',p:['Sebi','Morse','Gerson'],o:['Hepatic','Renal','Digestive'],m:['Potassium','Iron','Calcium','Magnesium'],pr:['Decoction','Infusion','Raw','Juice'],ev:'limited',
+ t:'A bitter that "wakes" the liver, increases bile and urine flow, and eliminates acid. Leaves are a mineral-rich green.',
+ mo:'Bitter sesquiterpene lactones stimulate bile and digestive secretions. The leaf has diuretic effects in small studies. Potassium content is high.',
+ c:'Daisy-family allergy; may interact with diuretics, lithium and quinolones; caution with gallstones and bile obstruction; potassium load in kidney disease.'},
+{n:'Yellow dock',lat:'Rumex crispus',k:'Herb',p:['Sebi'],o:['Hepatic','Digestive'],m:['Iron'],pr:['Decoction','Tincture'],ev:'limited',
+ t:'An alterative and mild laxative for the "sluggish" liver and bowel, traditionally given for anaemia because the root is iron-rich.',
+ mo:'Contains anthraquinones (laxative) and tannins. Oxalic acid is also present.',
+ c:'High oxalate: kidney stone risk. Laxative dependence; avoid in pregnancy and kidney disease.'},
+{n:'Cascara sagrada',lat:'Frangula purshiana',k:'Herb',p:['Sebi','Jensen'],o:['Digestive'],m:[],pr:['Decoction','Tincture'],ev:'some',
+ t:'Opens the colon as the first emunctory in the first phase of cleansing.',
+ mo:'Anthraquinone stimulant laxative; effective for constipation but the FDA removed it from OTC laxative status in 2002 over safety-data gaps.',
+ c:'Chronic use causes laxative dependence, hypokalaemia and melanosis coli; avoid in pregnancy, IBD and bowel obstruction.'},
+{n:'Elderberry',lat:'Sambucus nigra',k:'Herb',p:['Sebi'],o:['Respiratory','Lymphatic'],m:['Potassium'],pr:['Infusion','Cooked'],ev:'limited',
+ t:'Supports lymph and mucous membranes; used for colds, fever and "congestion".',
+ mo:'Anthocyanin-rich extracts have shortened cold duration modestly in small trials.',
+ c:'Raw berries, leaves and stems contain cyanogenic glycosides and cause vomiting; always cook.'},
+{n:'Nettle',lat:'Urtica dioica',k:'Herb',p:['Sebi','ONeill'],o:['Renal','Skin','Circulatory'],m:['Iron','Calcium','Magnesium','Potassium'],pr:['Infusion','Decoction','Cooked'],ev:'limited',
+ t:'A "mineral tonic" and kidney herb that clears uric acid and supports skin and joints.',
+ mo:'Nutrient-dense leaf; the root has evidence for lower urinary symptoms in benign prostate enlargement; mild diuretic.',
+ c:'Can lower blood pressure and glucose; interacts with anticoagulants, diuretics and lithium.'},
+{n:'Red clover',lat:'Trifolium pratense',k:'Herb',p:['Morse','Sebi'],o:['Lymphatic','Skin'],m:[],pr:['Infusion','Tincture'],ev:'limited',
+ t:'A lymphatic alterative and traditional blood purifier in Morse protocols.',
+ mo:'Contains isoflavones (phyto-oestrogens). Evidence for hot flushes is mixed.',
+ c:'Avoid with hormone-sensitive cancers, anticoagulants and before surgery.'},
+{n:'Cleavers',lat:'Galium aparine',k:'Herb',p:['Morse'],o:['Lymphatic','Renal'],m:[],pr:['Infusion','Juice','Tincture'],ev:'limited',
+ t:'A classic lymphatic cleanser and diuretic for "swollen glands".',
+ mo:'Contains iridoids and flavonoids with mild diuretic effects; essentially no clinical trials.',
+ c:'Limited safety data; avoid in pregnancy; may lower blood glucose.'},
+{n:'Echinacea',lat:'Echinacea purpurea',k:'Herb',p:['Morse'],o:['Lymphatic','Respiratory'],m:[],pr:['Tincture','Infusion'],ev:'limited',
+ t:'Stimulates the immune system and lymph in infection and "glandular" fever.',
+ mo:'Meta-analyses show at most a small reduction in cold risk or duration, with inconsistent preparations.',
+ c:'Allergy to daisy-family plants; avoid in autoimmune disease or with immunosuppressants (theoretical).'},
+{n:'Poke root',lat:'Phytolacca americana',k:'Herb',p:['Morse'],o:['Lymphatic'],m:[],pr:['Tincture'],ev:'harm',
+ t:'A strong lymphatic "mover" used in small drop doses for swollen glands.',
+ mo:'Contains phytolaccatoxin and lectins; documented cases of severe gastroenteritis, hypotension, seizures and death.',
+ c:'DO NOT use. Poisonous; no safe self-administered dose.'},
+{n:'Blue vervain',lat:'Verbena hastata',k:'Herb',p:['Sebi'],o:['Nervous','Digestive'],m:[],pr:['Infusion','Tincture'],ev:'limited',
+ t:'A bitter nervine for tension, insomnia and "stuck" bile, used for nerve and liver support.',
+ mo:'Verbenalin and iridoids suggest mild sedative and bitter effects; human data are minimal.',
+ c:'Large amounts may cause nausea and vomiting; avoid in pregnancy.'},
+{n:'Damiana',lat:'Turnera diffusa',k:'Herb',p:['Sebi'],o:['Nervous','Endocrine'],m:[],pr:['Infusion','Tincture'],ev:'limited',
+ t:'A nervous system tonic and "aphrodisiac" in the Sebi nervine group.',
+ mo:'Flavonoids and terpenes with anxiolytic effects in rodents; little human evidence.',
+ c:'May lower blood sugar; avoid with diabetic medicines; avoid in pregnancy.'},
+{n:'Kale and dark leafy greens',lat:'Brassica oleracea; others',k:'Food',p:['Sebi','Gerson','Ehret','Morse'],o:['Hepatic','Digestive','Circulatory'],m:['Potassium','Calcium','Magnesium','Iron'],pr:['Raw','Juice','Cooked'],ev:'some',
+ t:'Chlorophyll-rich "green blood" that alkalises and mineralises; the foundation of nearly every protocol.',
+ mo:'Rich in vitamin K, folate, carotenoids and glucosinolates. A high leafy-green intake is associated with lower cardiovascular risk and slower cognitive decline.',
+ c:'Vitamin K interferes with warfarin dosing; oxalates in spinach and chard; goitrogens only matter in large raw amounts with low iodine.'},
+{n:'Amaranth greens (callaloo)',lat:'Amaranthus spp.',k:'Food',p:['Sebi'],o:['Hepatic','Digestive'],m:['Iron','Calcium','Magnesium','Potassium'],pr:['Cooked','Raw'],ev:'some',
+ t:'A core Sebi "electric" green and grain, a mineral-dense food that does not clog.',
+ mo:'High in calcium, iron, magnesium and protein; the grain is gluten-free.',
+ c:'High oxalate content; cook to reduce.'},
+{n:'Nopales',lat:'Opuntia ficus-indica',k:'Food',p:['Sebi'],o:['Metabolic','Digestive'],m:['Magnesium','Calcium','Potassium'],pr:['Cooked','Raw','Juice'],ev:'limited',
+ t:'An "electric" vegetable that cleanses the intestine with its mucilage.',
+ mo:'Soluble fibre and mucilage modestly blunt post-meal glucose in small trials.',
+ c:'May cause mild diarrhoea; additive with diabetic medicines.'},
+{n:'Burro (baby) banana',lat:'Musa spp.',k:'Food',p:['Sebi'],o:['Digestive','Circulatory'],m:['Potassium','Magnesium'],pr:['Raw'],ev:'some',
+ t:'One of the few non-hybrid fruits in the Sebi guide; a potassium and sugar source.',
+ mo:'Bananas supply potassium, resistant starch (when less ripe) and vitamin B6; "hybrid versus non-hybrid" has no nutritional basis.',
+ c:'Potassium load in advanced kidney disease or with ACE inhibitors.'},
+{n:'Avocado',lat:'Persea americana',k:'Food',p:['Sebi'],o:['Circulatory','Nervous'],m:['Potassium','Magnesium'],pr:['Raw'],ev:'some',
+ t:'A creamy, "alkalising" fat that feeds the nerves and skin.',
+ mo:'Monounsaturated fat, fibre and potassium; associated with improved LDL cholesterol.',
+ c:'Energy-dense; latex-fruit cross-allergy.'},
+{n:'Ancient grains (spelt, kamut, teff, fonio, wild rice)',lat:'various',k:'Food',p:['Sebi'],o:['Digestive','Metabolic'],m:['Magnesium','Iron'],pr:['Cooked'],ev:'some',
+ t:'The only grains in the Sebi list because they are "non-hybrid"; they provide energy without mucus.',
+ mo:'Whole grains deliver fibre and magnesium; teff is high in iron. Spelt and kamut contain gluten.',
+ c:'Gluten in spelt and kamut for coeliac disease.'},
+{n:'Walnuts, Brazil nuts, hemp seed',lat:'Juglans regia; Bertholletia excelsa; Cannabis sativa (seed)',k:'Food',p:['Sebi'],o:['Nervous','Circulatory'],m:['Magnesium','Selenium'],pr:['Raw'],ev:'some',
+ t:'Approved raw nuts and seeds for fat and protein in a plant diet.',
+ mo:'Walnuts are linked to lower LDL; Brazil nuts are a very rich selenium source (about 70-90 mcg per nut).',
+ c:'More than 2-3 Brazil nuts a day risks selenium excess; nut allergy.'},
+{n:'Dates and figs',lat:'Phoenix dactylifera; Ficus carica',k:'Food',p:['Ehret','Sebi'],o:['Digestive'],m:['Potassium','Magnesium','Calcium'],pr:['Raw'],ev:'some',
+ t:'Ripe sweet fruit that cleans the intestine without forming mucus (Ehret) and a sugar source (Sebi).',
+ mo:'High in fibre, polyphenols and potassium; dates are a concentrated sugar source with a moderate glycaemic response.',
+ c:'Concentrated sugar; caution with diabetes.'},
+{n:'Ripe fruit (apples, grapes, citrus)',lat:'various',k:'Food',p:['Ehret','Morse'],o:['Renal','Digestive'],m:['Potassium','Magnesium'],pr:['Raw','Juice'],ev:'some',
+ t:'The "ideal" mucusless food and the cleaning medium for the pipes.',
+ mo:'Whole fruit intake correlates with lower cardiovascular and type 2 diabetes risk; juice gives less fibre and more rapid sugar.',
+ c:'Fruit-only diets cause protein, B12 and calcium deficiency; dental erosion.'},
+{n:'Carrot-apple juice',lat:'Daucus carota; Malus domestica',k:'Food',p:['Gerson'],o:['Hepatic','Renal'],m:['Potassium'],pr:['Juice'],ev:'limited',
+ t:'The core Gerson juice: potassium and enzymes to re-mineralise the cells and support the liver.',
+ mo:'Provides potassium, carotenoids and fructose. There is no good evidence that it detoxifies or treats cancer.',
+ c:'Hyperkalaemia in kidney disease or with ACE inhibitors, ARBs or spironolactone; sugar load in diabetes; carotenaemia.'},
+{n:'Green-leaf juice',lat:'lettuce, chard, endive, etc.',k:'Food',p:['Gerson'],o:['Hepatic'],m:['Potassium','Magnesium','Iron'],pr:['Juice'],ev:'limited',
+ t:'A "chlorophyll" juice that provides nutrients for the liver and cleans the blood.',
+ mo:'Supplies folate and nitrates; no data that juicing yields benefit over whole vegetables.',
+ c:'Oxalate load in chard and spinach; vitamin K interaction.'},
+{n:'Castor oil',lat:'Ricinus communis',k:'Herb',p:['Gerson','ONeill'],o:['Digestive','Hepatic'],m:[],pr:['Poultice'],ev:'some',
+ t:'Taken to "open the bowel" in Gerson therapy; used as a warm pack for the liver and abdomen.',
+ mo:'Oral castor oil is a stimulant laxative (ricinoleic acid) and can induce labour. Packs have no robust evidence beyond comfort.',
+ c:'Cramping, dehydration; avoid in pregnancy and bowel obstruction.'},
+{n:'Activated charcoal',lat:'carbon',k:'Herb',p:['ONeill'],o:['Skin','Digestive'],m:[],pr:['Poultice'],ev:'limited',
+ t:'Poultices to "draw" toxins and infection from skin and wounds.',
+ mo:'Oral charcoal binds some poisons in emergency care; topical use has little evidence.',
+ c:'Binds medicines and nutrients when taken by mouth; constipation.'},
+{n:'Ginger',lat:'Zingiber officinale',k:'Herb',p:['ONeill'],o:['Digestive','Circulatory'],m:[],pr:['Infusion','Raw','Poultice'],ev:'some',
+ t:'A warming circulatory herb used as tea, compress and in cooking for pain and nausea.',
+ mo:'Gingerols reduce nausea (including pregnancy and chemotherapy-related) and mildly reduce osteoarthritis pain in trials.',
+ c:'Antiplatelet effect; large doses may cause reflux.'},
+{n:'Garlic',lat:'Allium sativum',k:'Food',p:['ONeill'],o:['Circulatory','Respiratory'],m:['Selenium'],pr:['Raw','Cooked'],ev:'limited',
+ t:'A "natural antibiotic" for infection, mucus and circulation.',
+ mo:'Allicin is antimicrobial in vitro; clinical benefit is modest (a small reduction in blood pressure and LDL).',
+ c:'Bleeding risk with anticoagulants; interacts with some HIV medicines (saquinavir).'},
+{n:'Slippery elm',lat:'Ulmus rubra',k:'Herb',p:['ONeill','Jensen'],o:['Digestive','Respiratory'],m:[],pr:['Infusion','Poultice'],ev:'limited',
+ t:'A mucilaginous herb that soothes and "coats" the gut, throat and skin.',
+ mo:'Mucilage forms a protective gel on mucosa, which explains demulcent comfort; trials in IBS are small.',
+ c:'May slow absorption of medicines taken at the same time; sourcing sustainability concerns.'},
+{n:'Mullein',lat:'Verbascum thapsus',k:'Herb',p:['ONeill'],o:['Respiratory'],m:[],pr:['Infusion'],ev:'limited',
+ t:'A lung herb that loosens phlegm and soothes the cough.',
+ mo:'Contains mucilage and saponins with demulcent and mild expectorant effects; no good clinical data.',
+ c:'Strain the leaf hairs from tea to avoid throat irritation.'},
+{n:'Apple cider vinegar',lat:'Malus domestica ferment',k:'Food',p:['ONeill'],o:['Digestive','Metabolic'],m:[],pr:['Raw'],ev:'limited',
+ t:'An "alkalising" tonic for digestion, weight and joint pain, even though it is acidic.',
+ mo:'Acetic acid modestly lowers post-meal glucose in small trials. Claims of weight loss or cancer prevention are unproven.',
+ c:'Erodes tooth enamel; oesophageal injury if undiluted; potassium and glucose effects with diuretics and insulin.'},
+{n:'Psyllium and flaxseed',lat:'Plantago ovata; Linum usitatissimum',k:'Food',p:['Jensen'],o:['Digestive','Metabolic','Circulatory'],m:['Magnesium'],pr:['Raw'],ev:'some',
+ t:'Bulk and mucilage that "sweep" the colon in bowel-management programmes.',
+ mo:'Soluble fibre treats constipation and lowers LDL and glucose; the best-evidenced item in the whole "cleanse" kit.',
+ c:'Take with plenty of water to avoid obstruction; separate from medicines by 2 hours.'},
+{n:'Okra',lat:'Abelmoschus esculentus',k:'Food',p:['Sebi'],o:['Digestive','Metabolic'],m:['Magnesium','Calcium'],pr:['Cooked','Raw'],ev:'limited',
+ t:'An approved mucilaginous vegetable to soothe the gut lining.',
+ mo:'Soluble fibre and mucilage; small trials show modest glucose lowering.',
+ c:'May reduce absorption of metformin when taken together (small data).'},
+{n:'Turmeric',lat:'Curcuma longa',k:'Herb',p:['ONeill'],o:['Digestive','Circulatory'],m:['Iron','Potassium'],pr:['Raw','Infusion','Cooked'],ev:'limited',
+ t:'A golden anti-inflammatory root used in food and tea to ease joints, gut and skin.',
+ mo:'Curcumin has anti-inflammatory activity in the lab, but poor absorption limits clinical effect. Some trials suggest modest osteoarthritis pain relief.',
+ c:'High-dose supplements are linked to rare liver injury; antiplatelet effect; may worsen gallstones.'},
+{n:'Lemon and key lime',lat:'Citrus limon; Citrus aurantiifolia',k:'Food',p:['ONeill','Sebi'],o:['Hepatic','Renal'],m:['Potassium'],pr:['Raw','Juice'],ev:'some',
+ t:'Acidic to taste but "alkaline-forming"; warm lemon water is taken to wake the liver and bowel. Key limes are on the Sebi guide.',
+ mo:'Citrate raises urinary citrate and can reduce calcium-stone recurrence; vitamin C intake is a bonus. Lemon water does not alter blood pH.',
+ c:'Tooth enamel erosion; reflux; phototoxic skin reactions from lime juice on skin in sun.'},
+{n:'Cayenne pepper',lat:'Capsicum annuum',k:'Herb',p:['ONeill'],o:['Circulatory','Digestive'],m:['Potassium'],pr:['Raw','Infusion'],ev:'limited',
+ t:'A circulatory stimulant to warm the body and move congestion.',
+ mo:'Capsaicin is analgesic topically and increases thermogenesis slightly. It is not a treatment for heart attack or stroke.',
+ c:'Call emergency services for chest pain, never rely on cayenne; gastric irritation; may interact with ACE inhibitors (cough) and anticoagulants.'},
+{n:'Onion',lat:'Allium cepa',k:'Food',p:['ONeill'],o:['Respiratory','Circulatory'],m:['Potassium','Selenium'],pr:['Raw','Cooked','Poultice'],ev:'limited',
+ t:'Used raw, as syrup or as a poultice for chest congestion and infection.',
+ mo:'Rich in quercetin and fructans (prebiotic). No good evidence for syrup or poultice effects.',
+ c:'FODMAP trigger in IBS; toxic to dogs and cats.'},
+{n:'Bentonite and clay',lat:'montmorillonite clay',k:'Herb',p:['Jensen','ONeill'],o:['Digestive','Skin'],m:['Calcium','Magnesium'],pr:['Poultice'],ev:'limited',
+ t:'Clay drinks and packs "bind toxins" in the bowel or draw them from the skin.',
+ mo:'Clays adsorb some toxins and drugs in vitro; used in some pharmaceutical products for diarrhoea. Evidence for systemic detox is absent.',
+ c:'Some clays are contaminated with lead or arsenic; binds medicines; constipation.'},
+{n:'Epsom salt baths',lat:'magnesium sulphate',k:'Herb',p:['ONeill'],o:['Skin','Nervous'],m:['Magnesium'],pr:['Poultice'],ev:'limited',
+ t:'Hot baths that "draw out" toxins and replenish magnesium through the skin.',
+ mo:'Warm water relaxes muscles. Transdermal magnesium absorption is not well established.',
+ c:'Burns or fainting from very hot baths; avoid on broken skin; oral magnesium sulphate is a laxative.'},
+{n:'Oatmeal',lat:'Avena sativa',k:'Food',p:['Gerson'],o:['Digestive','Circulatory'],m:['Magnesium','Iron'],pr:['Cooked'],ev:'some',
+ t:'The Gerson breakfast: a gentle, salt-free whole grain.',
+ mo:'Beta-glucan fibre lowers LDL cholesterol and post-meal glucose.',
+ c:'Cross-contamination with gluten unless certified; fibre bloating if increased too quickly.'},
+{n:'Baked potato',lat:'Solanum tuberosum',k:'Food',p:['Gerson'],o:['Renal','Circulatory'],m:['Potassium','Magnesium'],pr:['Cooked'],ev:'some',
+ t:'A potassium-rich staple in the sodium-restricted Gerson diet.',
+ mo:'Potassium-rich; skin-on potatoes offer fibre. Cooling cooked potato yields resistant starch.',
+ c:'Potassium load in kidney disease; green or sprouted potatoes contain solanine.'},
+{n:'Flaxseed oil',lat:'Linum usitatissimum',k:'Food',p:['Gerson'],o:['Circulatory','Nervous'],m:[],pr:['Raw'],ev:'limited',
+ t:'The only added fat allowed on Gerson therapy, as a source of essential fatty acids.',
+ mo:'High in ALA (plant omega-3); conversion to EPA/DHA is low. Cardiovascular benefit is modest.',
+ c:'Goes rancid quickly; may increase bleeding tendency in high doses.'},
+{n:'Hippocrates soup',lat:'celeriac, leek, tomato, onion, parsley, potato',k:'Food',p:['Gerson'],o:['Renal','Hepatic'],m:['Potassium','Magnesium'],pr:['Cooked'],ev:'some',
+ t:'A salt-free blended vegetable soup eaten daily to supply minerals while sparing sodium.',
+ mo:'A high-fibre, high-potassium vegetable soup is heart-healthy; sodium restriction helps hypertension and heart failure.',
+ c:'Potassium load in kidney disease; very low sodium needs monitoring (hyponatraemia) on diuretics.'},
+{n:'Cucumber',lat:'Cucumis sativus',k:'Food',p:['Sebi'],o:['Renal','Skin'],m:['Potassium','Magnesium'],pr:['Raw','Juice'],ev:'limited',
+ t:'A cooling, watery vegetable that flushes the kidneys and soothes the skin.',
+ mo:'About 95% water with small amounts of potassium and vitamin K; supports hydration.',
+ c:'Cucurbitacin bitterness may cause GI upset.'},
+{n:'Squash and zucchini',lat:'Cucurbita spp.',k:'Food',p:['Sebi'],o:['Digestive','Metabolic'],m:['Potassium','Magnesium'],pr:['Cooked','Raw'],ev:'some',
+ t:'Mild "electric" staples used in place of starch and grains.',
+ mo:'Provide carotenoids, potassium and fibre with a low energy density.',
+ c:'Very bitter squash can contain toxic cucurbitacins.'},
+{n:'Tomatoes (cherry and plum)',lat:'Solanum lycopersicum',k:'Food',p:['Sebi'],o:['Circulatory','Skin'],m:['Potassium'],pr:['Raw','Cooked'],ev:'some',
+ t:'Only small cherry and plum varieties are permitted on the Sebi list; large hybrids are excluded.',
+ mo:'Lycopene (better absorbed when cooked with oil) is associated with lower prostate and cardiovascular risk. Variety size makes no nutritional difference.',
+ c:'May worsen reflux; nightshade sensitivity is rare.'},
+{n:'Mushrooms',lat:'various (Sebi list excludes shiitake)',k:'Food',p:['Sebi'],o:['Digestive'],m:['Selenium','Potassium'],pr:['Cooked','Raw'],ev:'some',
+ t:'Allowed on the Sebi guide, except shiitake, as a savoury, protein-containing food.',
+ mo:'Provide beta-glucans, selenium and (if UV-exposed) vitamin D; the exclusion of shiitake has no nutritional basis.',
+ c:'Never forage without expert identification; raw mushrooms contain agaritine.'},
+{n:'Olive oil',lat:'Olea europaea',k:'Food',p:['Sebi'],o:['Circulatory','Hepatic'],m:[],pr:['Raw'],ev:'some',
+ t:'Uncooked olive oil is the main approved fat on the Sebi guide.',
+ mo:'Extra-virgin olive oil is the strongest fat evidence in the Mediterranean diet: lower cardiovascular events.',
+ c:'Energy-dense; the "uncooked only" rule has no safety basis (olive oil is stable at normal cooking heat).'},
+{n:'Sesame and tahini',lat:'Sesamum indicum',k:'Food',p:['Sebi'],o:['Nervous','Digestive'],m:['Calcium','Magnesium','Iron'],pr:['Raw'],ev:'some',
+ t:'Raw tahini and sesame seeds are the approved calcium-rich fat.',
+ mo:'Good source of calcium, magnesium, iron and lignans; a useful non-dairy calcium source.',
+ c:'Sesame is a major allergen.'},
+{n:'Grapes (seeded)',lat:'Vitis vinifera',k:'Food',p:['Ehret','Sebi'],o:['Renal','Digestive'],m:['Potassium'],pr:['Raw','Juice'],ev:'some',
+ t:'A classic cleansing fruit for the kidneys and colon (Ehret), allowed only if seeded on the Sebi list.',
+ mo:'Polyphenols (resveratrol, anthocyanins) and potassium; seedless grapes are nutritionally equivalent.',
+ c:'High in sugar; toxic to dogs.'},
+{n:'Papaya',lat:'Carica papaya',k:'Food',p:['Sebi','Ehret'],o:['Digestive'],m:['Potassium','Magnesium'],pr:['Raw'],ev:'limited',
+ t:'A digestive fruit with enzymes that "dissolve" mucus and waste.',
+ mo:'Papain is a protease; small trials suggest benefit for constipation and bloating. It does not dissolve mucus in the body.',
+ c:'Latex allergy; unripe papaya should be avoided in pregnancy.'},
+{n:'Berries',lat:'Rubus, Vaccinium and Fragaria spp.',k:'Food',p:['Sebi','Morse'],o:['Circulatory','Nervous'],m:['Potassium','Magnesium'],pr:['Raw'],ev:'some',
+ t:'Allowed fruit that feeds and "cleans" the blood and nerves.',
+ mo:'Anthocyanin-rich berries are linked to lower blood pressure and slower cognitive decline in cohort studies and small trials.',
+ c:'Sugar content when eaten in large amounts; vitamin K in some berries.'},
+{n:'Soft jelly coconut',lat:'Cocos nucifera',k:'Food',p:['Sebi'],o:['Renal','Digestive'],m:['Potassium','Magnesium'],pr:['Raw','Juice'],ev:'limited',
+ t:'The soft young coconut is a Sebi-approved source of water and flesh.',
+ mo:'Coconut water supplies potassium and some electrolytes, useful for mild rehydration; it is not superior to oral rehydration solutions.',
+ c:'High potassium in kidney disease; saturated fat in the flesh.'},
+{n:'Tamarind',lat:'Tamarindus indica',k:'Food',p:['Sebi'],o:['Digestive','Hepatic'],m:['Magnesium','Potassium','Iron'],pr:['Infusion','Raw'],ev:'limited',
+ t:'An approved fruit used as a cooling drink and mild laxative.',
+ mo:'Contains tartaric acid, polyphenols and magnesium; mild laxative effect.',
+ c:'May lower blood glucose and potentiate anticoagulants; excess tartaric acid.'},
+{n:'Vegetable broth (potassium broth)',lat:'mixed vegetables',k:'Food',p:['Jensen'],o:['Renal','Digestive'],m:['Potassium','Magnesium','Calcium'],pr:['Cooked','Decoction'],ev:'limited',
+ t:'A mineral broth of potato peel, celery, carrot and greens used during bowel-cleansing programmes.',
+ mo:'Delivers fluids and potassium during diet changes; no evidence that it removes toxins.',
+ c:'Potassium load in kidney disease or with potassium-sparing drugs.'}
+];
+
+const CATS=[
+{id:'auto',icon:'🛡️',name:'Autoimmune & Chronic Inflammatory',
+ summary:'Rheumatoid arthritis, lupus, inflammatory bowel disease, psoriasis, thyroiditis and similar conditions in which the immune system damages the body.',
+ ev:'limited',evText:'Anti-inflammatory dietary patterns (Mediterranean, plant-forward) help symptoms and risk markers. Elimination diets show promising small-trial results in IBD and thyroiditis. No natural protocol has been shown to induce remission in place of disease-modifying drugs.',
+ med:'Do not stop immunosuppressants, biologics or steroids. Fasting or herbs such as echinacea (immune stimulation) can destabilise disease or interact with treatment. Rheumatology and gastroenterology follow-up stays essential.',
+ phases:[
+ {name:'Phase 1: Elimination & Drainage',goal:'Open the emunctories: kidneys, lymph, colon, skin.',
+  diet:['Remove dairy, refined sugar, fried and processed foods (Ehret/Sebi "mucus-formers").','Alkaline-leaning plant foods: leafy greens, cucumber, squash, berries, burro banana.','2-3 L of water daily; lemon water (O\'Neill).'],
+  bot:['Nettle or dandelion-leaf infusion for renal flow.','Cleavers or red clover infusion for lymph (Morse).','Slippery elm or okra for a mucosal soothing effect.'],
+  prac:['Daily walking and rebounding to move lymph.','Warm/cool alternating hydrotherapy and dry brushing.','Gentle bowel regularity with fibre (psyllium or flax).'],
+  trad:'Clear the mucus and acid that "irritate" joints, gut or skin so the body\'s inflammation can settle.',
+  mod:'Removing ultra-processed food lowers the dietary inflammatory load. Fibre feeds short-chain-fatty-acid–producing bacteria that regulate immunity. Movement drives lymph flow via muscle pumping. Hydration supports renal clearance. Proposed elimination diets (such as AIP) are tested in small trials and need dietitian supervision.'},
+ {name:'Phase 2: Deep Cellular Detox & Chelation',goal:'Move deeper than the surface channels.',
+  diet:['Extended plant-only phase or short juice days (Morse/Gerson), medically supervised only.','Sulphur- and glucosinolate-rich vegetables (broccoli, kale, garlic).','Time-restricted eating windows.'],
+  bot:['Burdock and sarsaparilla decoctions (Sebi alteratives).','Bitter greens and dandelion root for bile flow.','Turmeric-ginger as culinary anti-inflammatories.'],
+  prac:['12-16 h overnight fast (autophagy rationale).','Sweating via sauna or exercise.','Sleep optimisation.'],
+  trad:'Herbs and rest "pull" stored acid and toxins from tissues and cells ("intra-cellular chelation").',
+  mod:'Bitter compounds stimulate bile and Phase I/II hepatic enzymes. Short fasts induce autophagy and lower inflammatory cytokines in animal and small human studies. Herbs do not chelate intracellularly; true chelation is a drug therapy for metal poisoning. Prolonged fasts can precipitate flares or interact with steroids.'},
+ {name:'Phase 3: Mineralization & Tissue Regeneration',goal:'Rebuild after the clear-out.',
+  diet:['Mineral-dense whole foods: greens, seeds, nuts, legumes, ancient grains.','Omega-3 fish or algae; olive oil.','Gradual reintroduction of excluded foods to test tolerance.'],
+  bot:['Nettle and oat-straw infusions (minerals).','Sea moss in moderation (check iodine, especially with thyroiditis).','Ginger and garlic in cooking.'],
+  prac:['Strength training for bone and muscle.','Sunlight and vitamin D testing.','Stress-reduction practice.'],
+  trad:'Replenishing "African bio-minerals" lets damaged tissue rebuild itself.',
+  mod:'Adequacy of magnesium, vitamin D, iron, B12, omega-3 and protein matters for repair. Reintroduction identifies true triggers. Iodine excess is a recognised trigger of autoimmune thyroid disease, so seaweed is not neutral here.'}]},
+{id:'meta',icon:'⚖️',name:'Metabolic & Endocrine Dysregulation',
+ summary:'Type 2 diabetes, insulin resistance, obesity, metabolic syndrome, fatty liver, thyroid and adrenal complaints.',
+ ev:'some',evText:'Whole-food plant-predominant diets, weight loss and exercise reduce HbA1c, blood pressure and liver fat, and can induce remission of early type 2 diabetes. These benefits come from calorie, fibre and activity changes, not from alkalinity or herbs. Type 1 diabetes and thyroid disease require hormone replacement.',
+ med:'Insulin and sulfonylurea users risk dangerous hypoglycaemia with fasting or juicing. Never stop metformin, insulin or thyroid replacement. Check glucose, renal function, potassium and thyroid tests regularly.',
+ phases:[
+ {name:'Phase 1: Elimination & Drainage',goal:'Cut the metabolic load and open the bowel and kidney channels.',
+  diet:['Eliminate sugary drinks, refined flour and fried food.','Switch to non-starchy vegetables, legumes, intact whole grains.','Avoid fruit juice; keep whole fruit moderate.'],
+  bot:['Dandelion and nettle infusions.','Nopales and okra for soluble fibre.','Cinnamon and fenugreek as culinary support (small effects).'],
+  prac:['Daily 30-45 minute walk.','Home glucose monitoring.','Consistent sleep.'],
+  trad:'Clear the "mucus" clogging the pancreas and liver (Sebi); drain the kidneys and colon.',
+  mod:'Fibre and lower glycaemic load flatten post-meal glucose and improve insulin sensitivity. Exercise increases GLUT4-mediated glucose uptake independent of insulin. Soluble fibre is the strongest evidence-based element here.'},
+ {name:'Phase 2: Deep Cellular Detox & Chelation',goal:'Metabolic reset of the liver and cell.',
+  diet:['Time-restricted eating (8-10 h window), only with prescriber approval.','Bitter greens, cruciferous vegetables, coffee-free or moderate coffee.','Lower total energy intake for weight loss.'],
+  bot:['Burdock and dandelion root (bile/liver).','Berberine-containing plants are researched; take only under clinician guidance.','Bitter melon is studied but unreliable.'],
+  prac:['Resistance training.','Sauna or heat exposure for comfort.','Stress and cortisol management.'],
+  trad:'The liver and pancreas are cleared of stored toxins and fat so they can function again.',
+  mod:'Weight loss of 10-15% reduces liver fat and can reverse early insulin resistance. Bitter herbs raise bile flow but have not been shown to treat fatty liver. Berberine lowers glucose by 0.5-1% HbA1c in trials but interacts with many drugs.'},
+ {name:'Phase 3: Mineralization & Tissue Regeneration',goal:'Rebuild insulin sensitivity and lean tissue.',
+  diet:['High-magnesium foods (leafy greens, nuts, seeds, legumes).','Adequate protein (about 1.0-1.2 g/kg) to preserve muscle.','Olive oil, nuts, fish.'],
+  bot:['Nettle and oat-straw infusions.','Ginger and cinnamon in cooking.','Seaweed only in small, tested amounts (iodine).'],
+  prac:['Progressive strength training.','Annual retinal, foot and renal checks.','Sleep apnoea screening if relevant.'],
+  trad:'Re-mineralise the glands (adrenals, thyroid, pancreas) so they self-regulate.',
+  mod:'Low magnesium is associated with insulin resistance; correcting deficiency helps. Muscle mass is the major glucose sink. Iodine excess or deficiency can both impair thyroid function.'}]},
+{id:'onco',icon:'🔬',name:'Cellular Degeneration / Oncological Support',
+ summary:'Cancer and degenerative disease. This module covers only supportive nutrition and symptom care alongside oncology, not any treatment of cancer itself.',
+ ev:'none',evText:'No diet, herb, juice, fast or enema has been shown to cure or slow cancer. Gerson therapy has no supporting trials. Cancer cells are not killed by "alkaline" conditions; tumour microenvironment acidity is a product of tumour metabolism, not of diet. Supportive nutrition, exercise and symptom-directed integrative care (acupuncture for nausea, ginger, mind–body methods) do improve quality of life.',
+ med:'Cancer needs diagnosis, staging and treatment by an oncology team. Choosing alternative medicine alone is associated with about 2.5-fold higher mortality. Many herbs affect chemotherapy metabolism (CYP3A4/P-gp), clotting and liver function; coffee enemas and fasts can be dangerous in cachexia, neutropenia or kidney disease. Tell the oncology team about everything you take.',
+ phases:[
+ {name:'Phase 1: Elimination & Drainage',goal:'Supportive nutrition and bowel/kidney comfort during treatment.',
+  diet:['Plant-forward, protein-adequate, calorie-sufficient diet; dietitian-led.','Avoid alcohol and processed meats (established risk factors).','Food safety rules during neutropenia (no raw sprouts, unpasteurised juices).'],
+  bot:['Ginger tea or capsules for nausea (evidence-based).','Peppermint or fibre for bowel regularity.','Check every herb with the oncology pharmacist.'],
+  prac:['Gentle walking and, when able, resistance training (reduces fatigue).','Hydration and mouth care.','Acupuncture and massage for symptom relief.'],
+  trad:'Open channels so that the body can "expel" the growth and its toxins.',
+  mod:'Exercise reduces cancer-related fatigue and may improve outcomes in breast and colon cancer. Adequate protein and energy prevent cachexia. No herb "drains" a tumour.'},
+ {name:'Phase 2: Deep Cellular Detox & Chelation',goal:'Historically: "deep detox". Today: avoid harmful extremes.',
+  diet:['Historical Gerson: ~13 juices, salt-free, coffee enemas (not recommended).','Modern parallel: Mediterranean pattern, high fibre, plenty of vegetables.','Fasting-mimicking diets are under study; not for undernourished patients.'],
+  bot:['Historical: chaparral, poke root, high-dose herbs (unsafe).','Modern: culinary turmeric, green tea in food amounts; supplements only with oncology approval.','Avoid high-dose antioxidants during chemotherapy and radiotherapy.'],
+  prac:['Coffee enemas: documented fatalities; do not use.','Sleep, stress reduction, psycho-oncology support.','Smoking cessation.'],
+  trad:'Cells are poisoned by toxins and starved of potassium; flushing and hyper-nutrition restore them.',
+  mod:'No detox mechanism has been shown to affect tumour biology. High-dose antioxidants may blunt treatment. Reports of coffee-enema-linked infections, electrolyte derangement and deaths led regulators to warn against them.'},
+ {name:'Phase 3: Mineralization & Tissue Regeneration',goal:'Recovery and survivorship.',
+  diet:['Plant-rich, high-fibre diet associated with better survivorship in colorectal cancer.','Maintain a healthy weight; adequate protein, vitamin D and calcium per bloods.','Limit alcohol.'],
+  bot:['Culinary herbs and spices in food.','No supplement without checking recurrence or drug interactions.','Soothing demulcents (slippery elm) for mucositis comfort, spaced from medicines.'],
+  prac:['Structured exercise (150 min/week).','Survivorship clinic follow-up and screening.','Peer and psychological support.'],
+  trad:'Re-mineralising the cells restores the terrain so disease cannot return.',
+  mod:'Survivorship benefits from exercise, healthy weight, plant-rich diet and no smoking. These lower recurrence risk and other chronic disease, but they supplement rather than replace surveillance and therapy.'}]},
+{id:'neuro',icon:'🧠',name:'Neurological & Gut–Brain Axis Disorders',
+ summary:'Migraine, neuropathy, multiple sclerosis, Parkinson\'s, mood and cognitive symptoms, and IBS/functional gut–brain disorders.',
+ ev:'limited',evText:'The gut–brain axis is real: the microbiome, vagus nerve and immune signalling influence mood, pain and inflammation. Mediterranean-type diets are linked with lower dementia and depression risk, and low-FODMAP diets help many IBS patients. Evidence does not support natural protocols as treatment for MS, Parkinson\'s or dementia.',
+ med:'Neurological disease needs specialist care. Diet changes can alter drug absorption (levodopa and protein), anticonvulsant levels, or B12/iron status. New or worsening neurological signs need urgent assessment.',
+ phases:[
+ {name:'Phase 1: Elimination & Drainage',goal:'Calm the gut and reduce irritants.',
+  diet:['Cut ultra-processed foods, alcohol and excess caffeine.','Trial of low-FODMAP or elimination diet with a dietitian for IBS-type symptoms.','Regular meals, fibre titrated slowly.'],
+  bot:['Peppermint oil for IBS (evidence-based).','Ginger or chamomile infusion.','Slippery elm or psyllium for stool form.'],
+  prac:['Daily movement and morning light.','Diaphragmatic breathing (vagal tone).','Sleep regularity.'],
+  trad:'The "second brain" (gut) is clogged with mucus, so thoughts and nerves are clouded.',
+  mod:'Enteric neurons, the vagus nerve and microbial metabolites signal to the brain. Peppermint oil relaxes gut smooth muscle; low-FODMAP reduces fermentation-driven symptoms. Breathing techniques increase vagal tone.'},
+ {name:'Phase 2: Deep Cellular Detox & Chelation',goal:'Support neuro-inflammation control and mitochondria.',
+  diet:['Mediterranean/MIND-style diet: greens, berries, nuts, olive oil, fish.','Fermented foods for microbiome diversity.','Limit alcohol; time-restricted eating if suitable.'],
+  bot:['Blue vervain or lemon balm for nervous tension (limited data).','Culinary turmeric with black pepper.','Magnesium-rich foods; test before supplementing.'],
+  prac:['Aerobic exercise (best evidence for cognition).','Cognitive and social engagement.','Heavy-metal testing only when exposure is plausible (chelation drugs only under toxicology).'],
+  trad:'Herbs "chelate" metals and toxins from nerve tissue.',
+  mod:'Exercise raises BDNF and protects cognition. Ketogenic and fasting protocols show early signals in epilepsy and migraine. Unproven chelation for autism or neurodegeneration has caused deaths (hypocalcaemia from EDTA).'},
+ {name:'Phase 3: Mineralization & Tissue Regeneration',goal:'Nourish nerve and brain tissue.',
+  diet:['Omega-3 (oily fish or algae), B12, folate and vitamin D adequacy.','Magnesium-, iron- and zinc-rich foods.','Protein timing for levodopa users per neurology advice.'],
+  bot:['Nettle and oat-straw infusions as mineral drinks.','Walnuts and hemp seed for fat.','Avoid unregulated "brain tonics".'],
+  prac:['Strength and balance training.','Rehabilitation therapy.','Mood and sleep support.'],
+  trad:'Mineralised nerve tissue "regenerates" and conducts properly.',
+  mod:'Deficiency states (B12, folate, vitamin D, iron, thiamine) cause treatable neurological symptoms, so testing comes first. Nerve regeneration is limited; rehabilitation and treatment of the underlying disease drive recovery.'}]}
+];
+
+const PHYS=[
+{t:'Mucus as the root of disease',trad:'Excess mucus from the wrong foods accumulates in organs and causes disease (Sebi, Ehret).',mod:'Mucus is produced constantly by healthy mucosa and is a defensive barrier. Overproduction is a response to infection, allergy or irritants. Milk does not increase airway mucus in controlled studies.',v:'none'},
+{t:'Acid–alkaline balance',trad:'An acidic body breeds disease; alkaline foods restore the terrain (Sebi, O\'Neill).',mod:'Blood pH is buffered at 7.35–7.45 by bicarbonate, lungs and kidneys. Diet changes urine pH and net acid load (PRAL), not blood pH. Evidence for alkaline diets preventing cancer or osteoporosis is weak or absent.',v:'none'},
+{t:'Plant-based "electric" diets',trad:'Living, non-hybrid plant foods carry mineral "electricity" and do not clog.',mod:'Whole-food plant-predominant diets reduce cardiovascular disease, type 2 diabetes and some cancers. "Hybrid" has no nutritional meaning; strict versions risk B12, iron, protein and omega-3 gaps.',v:'some'},
+{t:'Detoxification and the emunctories',trad:'Opening the kidneys, lymph, colon and skin removes accumulated toxins.',mod:'The liver, kidneys, gut and lungs already detoxify continuously. Evidence for commercial "detox" regimens clearing toxins is poor. Hydration, fibre, alcohol reduction and sweating from exercise support normal function.',v:'limited'},
+{t:'Fasting and cellular cleansing',trad:'Fasting rests the organs and lets the body burn off diseased tissue and mucus (Ehret).',mod:'Fasting induces autophagy (Ohsumi, Nobel 2016) and lowers insulin and some inflammation markers, mostly in animals. Human trials of time-restricted eating show modest benefit; prolonged fasting carries risk of electrolyte, glucose and muscle loss.',v:'limited'},
+{t:'Bitter herbs and the liver',trad:'Bitters wake a congested liver and clear toxins (Sebi, Morse).',mod:'Bitter taste stimulates cephalic-phase digestive secretion and can raise bile flow (cholagogue effect). Phase I/II enzymes are induced by cruciferous compounds. There is no proof that bitters treat disease; some herbs injure the liver.',v:'limited'},
+{t:'Mucilaginous herbs',trad:'Slippery elm, okra and sea moss soothe and coat the inflamed lining.',mod:'Soluble mucilage forms a gel that provides local demulcent comfort and slows nutrient absorption. This is one of the better-supported traditional concepts for sore throat and irritable bowel.',v:'some'},
+{t:'Lymphatic cleansing',trad:'Herbs and fruit unblock and drive the lymph, the body\'s sewer (Morse).',mod:'Lymph is moved by muscle contraction, breathing and one-way valves. Exercise and movement are the best-supported ways to move lymph; no herb is proven to do so. Persistent swollen nodes need medical assessment.',v:'limited'},
+{t:'Mineral replenishment (potassium, magnesium, iodine)',trad:'Chronic disease is mineral depletion; replenishing "bio-minerals" regenerates tissue.',mod:'Deficiency of magnesium, potassium, iron and iodine is real and treatable, but should be measured. Excess is equally real: hyperkalaemia in renal disease, iodine-induced thyroid disease.',v:'some'},
+{t:'Intra-cellular chelation',trad:'Specific herbs bind and remove metals and toxins from inside cells (Sebi).',mod:'Chelation is a prescription treatment for confirmed metal poisoning (DMSA, EDTA, dimercaprol). Herbs are not shown to chelate intracellular metals. Inappropriate IV chelation has caused deaths.',v:'none'},
+{t:'Coffee enemas',trad:'Coffee palmitates stimulate bile flow and glutathione S-transferase to detoxify the liver (Gerson).',mod:'The enzyme effect was shown in rodents, not as human clinical benefit. Documented harms include electrolyte disturbance, rectal burns, infections and fatalities.',v:'harm'},
+{t:'Terrain over germs',trad:'The condition of the host decides disease; germs are secondary.',mod:'Pathogens are necessary causes of infectious disease; host factors modulate severity. Nutrition and immunity matter, but terrain does not replace vaccines or antimicrobials.',v:'none'},
+{t:'Hydrotherapy and poultices',trad:'Alternating hot and cold water, packs and poultices stimulate circulation and draw out congestion (O\'Neill).',mod:'Heat and cold change vascular tone and pain perception; contrast baths have modest effects on comfort and recovery. "Drawing" toxins through skin has no evidence.',v:'limited'}
+];
+
+const RISKS=[
+{n:'Chaparral (internal use)',d:'Reports of acute hepatitis, cirrhosis and liver failure requiring transplant; FDA consumer warnings.'},
+{n:'Poke root',d:'Poisonous; severe vomiting, low blood pressure, seizures; deaths reported.'},
+{n:'Coffee enemas',d:'Colitis, rectal injury, infection, electrolyte loss and deaths, including in alternative clinics.'},
+{n:'Iodine-rich seaweeds',d:'Sea moss and bladderwrack can contain unpredictable iodine levels, causing thyroiditis, hyper- or hypothyroidism.'},
+{n:'High-potassium juicing (Gerson)',d:'Dangerous hyperkalaemia in kidney disease, or with ACE inhibitors, ARBs, spironolactone or NSAIDs.'},
+{n:'Prolonged fasting',d:'Hypoglycaemia on insulin or sulfonylureas; refeeding syndrome; arrhythmia; muscle loss; not for pregnancy, eating disorders or frailty.'},
+{n:'Stimulant laxative herbs',d:'Cascara, senna and yellow dock can cause dependence, potassium loss and dehydration with repeated use.'},
+{n:'Delaying conventional care',d:'The greatest harm in the literature: delayed diagnosis and treatment of cancer, diabetes, infection and heart disease.'},
+{n:'Raw elderberry and unprepared plants',d:'Raw elderberry contains cyanogenic compounds; many herbs have unlisted adulterants or heavy metals.'},
+{n:'Herb–drug interactions',d:'Anticoagulants, immunosuppressants, chemotherapy, digoxin, lithium, antiepileptics and thyroid drugs all have important interactions.'}
+];
+
+const THREADS=[
+ 'Whole-food, mostly plant-based eating: all of them favour vegetables, fruit and little or no processed food.',
+ 'Support for elimination channels: kidneys, bowel, skin and lymph are seen as the pathways to "clear".',
+ 'Mineral replenishment: potassium (Gerson, Morse), iodine and magnesium (Sebi) and general mineral density.',
+ 'Fasting and rest as therapeutic tools (Ehret, Morse, Sebi, O\'Neill).',
+ 'Terrain over germs: disease is understood as an internal environment problem.',
+ 'Hydration and simple physical therapies: water, sunlight, hydrotherapy, sweat.'];
+const DIVERGE=[
+ 'Fruit: central for Ehret and Morse; Sebi restricts to "non-hybrid" fruit; Gerson uses it for juices; mainstream nutrition treats sugar load with caution.',
+ 'Herbs: Sebi and Morse use extensive herbal formulas; Ehret and Gerson rely mostly on food and fasting.',
+ 'Salt and fat: Gerson is strictly salt-free and low-fat; Sebi allows some oils; O\'Neill is moderate.',
+ 'Enemas: Gerson (coffee) and Ehret/Jensen (water, bowel cleansing) support them; Sebi emphasises herbs instead.',
+ 'Credentials and evidence: Gerson held an MD; Sebi, Ehret and O\'Neill lacked medical degrees; Jensen and Morse hold chiropractic/naturopathic credentials.',
+ 'Cure claims: Sebi and Gerson made explicit disease-cure claims that regulators or reviewers rejected; O\'Neill claims are framed as "self-healing support".'];
+const EMUNCT=[
+ {n:'Kidneys',t:'Flush acid and urea; diuretic herbs (nettle, dandelion) "wash" the terrain.',m:'Kidneys already filter ~180 L/day; hydration and a plant-rich diet reduce stone risk. Diuretic herbs add little and can disturb potassium.'},
+ {n:'Lymph',t:'Congested lymph holds mucus and toxins; alteratives clear it.',m:'Moves via muscle pumping and breathing; exercise is the proven "drainage". Immune surveillance happens in nodes.'},
+ {n:'Colon',t:'The first channel to open; stagnant stool poisons the body ("autointoxication").',m:'Autointoxication has been discredited; fibre and fluid prevent constipation and may lower colorectal cancer risk.'},
+ {n:'Skin',t:'Sweat and dry brushing release acids and waste.',m:'Sweat is mostly water and electrolytes; it is a negligible route for toxins. Exercise heat has cardiovascular benefits.'},
+ {n:'Liver',t:'Bitters and juices decongest the liver; the hub of Gerson therapy.',m:'The liver is the main detoxifier by Phase I/II enzymes and bile; alcohol reduction, weight loss and avoiding hepatotoxic herbs matter most.'}];
+
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const EVL={some:'Some support',limited:'Limited',none:'Unsupported',harm:'Safety concern'};
+const evBadge=e=>`<span class="ev ev-${e}">${EVL[e]}</span>`;
+const lens=(trad,mod)=>`<div class="trad lensL text-sm mb-2.5"><div class="text-[10px] uppercase tracking-widest text-champagne-600 font-bold mb-0.5">Traditional reasoning</div>${trad}</div><div class="modern lensM text-sm"><div class="text-[10px] uppercase tracking-widest text-sage-700 font-bold mb-0.5">Modern biochemical parallel</div>${mod}</div>`;
+
+/* ============ NAV & ROUTING ============ */
+const VIEWS=[['home','Home'],['conditions','Conditions'],['terrain','Practitioners'],['database','Database'],['protocols','Protocols'],['physiology','Physiology'],['safety','Safety'],['sources','Sources'],['learn','Glossary & FAQ'],['about','About']];
+const TITLES={home:'Natural Healing Atlas — A free guide to natural health options',terms:'Terms, Privacy & Disclaimer'};
+VIEWS.forEach(([k,l])=>TITLES[k]=TITLES[k]||l+' · Natural Healing Atlas');TITLES.terms+=' · Natural Healing Atlas';
+$('#navD').innerHTML=VIEWS.map(([k,l])=>`<a class="navlink" data-v="${k}" href="#${k}">${l}</a>`).join('');
+$('#navM').innerHTML=VIEWS.map(([k,l])=>`<a class="navlink" data-v="${k}" href="#${k}">${l}</a>`).join('');
+$('#burger').onclick=()=>{const m=$('#navM');m.classList.toggle('hidden');m.classList.toggle('flex')};
+function route(){
+  let h=location.hash.slice(1); if(!VIEWS.some(v=>v[0]===h)&&h!=='terms') h='home';
+  document.title=TITLES[h];
+  $$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+h));
+  $$('.navlink').forEach(a=>a.classList.toggle('active',a.dataset.v===h));
+  $('#navM').classList.add('hidden');$('#navM').classList.remove('flex');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const m=$('#main');if(m&&document.activeElement&&document.activeElement.tagName==='A')m.focus({preventScroll:true});
+}
+window.addEventListener('hashchange',route);
+
+/* ============ LENS ============ */
+function setLens(l){
+  document.body.dataset.lens=l;
+  $$('#lensBar button,#lensBarM button').forEach(b=>{
+    const on=b.dataset.l===l;
+    b.className=`px-3.5 py-1 rounded-full transition-all ${on?'bg-obsidian-900 text-white font-semibold shadow-sm':'text-stone-600 hover:text-obsidian-900'}`;
+  });
+}
+$$('#lensBar button,#lensBarM button').forEach(b=>b.onclick=()=>setLens(b.dataset.l));
+
+/* ============ HOME ============ */
+$('#homeCards').innerHTML=[
+ ['conditions','🩺','Conditions A–Z','Twelve common conditions: what each practitioner taught, what evidence says, what is reasonable to try, and when to see a doctor.'],
+ ['terrain','⚗️','Philosophy & Terrain Hub','Compare six pioneers across core theory, dietary rules, targeted organs, and historical credentials.'],
+ ['database','🌿','Food & Botanical Database',DB.length+' foods and herbs filterable by practitioner, organ system, mineral profile, and evidence grade.'],
+ ['protocols','🧭','Complex Protocol Explorer','Four chronic-disorder categories mapped across three phases with physiological rationales.'],
+ ['physiology','⚖️','Physiology vs. Tradition','Thirteen core naturopathic doctrines examined alongside modern biochemistry and pH homeostasis.'],
+ ['safety','⚠️','Safety & Risk Registry','Documented organ toxicities, herb–drug interactions, and essential clinical boundaries.'],
+ ['sources','📚','Primary Sources & Evidence','Peer-reviewed papers, regulatory records and fact-checks behind the key claims.'],
+ ['learn','📖','Glossary & FAQ','Plain-language definitions and answers to the questions people ask first.'],
+ ['about','ℹ️','About this guide','Our aim, how statements are credited, how evidence is graded and our editorial standards.']
+].map(([k,i,t,d])=>`
+<a href="#${k}" class="card card-hover p-6 block group">
+  <div class="w-11 h-11 rounded-2xl bg-alabaster-200 border border-black/5 flex items-center justify-center text-xl group-hover:bg-obsidian-900 group-hover:text-white transition-colors">${i}</div>
+  <h3 class="text-2xl font-bold text-obsidian-900 mt-4 group-hover:text-sage-700 transition-colors">${t}</h3>
+  <p class="text-sm mt-1.5 text-stone-600 leading-relaxed">${d}</p>
+</a>`).join('');
+
+/* ============ TERRAIN ============ */
+const ROWS=[['Era & credentials','era'],['Core theory','theory'],['Dietary rules','diet'],['Primary organs targeted','organs'],['Signature herbs & therapies','herbs'],['Modern assessment','modern'],['Key safety flags','risk']];
+let sel=new Set(['Sebi','Ehret','Morse','Gerson','ONeill']);
+function drawChips(){
+  $('#pChips').innerHTML=Object.entries(PR).map(([k,p])=>`<button class="pill-btn ${sel.has(k)?'on':''}" data-k="${k}">${p.name}</button>`).join('');
+  $$('#pChips button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(sel.has(k)){if(sel.size>1)sel.delete(k)}else sel.add(k);drawChips();drawMatrix()});
+}
+function drawMatrix(){
+  const ks=Object.keys(PR).filter(k=>sel.has(k));
+  $('#matrix').innerHTML=`<thead><tr><th>Dimension</th>${ks.map(k=>`<th>${PR[k].name}</th>`).join('')}</tr></thead><tbody>${ROWS.map(([l,f])=>`<tr><td>${l}</td>${ks.map(k=>`<td ${f==='risk'?'class="text-[#8c2318] font-medium"':''}>${PR[k][f]}</td>`).join('')}</tr>`).join('')}</tbody>`;
+}
+drawChips();drawMatrix();
+$('#emunct').innerHTML=EMUNCT.map(e=>`<div class="pb-3 border-b border-black/5 last:border-0"><h4 class="font-bold text-obsidian-900 mb-1.5">${e.n}</h4>${lens(e.t,e.m)}</div>`).join('');
+$('#threads').innerHTML=THREADS.map(t=>`<li>${t}</li>`).join('');
+$('#diverge').innerHTML=DIVERGE.map(t=>`<li>${t}</li>`).join('');
+
+/* ============ DATABASE ============ */
+let allExpanded=false;
+function opts(el,label,arr,labelFn){el.innerHTML=`<option value="">${label}</option>`+arr.map(a=>`<option value="${a}">${labelFn?labelFn(a):a}</option>`).join('')}
+opts($('#fP'),'All practitioners',Object.keys(PR),k=>PR[k].name);
+opts($('#fO'),'All systems',ORGANS);opts($('#fM'),'Any mineral',MINERALS);opts($('#fPr'),'Any preparation',PREPS);
+const COND={
+ thy:{l:'Thyroid disease',re:/thyroid|iodine/i},
+ kid:{l:'Kidney disease / hyperkalaemia',re:/kidney|renal|hyperkal|potassium load|oxalate|stone/i},
+ bleed:{l:'Anticoagulants / bleeding risk',re:/anticoag|bleed|antiplatelet|warfarin|vitamin K|blood.thin/i},
+ dia:{l:'Diabetes / hypoglycaemia',re:/glucose|diabet|hypoglyc|insulin|sugar|metformin/i},
+ preg:{l:'Pregnancy',re:/pregnan|labour/i}};
+let condSel=new Set();
+function drawCond(){
+  $('#condChips').innerHTML=Object.entries(COND).map(([k,c])=>`<button class="pill-btn ${condSel.has(k)?'on':''}" data-k="${k}">${c.l}</button>`).join('');
+  $$('#condChips button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;condSel.has(k)?condSel.delete(k):condSel.add(k);drawCond();drawDB()});
+}
+function hlC(text){let out=text;condSel.forEach(k=>{out=out.replace(new RegExp(COND[k].re.source,'gi'),m=>`<mark class="cm">${m}</mark>`)});return out}
+function drawDB(){
+  const q=$('#q').value.trim().toLowerCase(),k=$('#fKind').value,p=$('#fP').value,o=$('#fO').value,m=$('#fM').value,pr=$('#fPr').value,e=$('#fE').value;
+  const sel=[...condSel],hide=$('#hideFlag').checked;
+  let res=DB.filter(x=>(!k||x.k===k)&&(!p||x.p.includes(p))&&(!o||x.o.includes(o))&&(!m||x.m.includes(m))&&(!pr||x.pr.includes(pr))&&(!e||x.ev===e)&&
+    (!q||(x.n+' '+x.lat+' '+x.t+' '+x.mo+' '+x.c+' '+x.o.join(' ')+' '+x.m.join(' ')).toLowerCase().includes(q)));
+  const flags=x=>sel.filter(c=>COND[c].re.test(x.c));
+  const nFlag=res.filter(x=>flags(x).length).length;
+  if(sel.length){
+    $('#condMsg').textContent=`${nFlag} of ${res.length} matching entries carry a caution relevant to: ${sel.map(c=>COND[c].l).join(', ')}.`;
+    if(hide)res=res.filter(x=>!flags(x).length);
+    res=[...res].sort((a,b)=>(flags(b).length>0)-(flags(a).length>0));
+  } else $('#condMsg').textContent='';
+  $('#count').textContent=`${res.length} of ${DB.length} entries`;
+  $('#dbGrid').innerHTML=res.length?res.map(x=>{const f=flags(x);return `
+  <details class="card p-4 ${sel.length?(f.length?'flagcard':'okcard'):''}" ${allExpanded?'open':''}>
+    <summary class="flex justify-between gap-2 items-start">
+      <div><h3 class="text-2xl font-semibold text-obsidian-900 leading-tight">${x.n}</h3><p class="text-xs italic text-stone-600">${x.lat}</p>
+        ${sel.length?(f.length?`<div class="mt-1">${f.map(c=>`<span class="fl">⚠ ${COND[c].l}</span>`).join('')}</div>`:`<div class="mt-1 text-[11px] text-sage-700">No listed caution for your selection</div>`):''}</div>
+      <div class="text-right shrink-0">${evBadge(x.ev)}<div class="text-[11px] text-stone-600 mt-1">${x.k}</div></div>
+    </summary>
+    <div class="mt-2">${x.p.map(a=>`<span class="tag">${PR[a].name}</span>`).join('')}${x.o.map(a=>`<span class="tag" style="background:#d7e3d8">${a}</span>`).join('')}${x.m.map(a=>`<span class="tag" style="background:#f6e3b4">${a}</span>`).join('')}${x.pr.map(a=>`<span class="tag" style="background:#fff;border:1px solid #d9c9a3">${a}</span>`).join('')}</div>
+    <p class="mt-3 text-xs text-stone-600">Traditional claim credited to <b>${x.p.map(a=>PR[a].name).join(', ')}</b>. The modern note reflects current clinical literature.</p>
+    <div class="mt-2">${lens(x.t,x.mo)}</div>
+    <div class="mt-3 text-sm p-2 rounded-lg bg-[#a33e30]/10 border border-[#a33e30]/20 text-[#7a261b]"><b>Cautions:</b> ${hlC(x.c)}</div>
+  </details>`}).join(''):`<p class="col-span-full text-center text-stone-600 py-10">No entries match these filters.</p>`;
+}
+['#q','#fKind','#fP','#fO','#fM','#fPr','#fE','#hideFlag'].forEach(s=>$(s).addEventListener('input',drawDB));
+$('#reset').onclick=()=>{['#q','#fKind','#fP','#fO','#fM','#fPr','#fE'].forEach(s=>$(s).value='');$('#hideFlag').checked=false;condSel.clear();allExpanded=false;$('#toggleAll').textContent='Expand all cards';drawCond();drawDB()};
+$('#toggleAll').onclick=()=>{
+  allExpanded=!allExpanded;
+  $('#toggleAll').textContent=allExpanded?'Collapse all cards':'Expand all cards';
+  $$('#dbGrid details').forEach(d=>d.open=allExpanded);
+};
+function jumpDB(prep){$('#fPr').value=prep;['#q','#fKind','#fP','#fO','#fM','#fE'].forEach(s=>$(s).value='');drawDB();location.hash='database'}
+drawCond();drawDB();
+
+/* ============ ROUTINES & APOTHECARY DATA ============ */
+const RHYTHM={
+ auto:[
+  {am:'Warm lemon water, then a plant-based breakfast (oats or berries). A 20-minute walk.',mid:'Largest plant meal: leafy greens and legumes. Nettle or dandelion-leaf infusion. A short movement break.',pm:'Light vegetable soup early. Slippery elm or chamomile tea. Warm-then-cool shower, screens off, fixed bedtime.'},
+  {am:'Overnight fast of about 12–14 hours only if your clinician agrees. Herbal infusion, gentle yoga.',mid:'Cruciferous and bitter-greens meal. Burdock or dandelion-root decoction only after an interaction check. Walk after eating.',pm:'Early light meal. Sweat session (exercise or sauna) earlier in the day, not late. Magnesium-rich foods, wind-down routine.'},
+  {am:'Protein-adequate breakfast with seeds and fruit. Fifteen minutes of morning light. Strength training 2–3 days a week.',mid:'Mineral-dense meal: greens, legumes, ancient grains. Nettle or oat-straw infusion.',pm:'Omega-3 meal (oily fish or algae). Reintroduce one excluded food at a time and log symptoms. Stress-reduction practice.'}],
+ meta:[
+  {am:'Water first. High-fibre breakfast (oats, seeds, berries) without juice. A 10-minute walk after eating.',mid:'Plate: half non-starchy vegetables, a quarter legumes or whole grains, a quarter protein. Walk 10–15 minutes afterwards.',pm:'Early, light dinner. Dandelion or nettle tea. Consistent bedtime. Check glucose as your care plan advises.'},
+  {am:'Start the eating window later only if your prescriber approves. Cruciferous vegetables with breakfast.',mid:'Resistance-training session. Eat vegetables and protein before carbohydrate to flatten the glucose rise.',pm:'Last meal about three hours before bed. Stress down-regulation. Seven to eight hours of sleep.'},
+  {am:'Protein at breakfast to protect muscle. Sunlight and a short walk.',mid:'Magnesium-rich meal: leafy greens, nuts, legumes.',pm:'Strength or balance session earlier in the evening. Olive oil, fish or legume dinner. Sleep-apnoea and glucose checks per your plan.'}],
+ onco:[
+  {am:'Small, frequent meals. Ginger tea for nausea. A light walk if energy allows.',mid:'Protein-rich meal at your best appetite time. Hydrate. Mouth care.',pm:'Gentle, familiar food. Sleep hygiene. Call the oncology line for fever, persistent vomiting or uncontrolled pain.'},
+  {am:'No fasting or enemas. Keep your prescribed treatment schedule. Plant-forward breakfast with protein.',mid:'Mediterranean-style lunch. Short, supervised exercise.',pm:'Psycho-oncology or support group. Relaxation practice. Review every supplement with the oncology pharmacist.'},
+  {am:'Exercise to the level your team has cleared. Fibre-rich breakfast.',mid:'Plant-rich, high-fibre lunch. Keep a healthy weight.',pm:'Book survivorship follow-ups. Sleep and social connection. Limit alcohol.'}],
+ neuro:[
+  {am:'Regular breakfast. Morning daylight. Five minutes of diaphragmatic breathing.',mid:'Lower-irritant lunch (trial elimination only with a dietitian). Peppermint tea if it suits you. A walk.',pm:'Early dinner. Ginger or chamomile infusion. Screens off, fixed bedtime.'},
+  {am:'Thirty minutes of aerobic exercise. Mediterranean breakfast with berries and nuts.',mid:'A portion of fermented food. Leafy greens. A social or cognitive activity.',pm:'Oily-fish or legume dinner. Limit alcohol. Lemon balm or vervain tea (limited data). Wind-down routine.'},
+  {am:'Review B12, vitamin D and iron results with your GP. Omega-3 breakfast (walnuts, ground flax).',mid:'Magnesium-, zinc- and iron-rich meal. Protein timing for levodopa per neurology advice, if relevant.',pm:'Balance or strength session earlier in the day. Mood and sleep check. Rehabilitation exercises.'}]};
+function rhythmHTML(c,i){const r=RHYTHM[c][i];return `<div class="grid md:grid-cols-3 gap-3 mt-3">${[['🌅 Morning',r.am],['☀️ Midday',r.mid],['🌙 Evening',r.pm]].map(([t,x])=>`<div class="p-3 rounded-lg bg-alabaster-200/60 border border-black/5"><div class="font-semibold text-sage-700 text-sm">${t}</div><p class="text-sm mt-1">${x}</p></div>`).join('')}</div><p class="text-xs text-stone-600 mt-3">Illustrative structure only, not a prescription. Adapt meals and timing to your medicines, conditions and clinician's advice.</p>`}
+
+const APO=[
+ {n:'Decoction',icon:'🫖',best:'Roots, bark, seeds and other hard plant parts (burdock, dandelion root, yellow dock, sarsaparilla).',
+  steps:['Cut or break the dried herb into small pieces.','Put it in cold water in a stainless-steel, glass or enamel pot (about one tablespoon of dried herb per cup of water is the traditional ratio).','Bring to a boil, lower the heat, cover, and simmer for 15–20 minutes (tough roots may take longer).','Take off the heat and steep, covered, for about 10 minutes.','Strain, drink warm or cool, and refrigerate leftovers for no more than 24–48 hours.'],
+  warn:'Never decoct chaparral or poke root. Avoid aluminium pots. Laxative roots (yellow dock, cascara) can cause cramps and potassium loss.'},
+ {n:'Infusion',icon:'🍵',best:'Leaves, flowers and soft aerial parts (nettle, red clover, cleavers, mullein, blue vervain, ginger slices).',
+  steps:['Place the dried herb in a clean teapot or jar (about one tablespoon per cup is traditional).','Pour just-boiled water over it and cover immediately to keep volatile oils.','Steep 5–10 minutes for delicate herbs, or 4 hours to overnight for mineral-rich nettle or oat straw.','Strain through a fine sieve (mullein must be strained finely to remove irritating hairs).','Drink fresh, or refrigerate for up to 24 hours.'],
+  warn:'Cook elderberries; never use them raw. Infusions are weaker than decoctions, so do not assume "gentle" means free of interactions.'},
+ {n:'Tincture',icon:'🧪',best:'Herbs whose active compounds dissolve in alcohol or that need to keep for months (echinacea, bladderwrack, burdock).',
+  steps:['Fill a clean glass jar about halfway with chopped dried herb.','Cover with 40–60% alcohol (a traditional dried-herb ratio is 1 part herb to 5 parts liquid by weight to volume) so the herb is fully submerged.','Seal, label with herb, date and alcohol strength, and keep in a dark place for 4–6 weeks, shaking daily.','Strain through muslin, press out the liquid, and bottle in amber glass.','Store cool and dark; label clearly and keep out of children\'s reach.'],
+  warn:'Alcohol content matters in pregnancy, liver disease, recovery from alcohol misuse and with some medicines. Tinctures of toxic herbs (poke root) are poisonous. Standardised commercial products are more consistent than home extracts.'},
+ {n:'Poultice',icon:'🩹',best:'External use: mashed herbs, clay or charcoal for localised skin or muscle complaints; warm castor-oil packs.',
+  steps:['Mash or grind fresh or dried herb, or mix clay or charcoal with a little warm water to a smooth paste.','Spread on clean cotton or gauze (a thin cloth between paste and skin protects sensitive skin).','Patch-test on a small area of intact skin first.','Apply to intact skin, cover loosely, and leave for 20–30 minutes.','Remove, rinse the skin, and discard the used material.'],
+  warn:'Never apply to open wounds, burns or infected skin. Stop for burning, rash or blistering. Do not sleep on a heat pad over a pack. Clays can be contaminated with lead or arsenic.'}];
+function drawApo(){
+  $('#apo').innerHTML=`<h3 class="text-4xl font-bold text-obsidian-900">Apothecary Preparation Guide</h3>
+  <p class="text-sm text-stone-700 mt-1 max-w-3xl">How the traditional methods are prepared. This explains technique, not dosing. Never prepare herbs graded "Safety concern" in the database, and check every herb with a pharmacist if you take medicines.</p>
+  <div class="grid md:grid-cols-2 gap-4 mt-4">${APO.map(a=>{const n=DB.filter(x=>x.pr.includes(a.n)).length;return `
+   <div class="card p-5"><div class="flex items-center justify-between gap-2"><h4 class="text-3xl font-semibold text-obsidian-900">${a.icon} ${a.n}</h4><button class="pill-btn text-xs" onclick="jumpDB('${a.n}')">${n} database entries →</button></div>
+   <p class="text-sm mt-1 text-stone-700"><b>Best for:</b> ${a.best}</p>
+   <ol class="mt-3 text-sm list-decimal pl-5 space-y-1.5">${a.steps.map(t=>`<li>${t}</li>`).join('')}</ol>
+   <div class="mt-3 text-sm p-2 rounded-lg bg-[#a33e30]/10 border border-[#a33e30]/20 text-[#7a261b]"><b>Watch-outs:</b> ${a.warn}</div></div>`}).join('')}</div>
+  <div class="card p-5 mt-4"><h4 class="text-2xl font-semibold text-obsidian-900">Rules for every preparation</h4>
+   <ul class="mt-2 text-sm list-disc pl-5 space-y-1"><li>Right plant, right part: identify the species with a reputable supplier, since look-alikes can be toxic.</li><li>Use clean glass or stainless-steel equipment, label everything, and discard anything that smells off or grows mould.</li><li>Do not combine herbs with prescribed medicines without a pharmacist check.</li><li>Stop and seek care for rash, vomiting, jaundice, palpitations or fainting.</li></ul></div>`;
+}
+
+/* ============ SOURCES DATA ============ */
+const SRC=[
+ ['Peer-reviewed literature (verify in PubMed)',[
+  ['Johnson SB, Park HS, Gross CP, Yu JB. Use of alternative medicine for cancer and its impact on survival. J Natl Cancer Inst. 2018;110(1):121–124.','Alternative medicine alone and roughly 2.5-fold higher mortality (Safety page).'],
+  ['Remer T, Manz F. Potential renal acid load of foods and its influence on urine pH. J Am Diet Assoc. 1995;95(7):791–797.','Origin of the PRAL concept: diet shifts urine pH.'],
+  ['Fenton TR, Lyon AW, Eliasziw M, Tough SC, Hanley DA. Meta-analysis of the effect of the acid-ash hypothesis of osteoporosis on calcium balance. J Bone Miner Res. 2009;24(11):1835–1840.','Acid-ash and bone: calcium balance changes did not support the hypothesis.'],
+  ['Pinnock CB, Graham NM, Mylvaganam A, Douglas RM. Relationship between milk intake and mucus production in adult volunteers challenged with rhinovirus-2. Am Rev Respir Dis. 1990;141(2):352–356.','Milk and mucus.'],
+  ['Eisele JW, Reay DT. Deaths related to coffee enemas. JAMA. 1980;244(14):1608–1609.','Coffee-enema fatalities (Gerson-type practice).'],
+  ['Hildenbrand GL, Hildenbrand LC, Bradford K, Cavin SW. Five-year survival rates of melanoma patients treated by diet therapy after the manner of Gerson: a retrospective review. Altern Ther Health Med. 1995;1(4):29–37.','Retrospective, uncontrolled series; the best-known Gerson data.'],
+  ['Sheikh NM, Philen RM, Love LA. Chaparral-associated hepatotoxicity. Arch Intern Med. 1997;157(8):913–919.','Liver injury and failure from chaparral.'],
+  ['Leung AM, Braverman LE. Consequences of excess iodine. Nat Rev Endocrinol. 2014;10(3):136–142.','Thyroid effects of iodine excess (sea moss, bladderwrack).'],
+  ['Simon A, Worthen DM, Mitas JA. An evaluation of iridology. JAMA. 1979;242(13):1385–1389.','Blinded study: iridology could not detect kidney disease.'],
+  ['Baxter AJ, Krenzelok EP. Pediatric fatality secondary to EDTA chelation. Clin Toxicol. 2008;46(10):1083–1084.','Risk of inappropriate chelation.'],
+  ['Estruch R, et al. Primary prevention of cardiovascular disease with a Mediterranean diet supplemented with extra-virgin olive oil or nuts. N Engl J Med. 2018;378(25):e34.','PREDIMED: the strongest evidence for a plant-forward dietary pattern.']]],
+ ['Regulatory, legal and credential records',[
+  ['NSW Health Care Complaints Commission. Public statement and statement of decision in relation to Mrs Barbara O\'Neill, 24 September 2019.','Permanent prohibition from providing any health services.','https://www.hccc.nsw.gov.au/Hearings---decisions/Public-statements-and-warnings/Public-Statement-and-Statement-of-Decision-in-relation-to-in-relation-to-Mrs-Barbara-O-Neill'],
+  ['New York Amsterdam News. Herbalist found not guilty in "fake" healing case. 1 October 1988.','Contemporary report of Sebi\'s acquittal (no link; archive).'],
+  ['US Federal Register, 9 May 2002: final rule on over-the-counter status of aloe and cascara sagrada laxatives.','Why cascara left OTC laxative products.'],
+  ['Booktopia author bio for Robert S. Morse, The Detox Miracle Sourcebook.','Source for the "naturopathic physician, biochemist, herbalist" description; licensure not independently verified.','https://booktopia.com.au/the-detox-miracle-sourcebook-robert-s-morse/book/9781935826194.html']]],
+ ['Fact-checks and secondary sources',[
+  ['Science Feedback. No evidence Dr. Sebi could cure AIDS or other diseases.','Medical qualifications, 1987 case and consent agreement.','https://science.feedback.org/review/no-evidence-dr-sebi-could-cure-aids-other-diseases-using-natural-remedies-change-diet/'],
+  ['Lead Stories. Fact check: Dr. Sebi did not cure AIDS.','Consent agreement barring therapeutic claims.','https://leadstories.com/hoax-alert/2022/06/fact-check-dr-sebi-did-not-cure-aids.html'],
+  ['PolitiFact. Dr. Sebi and the circumstances of his 2016 death.','Arrest, charges and death in Honduras.','https://www.politifact.com/factchecks/2023/may/25/facebook-posts/dr-sebi-promoter-of-controversial-diets-died-from'],
+  ['McGill Office for Science and Society. Dr. Sebi: what do we make of him?','Critical overview of the diet and claims.','https://www.mcgill.ca/oss/article/quackery/dr-sebi-what-do-we-make-him'],
+  ['Science-Based Medicine. Australian naturopath Barbara O\'Neill banned for her dangerous health advice.','Detail of the HCCC findings.','https://sciencebasedmedicine.org/australian-naturopath-barbara-oneill-banned-for-her-dangerous-health-advice/'],
+  ['Medical Journal of Australia InSight+. Charity status for bunkum: where are the regulators?','Context on O\'Neill\'s ban.','https://insightplus.mja.com.au/2019/41/charity-status-for-bunkum-where-are-the-regulators']]]];
+function drawSources(){
+  $('#srcBody').innerHTML=SRC.map(([h,items])=>`<div class="card p-6 ${h.startsWith('Fact')?'lg:col-span-2':''}"><h3 class="text-2xl font-semibold text-obsidian-900">${h}</h3><ol class="mt-3 space-y-3 text-sm list-decimal pl-5">${items.map(([c,n,u])=>`<li>${u?`<a class="underline text-sage-700" target="_blank" rel="noopener" href="${u}">${c}</a>`:c}<div class="text-xs text-stone-600 mt-0.5">${n}</div></li>`).join('')}</ol></div>`).join('');
+}
+
+/* ============ PH SIMULATOR ============ */
+const SIMT=['Seconds','Minutes','Hours','Days'];
+const TIERS=[
+ {n:'Tier 1 · Bicarbonate buffer',sp:'Seconds',d:'HCO₃⁻ + H⁺ ⇌ H₂CO₃ ⇌ CO₂ + H₂O. Chemical buffering is instant but consumes bicarbonate.'},
+ {n:'Tier 2 · Respiratory CO₂ control',sp:'Minutes',d:'Chemoreceptors adjust breathing to blow off or retain CO₂, which acts as carbonic acid.'},
+ {n:'Tier 3 · Renal H⁺/HCO₃⁻ excretion',sp:'Hours to days',d:'Kidneys excrete H⁺ (as ammonium and titratable acid) and reabsorb or regenerate bicarbonate. This is where urine pH moves.'}];
+const SIM={
+ A:{n:'Alkaline plant diet',icon:'🥬',blood:[7.40,7.41,7.41,7.40],urine:[6.0,6.3,6.9,7.3],act:[[15,10,5,0],[0,10,10,5],[0,5,60,90]],
+  txt:['Plant citrate and bicarbonate precursors add a small base load; the buffer pair absorbs it at once and the change is tiny.','Breathing barely changes: slightly slower ventilation retains a little CO₂ to offset the base load.','Kidneys excrete the surplus bicarbonate and cut ammonium output, so urine turns alkaline. This is the only place the diet shows.'],
+  take:'A net-base diet moves urine pH, not blood pH. An alkaline urine reading shows what the kidneys discarded, not how "alkaline" the body is.'},
+ B:{n:'High-acid-load diet',icon:'🥩',blood:[7.40,7.40,7.39,7.40],urine:[6.0,5.8,5.4,5.0],act:[[40,25,15,10],[0,15,15,10],[0,10,70,95]],
+  txt:['Sulphur amino acids and phosphate from protein add H⁺; bicarbonate buffers it within seconds and is consumed.','A small rise in ventilation lowers CO₂ if bicarbonate has dipped; rarely noticeable in health.','Kidneys excrete the acid as ammonium and titratable acid and make new bicarbonate over hours to days. Urine falls to about pH 5–5.5, with more calcium in the urine.'],
+  take:'In people with normal kidneys a high-acid-load diet leaves blood pH in range. Chronic kidney disease is the exception: there acid retention is real and is treated medically.'},
+ C:{n:'Intense exercise',icon:'🏃',blood:[7.36,7.32,7.38,7.40],urine:[6.0,5.9,5.5,6.0],act:[[80,60,10,0],[20,90,30,5],[0,5,40,50]],
+  txt:['Lactic acid and CO₂ surge; bicarbonate plus muscle and blood proteins buffer the H⁺ within seconds.','Breathing rate climbs steeply, blowing off CO₂ and pulling pH back up. This is the dominant response over minutes.','Kidneys play a supporting role; the liver and muscle clear lactate. Urine can be more acidic and concentrated afterwards.'],
+  take:'All-out effort can briefly push arterial pH to about 7.2–7.3 before breathing and lactate clearance restore it within minutes to an hour. Moderate exercise stays in range.'},
+ D:{n:'Hyperventilation',icon:'😮‍💨',blood:[7.47,7.53,7.46,7.42],urine:[6.0,6.3,7.0,7.5],act:[[60,40,10,0],[100,70,20,5],[0,5,50,90]],
+  txt:['Losing CO₂ raises pH. Albumin and haemoglobin release H⁺ and bind calcium, which explains tingling and cramps.','This tier is the driver: over-breathing removes CO₂ faster than it is made. Slowing the breath restores pH within minutes.','If it persists (for example at altitude), kidneys excrete bicarbonate over hours to days, pulling pH back toward normal. Urine turns alkaline.'],
+  take:'Breathing, not diet, is the fastest lever on blood pH. Acute hyperventilation lifts pH above 7.45, then it reverses once breathing normalises.'}};
+let simS='A',simT=1;
+function initSim(){
+  $('#simStates').innerHTML=Object.entries(SIM).map(([k,v])=>`<button class="pill-btn" data-k="${k}">${v.icon} ${v.n}</button>`).join('');
+  $('#simTimes').innerHTML=SIMT.map((t,i)=>`<button class="pill-btn" data-i="${i}">${t}</button>`).join('');
+  $('#simTiers').innerHTML=TIERS.map((t,i)=>`<div class="card p-4 transition" id="tier${i}"><div class="flex justify-between gap-2 items-start"><h4 class="font-semibold text-obsidian-900 leading-snug">${t.n}</h4><span class="tag">${t.sp}</span></div><p class="text-xs text-stone-600 mt-1">${t.d}</p><div class="mt-3 flex items-center gap-2"><div class="bar flex-1"><i id="bar${i}" style="width:0"></i></div><span class="text-xs font-semibold w-9 text-right" id="pct${i}"></span></div><p class="text-sm mt-3" id="tx${i}"></p></div>`).join('');
+  $$('#simStates button').forEach(b=>b.onclick=()=>{simS=b.dataset.k;updateSim()});
+  $$('#simTimes button').forEach(b=>b.onclick=()=>{simT=+b.dataset.i;updateSim()});
+  updateSim();
+}
+function updateSim(){
+  const s=SIM[simS],b=s.blood[simT],u=s.urine[simT],ok=b>=7.35&&b<=7.45;
+  $$('#simStates button').forEach(x=>x.classList.toggle('on',x.dataset.k===simS));
+  $$('#simTimes button').forEach(x=>x.classList.toggle('on',+x.dataset.i===simT));
+  $('#bloodMk').style.left=((b-7.0)/0.8*100)+'%';
+  $('#urineMk').style.left=((u-4.5)/3.5*100)+'%';
+  $('#bloodVal').innerHTML=`<span class="serif text-4xl text-obsidian-900">${b.toFixed(2)}</span> <span class="ev ${ok?'ev-some':'ev-none'}">${ok?'In range':'Temporarily outside range'}</span>`;
+  $('#urineVal').innerHTML=`<span class="serif text-4xl text-obsidian-900">${u.toFixed(1)}</span> <span class="ev ev-limited">${u>=6.5?'Alkaline-leaning':u<=5.5?'Acid-leaning':'Mid-range'}</span>`;
+  const lead=simT===0?0:simT===1?1:2;
+  TIERS.forEach((t,i)=>{const a=s.act[i][simT];$('#bar'+i).style.width=a+'%';$('#pct'+i).textContent=a+'%';$('#tx'+i).textContent=s.txt[i];
+    $('#tier'+i).style.boxShadow=i===lead?'0 0 0 2px #b48a4e':'none'});
+  $('#simTake').innerHTML=`<b>${s.icon} ${s.n}:</b> ${s.take}`;
+}
+
+
+/* ============ PROTOCOLS ============ */
+let cat=CATS[0].id,ph=0;
+function drawCat(){
+  $('#catTabs').innerHTML=CATS.map(c=>`<button class="pill-btn ${c.id===cat?'on':''}" data-c="${c.id}">${c.icon} ${c.name}</button>`).join('');
+  $$('#catTabs button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;ph=0;drawCat()});
+  const c=CATS.find(x=>x.id===cat),p=c.phases[ph];
+  const box=(t,items)=>`<div class="card p-5"><h4 class="font-bold text-obsidian-900 text-xs uppercase tracking-widest border-b border-black/5 pb-2.5">${t}</h4><ul class="mt-3 text-sm text-stone-700 space-y-2 list-disc pl-4 leading-relaxed">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+  $('#catBody').innerHTML=`
+  <div class="card p-7">
+    <div class="flex flex-wrap items-center gap-3 justify-between">
+      <h3 class="text-3xl font-bold text-obsidian-900">${c.icon} ${c.name}</h3>
+      ${evBadge(c.ev)}
+    </div>
+    <p class="text-sm text-stone-600 mt-2.5 leading-relaxed">${c.summary}</p>
+    <div class="grid md:grid-cols-2 gap-4 mt-5">
+      <div class="p-4 rounded-2xl bg-sage-50 border border-sage-200/70 text-sm text-obsidian-900 leading-relaxed"><strong>Evidence verdict:</strong> ${c.evText}</div>
+      <div class="p-4 rounded-2xl bg-[#a33e30]/10 border border-[#a33e30]/20 text-[#7a261b] text-sm leading-relaxed"><strong>Conventional care must continue:</strong> ${c.med}</div>
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-3 mt-6">${c.phases.map((x,i)=>`
+    <button class="ph card p-4 text-left ${i===ph?'ring-2 ring-champagne-500 bg-white shadow-md':'opacity-80 hover:opacity-100'}" data-i="${i}">
+      <div class="text-[11px] text-champagne-600 font-bold uppercase tracking-wider">Phase 0${i+1}</div>
+      <div class="serif text-base sm:text-xl font-bold text-obsidian-900 leading-tight mt-0.5">${x.name.split(': ')[1]}</div>
+    </button>`).join('')}
+  </div>
+  <div class="h-1.5 rounded-full bg-black/5 mt-3.5 overflow-hidden"><div class="h-full rounded-full bg-obsidian-900 transition-all duration-300" style="width:${(ph+1)/3*100}%"></div></div>
+  <div class="mt-6">
+    <h3 class="text-3xl font-bold text-obsidian-900">${p.name}</h3>
+    <p class="text-sm text-stone-600 mt-1">${p.goal}</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4 mt-5">${box('Dietary shifts',p.diet)}${box('Botanical support',p.bot)}${box('Detoxification practices',p.prac)}</div>
+  <div class="card p-6 mt-5">
+    <h4 class="font-bold text-obsidian-900 text-xs uppercase tracking-widest mb-3">Physiological rationale</h4>
+    ${lens(p.trad,p.mod)}
+  </div>
+  <details class="card p-6 mt-5"><summary class="flex justify-between items-center font-bold text-obsidian-900"><span>🕰️ Sample Daily Rhythm (Morning / Midday / Evening)</span><span class="text-xs text-champagne-600 font-semibold">tap to expand</span></summary>${rhythmHTML(cat,ph)}</details>
+  <div class="flex justify-between mt-6">
+    <button class="pill-btn" id="prev" ${ph===0?'disabled style="opacity:.35;pointer-events:none"':''}>← Previous phase</button>
+    <button class="pill-btn on" id="next" ${ph===2?'disabled style="opacity:.35;pointer-events:none"':''}>Next phase →</button>
+  </div>`;
+  $$('.ph').forEach(b=>b.onclick=()=>{ph=+b.dataset.i;drawCat()});
+  $('#prev').onclick=()=>{if(ph>0){ph--;drawCat()}};$('#next').onclick=()=>{if(ph<2){ph++;drawCat()}};
+}
+drawCat();
+
+/* ============ PHYSIOLOGY ============ */
+let vf='';
+function drawPhys(){
+  $('#vChips').innerHTML=[['','All doctrines'],...Object.entries(EVL)].map(([k,l])=>`<button class="pill-btn ${vf===k?'on':''}" data-k="${k}">${l}</button>`).join('');
+  $$('#vChips button').forEach(b=>b.onclick=()=>{vf=b.dataset.k;drawPhys()});
+  $('#physList').innerHTML=PHYS.filter(x=>!vf||x.v===vf).map(x=>`
+  <div class="card p-6">
+    <div class="flex flex-wrap justify-between gap-3 items-start">
+      <h3 class="text-2xl font-bold text-obsidian-900">${x.t}</h3>
+      ${evBadge(x.v)}
+    </div>
+    <div class="mt-4 grid md:grid-cols-2 gap-4">${lens(x.trad,x.mod)}</div>
+  </div>`).join('');
+}
+drawPhys();
+
+/* ============ SAFETY ============ */
+$('#risks').innerHTML=RISKS.map(r=>`
+<div class="card p-5 border-l-4 border-[#8c2318]">
+  <h4 class="font-bold text-[#8c2318] text-base">${r.n}</h4>
+  <p class="text-sm text-stone-700 mt-1.5 leading-relaxed">${r.d}</p>
+</div>`).join('');
+
+/* ============ CONDITIONS A–Z ============ */
+const CONDS=[
+{id:'diabetes',n:'Type 2 diabetes & prediabetes',icon:'🩸',ev:'some',
+ sum:'High blood sugar from insulin resistance. Type 1 diabetes is a different disease and always needs insulin.',
+ taught:[['Sebi','Taught that diabetes is mucus in the pancreas and that his approved plant diet and herbs remove it. Court records show he was barred from claiming cures.'],['Gerson','Prescribed a raw juice, low-fat, plant-based regimen and described diabetes as reversible with it.'],['Ehret','Recommended fruit and green-leaf eating with fasting to “cleanse” the body.'],['ONeill','Advocates a whole-food plant diet, water, exercise and sunlight, and cutting out refined sugar.']],
+ modern:'Losing weight, eating more fibre and whole foods, and walking or exercising regularly all lower blood sugar. In supervised trials a low-calorie diet put some people with type 2 diabetes into remission. Plant-forward and Mediterranean patterns are well supported. No herb or juice has been shown to cure diabetes.',
+ safe:['Aim for gradual weight loss if you carry extra weight','Build meals around vegetables, legumes, whole grains, nuts and fish','Walk after meals; add strength work twice a week','Keep checking blood sugar as your clinician advises'],
+ doctor:'Excessive thirst or urination, unexplained weight loss, blurred vision, wounds that will not heal, or any sugar reading your team has told you to report. See a doctor before fasting or cutting carbohydrate sharply if you take insulin or tablets, because of the risk of dangerously low sugar.',
+ rel:['Psyllium','Kale','Berries','Prolonged fasting','Cinnamon']},
+{id:'bp',n:'High blood pressure',icon:'❤️',ev:'some',
+ sum:'Persistently raised pressure in the arteries; usually silent, a major cause of stroke and heart attack.',
+ taught:[['Gerson','Banned added salt and loaded the diet with potassium-rich raw juices and vegetables.'],['Jensen','Stressed bowel health, whole foods and mineral-rich vegetables.'],['ONeill','Promotes plant foods, water, rest and stress reduction.']],
+ modern:'Cutting sodium, eating more potassium-rich vegetables and fruit (the DASH pattern), losing excess weight, exercising and limiting alcohol each lower blood pressure. Garlic gives a small average drop in some trials. These measures complement, not replace, prescribed tablets.',
+ safe:['Choose fresh food over processed food to cut salt','Eat plenty of vegetables, beans, fruit and unsalted nuts','Limit alcohol; stay active most days','Check your pressure at home if advised'],
+ doctor:'A reading of 180/120 or higher, or severe headache, chest pain, breathlessness, weakness or vision change, needs urgent care. Potassium-heavy juices or salt substitutes can be dangerous with kidney disease or with ACE inhibitors, ARBs and some diuretics.',
+ rel:['Garlic','Kale','Vegetable broth','Tomatoes','Olive oil']},
+{id:'cholesterol',n:'High cholesterol & heart disease',icon:'🫀',ev:'some',
+ sum:'Raised LDL cholesterol and other risk factors that narrow the arteries.',
+ taught:[['Gerson','Treated heart disease with a salt-free, low-fat plant diet and juices.'],['Jensen','Advised whole foods, fibre, and bowel cleansing.'],['Ehret','Said a mucus-free fruit and vegetable diet clears “hardening” of the vessels.']],
+ modern:'Soluble fibre (oats, psyllium, beans), nuts, olive oil and a mostly plant-based pattern lower LDL cholesterol and heart risk. Cutting smoking, exercising and keeping a healthy weight matter as much. Many people still need statins; food changes add to them.',
+ safe:['Swap saturated fat for olive oil, nuts and fish','Add oats, beans, lentils and psyllium husk','Stop smoking; be active 150 minutes a week'],
+ doctor:'Chest pain or pressure, pain spreading to the arm or jaw, sudden breathlessness or fainting: call emergency services. Do not stop statins or blood thinners without your doctor.',
+ rel:['Oatmeal','Psyllium','Walnuts','Olive oil','Flaxseed oil']},
+{id:'cancer',n:'Cancer',icon:'🎗️',ev:'harm',
+ sum:'Uncontrolled cell growth. This page is about supportive nutrition only, never replacement of treatment.',
+ taught:[['Gerson','The Gerson therapy used up to 13 juices a day, a salt-free plant diet and coffee enemas, and claimed to treat cancer.'],['Sebi','Claimed his herbs and diet could clear cancers by removing mucus.'],['Morse','Teaches a fruit-and-herb detox that he says clears the lymph and supports recovery from chronic disease.'],['ONeill','Has spoken publicly about natural approaches to serious illness; she was permanently prohibited from providing health services in New South Wales in 2019 (see Safety).']],
+ modern:'No diet, juice, herb or enema has been shown to cure cancer. A large cohort study found people who chose alternative medicine alone had about 2.5 times the risk of death compared with standard treatment. Coffee enemas have caused deaths. What does help: a plant-forward diet, healthy weight and exercise during and after treatment, guided by your oncology team.',
+ safe:['Ask your oncology team or dietitian for a plan','Eat plenty of vegetables, fruit, whole grains and enough protein','Tell the team about every herb or supplement; some alter chemotherapy'],
+ doctor:'Any new lump, unexplained weight loss, bleeding, or a change in a mole or bowel habit needs prompt assessment. Never delay or replace surgery, chemotherapy, radiotherapy or other proven treatment with a natural regimen.',
+ rel:['Coffee enemas','Delaying conventional care','High-potassium juicing','Herb–drug interactions','Mushrooms']},
+{id:'digestive',n:'Constipation, IBS & digestion',icon:'🌀',ev:'some',
+ sum:'Irregular bowels, bloating, cramps and reflux, mostly functional rather than dangerous.',
+ taught:[['Jensen','Held that bowel health is the base of all health and promoted cleansing and fibre.'],['Ehret','Said a mucusless fruit and vegetable diet, with fasting, clears the intestines.'],['Morse','Teaches fruit-based eating and herbs for the colon and lymph.'],['Sebi','Used laxative herbs such as cascara sagrada and yellow dock.']],
+ modern:'More fibre, fluids and activity treat most constipation; psyllium has the best evidence. Ginger eases nausea. In IBS, a short low-FODMAP trial and peppermint oil can help. Repeated stimulant laxatives and enemas can cause dependence and electrolyte problems.',
+ safe:['Increase fibre slowly and drink enough water','Try psyllium husk daily and walk after meals','Keep a food and symptom diary to find triggers'],
+ doctor:'Blood in the stool, black stools, unexplained weight loss, persistent vomiting, difficulty swallowing, new symptoms over age 50, or waking at night with pain. See a doctor before any colon cleanse.',
+ rel:['Psyllium','Ginger','Slippery elm','Cascara sagrada','Stimulant laxative herbs']},
+{id:'arthritis',n:'Arthritis & joint pain',icon:'🦴',ev:'limited',
+ sum:'Osteoarthritis (wear), rheumatoid arthritis (autoimmune) and gout (uric acid) are different problems.',
+ taught:[['Gerson','Claimed his diet and juices reverse arthritis.'],['Sebi','Said arthritis is mucus and acid in the joints.'],['ONeill','Advises a plant diet, hydration, movement and home remedies such as warm compresses.'],['Morse','Attributes joint disease to lymph congestion.']],
+ modern:'Weight loss and exercise are the strongest treatments for osteoarthritis. Mediterranean-style eating lowers inflammation markers. Turmeric (curcumin) and ginger show modest pain relief in some trials. Rheumatoid arthritis needs disease-modifying drugs to prevent permanent joint damage.',
+ safe:['Keep moving: low-impact exercise and strength work','Lose excess weight','Warm baths or compresses for stiffness','Limit alcohol and sugary drinks if you have gout'],
+ doctor:'A hot, swollen joint, fever, morning stiffness lasting over an hour, or several joints affected. Turmeric can thin the blood slightly and interact with anticoagulants.',
+ rel:['Turmeric','Ginger','Epsom salt baths','Cayenne pepper']},
+{id:'skin',n:'Eczema, psoriasis & acne',icon:'🧴',ev:'limited',
+ sum:'Common inflammatory skin conditions that flare and settle.',
+ taught:[['Sebi','Treated the skin as an organ of elimination for mucus and used blood-cleansing herbs.'],['Morse','Teaches that skin eruptions are the body clearing toxins through the lymph.'],['Jensen','Linked skin trouble to bowel and liver sluggishness.']],
+ modern:'Regular moisturiser, avoiding triggers and short courses of prescribed creams control eczema. Oatmeal baths soothe itch. Weight loss helps psoriasis. Evidence that “cleansing” herbs clear skin is weak, and some diets are restrictive for children.',
+ safe:['Moisturise daily within minutes of bathing','Colloidal oatmeal baths for itch','Identify triggers; keep nails short'],
+ doctor:'Spreading redness with fever, weeping or crusted infection, severe pain, joint pain with psoriasis, or a new or changing mole. Stopping steroid creams suddenly can cause rebound flares.',
+ rel:['Oatmeal','Burdock root','Red clover','Cleavers']},
+{id:'respiratory',n:'Colds, cough & asthma',icon:'🌬️',ev:'limited',
+ sum:'Short viral illnesses are self-limiting. Asthma is a long-term airway disease.',
+ taught:[['Sebi','Called bronchitis and respiratory illness mucus in the lungs, to be removed by diet and herbs.'],['Ehret','Said mucus-forming foods cause colds and recommended fasting through them.'],['ONeill','Uses simple remedies such as ginger and onion compresses for coughs and colds.']],
+ modern:'Rest, fluids, honey for cough in adults and children over one, and cooked elderberry may shorten colds and flu slightly. Studies in volunteers did not show that milk increases mucus. Asthma needs a controller inhaler; herbs cannot replace it.',
+ safe:['Fluids, rest and honey in warm water for cough (not under age one)','Ginger or garlic in food if you enjoy them','Keep reliever and controller inhalers to hand'],
+ doctor:'Breathlessness, wheeze that your inhaler does not settle, blue lips, chest pain, a fever over three days, or coughing blood. Raw elderberry is toxic; only use properly cooked or prepared products.',
+ rel:['Elderberry','Mullein','Ginger','Garlic','Echinacea','Raw elderberry']},
+{id:'thyroid',n:'Thyroid problems',icon:'🦋',ev:'harm',
+ sum:'Underactive (hypothyroid) or overactive (hyperthyroid) glands; most are autoimmune.',
+ taught:[['Sebi','Promoted sea moss and bladderwrack as mineral foods that “feed” the thyroid.'],['Morse','Teaches iodine-rich plants and fruit for glandular health.']],
+ modern:'Too much iodine can cause or worsen both over- and under-active thyroid, and sea moss and kelp vary widely in iodine. Hypothyroidism is treated with levothyroxine; hyperthyroidism with medicine, radioiodine or surgery. Diet cannot replace these.',
+ safe:['Use iodised salt in normal amounts rather than seaweed supplements','Eat a varied diet with enough selenium and protein','Take thyroid tablets consistently, apart from calcium or iron'],
+ doctor:'A neck lump or swelling, racing heart, heat intolerance with weight loss, extreme tiredness with weight gain, or pregnancy planning. Avoid seaweed supplements with thyroid disease and in pregnancy unless your doctor agrees.',
+ rel:['Sea moss','Bladderwrack','Iodine-rich seaweeds']},
+{id:'kidney',n:'Kidney stones & kidney disease',icon:'🫘',ev:'harm',
+ sum:'Stones form from concentrated urine; chronic kidney disease slowly reduces filtering.',
+ taught:[['Gerson','Prescribed very large daily amounts of potassium-rich juices, including for kidney complaints.'],['Sebi','Used diuretic and “cleansing” herbs for the kidneys.']],
+ modern:'For stones, the main measure is drinking enough to pass about two litres of urine a day; lemon (citrate) may help some people. In chronic kidney disease, high-potassium juices and some herbs are dangerous because failing kidneys cannot clear potassium.',
+ safe:['Drink enough water through the day','Keep salt moderate','Ask a kidney dietitian about potassium and protein limits'],
+ doctor:'Severe flank pain, blood in urine, fever with urinary symptoms, reduced urine, swelling of legs, or known kidney disease before changing diet. High potassium (hyperkalaemia) can stop the heart.',
+ rel:['Lemon and key lime','Dandelion','High-potassium juicing','Kale']},
+{id:'liver',n:'Fatty liver',icon:'🍂',ev:'some',
+ sum:'Fat build-up in the liver, usually linked to excess weight, diabetes and metabolic syndrome.',
+ taught:[['Jensen','Emphasised liver and bowel cleansing with raw foods.'],['Gerson','Used liver-focused juices and castor oil packs.'],['Morse','Teaches liver detox with fruit, herbs and juices.']],
+ modern:'Losing 7–10% of body weight, a Mediterranean-style diet and regular exercise can reduce liver fat and in some people reverse early scarring. Coffee drinking is linked to lower risk. “Liver cleanse” products are unproven and some herbs, notably chaparral, have injured the liver.',
+ safe:['Gradual weight loss and daily activity','Mediterranean-style eating, limited sugary drinks','Little or no alcohol'],
+ doctor:'Yellow skin or eyes, dark urine, swelling of the abdomen, vomiting blood, or persistent upper-right abdominal pain. Check every herb with your doctor if your liver tests are abnormal.',
+ rel:['Chaparral (internal use)','Dandelion','Turmeric','Olive oil']},
+{id:'mood',n:'Low mood, anxiety & sleep',icon:'🌙',ev:'limited',
+ sum:'Very common; often improved by lifestyle and talking therapy, sometimes medication.',
+ taught:[['Jensen','Linked nerves and mood to digestion and mineral intake.'],['ONeill','Recommends sunlight, nature, rest, good sleep rhythm and simple herb teas.'],['Sebi','Used herbs such as damiana and blue vervain for nerves.']],
+ modern:'Regular exercise, a consistent sleep routine, daylight, limiting caffeine and alcohol, and cognitive behavioural therapy have the best evidence. Chamomile tea may modestly reduce anxiety. Evidence for most traditional nervine herbs is thin.',
+ safe:['Exercise most days and get morning daylight','Fix a regular sleep and wake time','Limit caffeine after midday and alcohol at night'],
+ doctor:'Thoughts of harming yourself, hopelessness lasting over two weeks, panic attacks, or not coping at work or home: contact your doctor or local crisis line now. Do not stop antidepressants suddenly; some herbs interact with them.',
+ rel:['Damiana','Blue vervain','Herb–drug interactions']}
+];
+const condRel=c=>c.rel.map(nm=>DB.find(x=>x.n.toLowerCase().startsWith(nm.toLowerCase()))).filter(Boolean);
+function drawConds(){
+  const q=$('#cq').value.trim().toLowerCase();
+  const res=CONDS.filter(c=>!q||(c.n+' '+c.sum+' '+c.modern).toLowerCase().includes(q));
+  $('#ccount').textContent=res.length+' of '+CONDS.length+' conditions';
+  $('#condList').innerHTML=res.length?res.map(c=>`
+  <details class="card p-5" id="c-${c.id}">
+    <summary class="flex justify-between gap-3 items-start">
+      <div><div class="text-2xl">${c.icon}</div><h2 class="text-2xl font-semibold text-obsidian-900 leading-tight mt-1">${c.n}</h2><p class="text-sm text-stone-600 mt-1">${c.sum}</p></div>
+      <div class="shrink-0 text-right"><div class="text-[10px] uppercase tracking-wider text-stone-500 mb-1">Natural claims</div>${evBadge(c.ev)}</div>
+    </summary>
+    <div class="mt-4">
+      <div class="trad lensL text-sm mb-2.5"><div class="text-[10px] uppercase tracking-widest text-champagne-600 font-bold mb-1">What the practitioners taught</div>
+        <ul class="space-y-1.5">${c.taught.map(([k,t])=>`<li><b>${PR[k].name}:</b> ${t}</li>`).join('')}</ul></div>
+      <div class="modern lensM text-sm"><div class="text-[10px] uppercase tracking-widest text-sage-700 font-bold mb-0.5">What modern evidence says</div>${c.modern}</div>
+      <div class="mt-3 p-3 rounded-xl bg-sage-50 border border-sage-100 text-sm"><b class="text-sage-800">Reasonable to try alongside medical care</b><ul class="list-disc pl-5 mt-1 space-y-0.5">${c.safe.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div class="mt-3 p-3 rounded-xl bg-[#a33e30]/10 border border-[#a33e30]/20 text-sm text-[#7a261b]"><b>See a doctor:</b> ${c.doctor}</div>
+      ${condRel(c).length?`<div class="mt-3 text-xs"><span class="text-stone-500 font-semibold uppercase tracking-wider">Related database entries</span><div class="mt-1">${condRel(c).map(x=>`<a href="#database" class="tag hover:bg-black/10" data-q="${x.n.replace(/"/g,'')}">${x.n}</a>`).join('')}</div></div>`:''}
+    </div>
+  </details>`).join(''):'<p class="col-span-full text-center text-stone-600 py-10">No conditions match. Try a different word.</p>';
+  $$('#condList a[data-q]').forEach(a=>a.onclick=()=>{setTimeout(()=>{$('#q').value=a.dataset.q;['#fKind','#fP','#fO','#fM','#fPr','#fE'].forEach(s=>$(s).value='');drawDB()},0)});
+}
+$('#cq').addEventListener('input',drawConds);
+$('#printCond').onclick=()=>window.print();
+drawConds();
+
+/* ============ FAQ & GLOSSARY ============ */
+const FAQ=[
+['Is this medical advice?','No. It is an educational guide. Use it to prepare questions for your own clinician, not to diagnose or treat yourself.'],
+['Can natural remedies cure disease?','Some lifestyle measures, such as diet, exercise and sleep, clearly help many conditions. No natural regimen reviewed here has been shown to cure cancer, diabetes or other serious disease, and several carry real risks. Each page says which is which.'],
+['Why include practitioners who made claims that science does not support?','People already ask about them. Showing exactly what each one taught, next to what the evidence says, helps you judge for yourself. Credit is not endorsement.'],
+['How do I find natural options for my condition?','Open Conditions A–Z, search for it, and read the four parts: what was taught, what evidence says, what is reasonable to try, and when to see a doctor. The related database entries link to the foods and herbs mentioned.'],
+['What do the evidence grades mean?','Some support means a plausible mechanism plus human evidence. Limited means mostly lab, animal, small-trial or traditional use. Unsupported means no credible evidence or evidence against. Safety concern means documented serious harm.'],
+['Can I use these remedies with my medicines?','Many herbs change how drugs work. Use the contraindication checker in the Database and show the list to your pharmacist or doctor first. A missing warning does not prove safety.'],
+['What are the Traditional and Modern lenses?','Traditional shows the reasoning the practitioner gave. Modern shows the matching physiology and clinical findings. Use the switch in the header to read either one alone.'],
+['Does it cost anything, and is my data collected?','It is free, has no ads and no accounts, and does not collect personal data. See the Terms &amp; Privacy page for the details.']
+];
+$('#faq').innerHTML=FAQ.map(([q,a])=>`<details class="py-3"><summary class="font-semibold text-obsidian-900 flex justify-between gap-3">${q}<span aria-hidden="true">＋</span></summary><p class="text-sm text-stone-700 mt-2 leading-relaxed">${a}</p></details>`).join('');
+const GLOSS=[
+['Acid–alkaline hypothesis','The idea that foods make the body acidic or alkaline and that this causes disease. Diet changes urine pH but blood pH stays tightly controlled.'],
+['Apothecary','The craft of preparing medicines from plants and other materials.'],
+['Bicarbonate buffer','The fastest blood system for keeping pH steady, reacting within seconds.'],
+['Chelation','Binding metals so they can be removed from the body; a real medical treatment for poisoning, not a general detox.'],
+['Contraindication','A condition or medicine that makes a treatment unsafe for a person.'],
+['Decoction','A herbal preparation made by simmering tougher parts such as roots and bark in water.'],
+['Detoxification','In medicine, the body’s processing of poisons by the liver, kidneys and gut; in natural health, a cleansing programme. Most “detox” products are unproven.'],
+['Emunctory','A traditional term for an organ of elimination: bowel, kidneys, skin, lungs, liver and lymph.'],
+['Evidence grade','This guide’s four-level label of how well science supports a specific health claim.'],
+['Hepatotoxicity','Damage to the liver caused by a drug, herb or chemical.'],
+['Homeostasis','The body’s way of keeping conditions such as pH, temperature and blood sugar within a narrow range.'],
+['Hyperkalaemia','Too much potassium in the blood, which can cause dangerous heart rhythms, especially in kidney disease.'],
+['Infusion','A herbal tea made by steeping leaves or flowers in hot water.'],
+['Iridology','Reading the iris of the eye to diagnose disease; studies show it does not work.'],
+['Lymphatic system','The network of vessels and nodes that drains tissue fluid and supports immune defence.'],
+['Mucus theory','Ehret’s and Sebi’s idea that mucus buildup is the root of disease.'],
+['Naturopathy','A system of care that emphasises diet, herbs and lifestyle; training and legal status vary widely by country.'],
+['PRAL','Potential renal acid load, an estimate of how much acid a food adds for the kidneys to excrete.'],
+['Poultice','A warm, moist mass of plant material or clay applied to the skin.'],
+['Randomised controlled trial (RCT)','A study that randomly assigns people to treatment or comparison; the strongest test of whether something works.'],
+['Terrain theory','The belief that the state of the body’s internal environment, rather than germs, determines disease.'],
+['Tincture','A concentrated herbal extract made by soaking plant material in alcohol or another solvent.']
+];
+function drawGloss(){const q=$('#gq').value.trim().toLowerCase();
+  $('#gloss').innerHTML=GLOSS.filter(([t,d])=>!q||(t+' '+d).toLowerCase().includes(q)).map(([t,d])=>`<div><dt class="font-semibold text-obsidian-900">${t}</dt><dd class="text-stone-700">${d}</dd></div>`).join('')||'<p class="text-stone-600">No terms match.</p>';}
+$('#gq').addEventListener('input',drawGloss);drawGloss();
+$('#aDB').textContent=DB.length;$('#aCond').textContent=CONDS.length;
+
+/* ============ FOOTER, TOP BUTTON, PRINT ============ */
+$('#footNav').innerHTML=[...VIEWS,['terms','Terms & Privacy']].map(([k,l])=>`<a class="hover:text-white underline-offset-2 hover:underline" href="#${k}">${l}</a>`).join('');
+const tt=$('#toTop');window.addEventListener('scroll',()=>{tt.style.display=window.scrollY>600?'block':'none'});
+tt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+window.addEventListener('beforeprint',()=>$$('.view.active details').forEach(d=>d.open=true));
+drawApo();initSim();drawSources();setLens('both');route();
+</script>
+</body>
+</html>
