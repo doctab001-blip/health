@@ -678,6 +678,18 @@ const IMGS=[
 ];
 const imgUrl=(m,w)=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(m.f)+'?width='+(w||800);
 const imgPage=m=>'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(m.f.replace(/ /g,'_'));
+
+const ANAT={
+ cardio:{n:'Heart (sectional anatomy)',f:'Blausen 0457 Heart SectionalAnatomy.png',a:'Blausen Medical Communications',l:'Free for any purpose (VRT permission)'},
+ autoimm:{n:'Shoulder joint',f:'Shoulder joint.svg',a:'NIAMS; SVG by Angelito7 and Jmarchn',l:'See file page'},
+ gi:{n:'Digestive system',f:'Digestive system diagram edit.svg',a:'Mariana Ruiz; edited by Joaquim Alves Gaspar and Jmarchn',l:'See file page'},
+ renal:{n:'Urinary system',f:'Urinary system.svg',a:'Jordi March i Nogué',l:'CC BY-SA 3.0 / GFDL'},
+ endo:{n:'Endocrine glands',f:'Illu endocrine system.png',a:'NCI SEER training modules',l:'See file page'},
+ derm:{n:'Layers of the skin',f:'Anatomy The Skin - NCI Visuals Online.jpg',a:'Don Bliss, National Cancer Institute',l:'See file page'},
+ neuro:{n:'Lobes of the brain',f:'Brain-anatomy.jpg',a:'Primalchaos, after NIH',l:'Public domain (US Gov, NIH)'},
+ resp:{n:'Respiratory system',f:'Respiratory system complete en.svg',a:'Mariana Ruiz (LadyofHats) and contributors',l:'See file page'}
+};
+const anatImg=(g,cls,w)=>{const m=ANAT[g];return m?`<img src="${imgUrl(m,w||700)}" alt="${m.n} illustration" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="${cls}" onerror="var f=this.closest('.imgwrap');if(f)f.remove();else this.remove()">`:''};
 const imgBy=k=>IMGS.find(m=>m.k===k);
 const imgFor=t=>IMGS.find(m=>m.re.source!=='^$'&&m.re.test(t));
 const picTag=(m,cls,w)=>m?`<img src="${imgUrl(m,w)}" alt="${m.n}" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="${cls}" onerror="var f=this.closest('figure,.imgwrap');if(f)f.remove();else this.remove()">`:'';
@@ -2378,7 +2390,7 @@ function planHTML(){const p=PL.cur,G=planG(p),st=stats(G,p);const gdef=GROUPS.fi
   <div class="flex flex-wrap items-center justify-between gap-2"><button class="text-sm underline text-alabaster-200/80 pl-noprint no-print" data-act="phome">← All plans</button><div class="text-[11px] font-bold uppercase tracking-[.25em] text-champagne-300">My Healing Plan · Command Center</div></div>
   <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-center mt-4"><div>
    <div class="flex items-center gap-3 text-champagne-300 text-sm font-semibold uppercase tracking-[.18em]"><span class="text-3xl normal-case">${gdef.icon}</span> Active protocol</div>
-   <h1 class="font-serif text-4xl sm:text-5xl xl:text-6xl font-bold leading-[1.05] mt-2">${esc(gdef.n)} <span class="text-champagne-300 italic">Protocol</span></h1>
+   ${ANAT[gdef.id]?`<div class="imgwrap float-right ml-4 mb-2 w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden bg-white/95 shadow-lg">${anatImg(gdef.id,"w-full h-full object-contain p-1",360)}</div>`:""}<h1 class="font-serif text-4xl sm:text-5xl xl:text-6xl font-bold leading-[1.05] mt-2">${esc(gdef.n)} <span class="text-champagne-300 italic">Protocol</span></h1>
    <div class="flex flex-wrap gap-2 mt-4">${pills}</div></div>
    <button class="justify-self-start lg:justify-self-end text-center group" data-act="ptab" data-id="today" aria-label="Today's completion ${pct0} percent. Open today's checklist"><div id="ringBox">${ringHTML(pct0)}</div><div class="text-[11px] uppercase tracking-wider text-champagne-300 mt-1">Today’s completion</div></button></div>
   <div class="mt-7"><div class="flex flex-wrap items-baseline justify-between gap-2"><div class="font-serif text-xl sm:text-2xl font-bold">${esc(tl)}</div><div class="text-sm text-alabaster-200/80">Day ${Math.min(D,Math.max(1,nT+1))} of ${D} · started ${esc(p.input.start)}</div></div>
@@ -2561,12 +2573,12 @@ function plInit(){const r=root();if(!r)return;r.addEventListener('click',e=>{con
 let TX={gid:null};
 function drawTaxo(){const box=$('#taxo');if(!box)return;
  const gbtn=GROUPS.map(g=>{const n=CATALOG.filter(c=>c.g===g.id).length;return `<button class="pill-btn text-left ${TX.gid===g.id?'on':''}" data-tx="${g.id}" aria-pressed="${TX.gid===g.id}"><span aria-hidden="true">${g.icon}</span> ${esc(g.n)} <span class="opacity-70 text-xs">(${n})</span></button>`}).join('');
- let body='';if(TX.gid){const g=GROUPS.find(x=>x.id===TX.gid);body=`<p class="text-sm text-stone-700 mt-3">${esc(g.blurb)}</p><div class="grid md:grid-cols-2 gap-3 mt-3">${CATALOG.filter(c=>c.g===TX.gid).map(c=>`<div class="card p-3 text-sm"><div class="flex flex-wrap items-center gap-2"><b class="text-obsidian-900">${esc(c.n)}</b>${evBadge(c.gr)}</div><div class="text-stone-700 mt-1">${esc(c.note)}</div><div class="mt-2"><button class="pill-btn !py-1 !text-[13px]" data-plan="${c.id}">Build my plan →</button></div></div>`).join('')}</div>`}
+ let body='';if(TX.gid){const g=GROUPS.find(x=>x.id===TX.gid);body=`<div class="flex flex-wrap items-center gap-4 mt-3">${ANAT[g.id]?`<div class="imgwrap w-36 h-36 rounded-2xl overflow-hidden bg-white ring-1 ring-black/10 shrink-0">${anatImg(g.id,"w-full h-full object-contain p-1",360)}</div>`:""}<p class="text-sm text-stone-700 flex-1 min-w-[12rem]">${esc(g.blurb)}${ANAT[g.id]?` <span class="block text-xs text-stone-500 mt-1">Illustration: ${ANAT[g.id].n}</span>`:""}</p></div><div class="grid md:grid-cols-2 gap-3 mt-3">${CATALOG.filter(c=>c.g===TX.gid).map(c=>`<div class="card p-3 text-sm"><div class="flex flex-wrap items-center gap-2"><b class="text-obsidian-900">${esc(c.n)}</b>${evBadge(c.gr)}</div><div class="text-stone-700 mt-1">${esc(c.note)}</div><div class="mt-2"><button class="pill-btn !py-1 !text-[13px]" data-plan="${c.id}">Build my plan →</button></div></div>`).join('')}</div>`}
  box.innerHTML=`<div class="flex flex-wrap gap-2">${gbtn}</div>${body}<div class="card p-3 mt-3 text-sm flex flex-wrap items-center gap-2"><span>Not on the list?</span><button class="pill-btn !py-1" data-plan="custom">Map my own condition →</button></div>`}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-tx]');if(t){TX.gid=TX.gid===t.dataset.tx?null:t.dataset.tx;drawTaxo();return}const p=e.target.closest('[data-plan]');if(p){const id=p.dataset.plan;location.hash='#plan';setTimeout(()=>{startWizard(id==='custom'?null:id);if(id==='custom'){PL.W.gid='cardio';PL.W.cid='custom';PL.W.cg='cardio';plRender()}},30)}});
 
 (function(){const hv=document.getElementById('view-home');if(hv){const keys=['salmon','olive','kale','berries','lentils','oats','walnuts','ginger'];const d=document.createElement('section');d.className='mt-12';d.innerHTML='<span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Food, plants and movement</span><h2 class="text-3xl sm:text-4xl font-bold text-obsidian-900 mt-1">What this looks like on the plate</h2><p class="mt-2 text-stone-700 max-w-3xl">Most natural-health advice, in practice, is food, plants, movement and sleep. A few of the staples that appear throughout the guide.</p><div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">'+keys.map(k=>fig(imgBy(k),'h-44')).join('')+'</div>';hv.appendChild(d)}
-const sv=document.getElementById('view-sources');if(sv){const c=document.createElement('div');c.className='card p-6 mt-6';c.innerHTML='<h3 class="text-2xl font-semibold text-obsidian-900">Image credits</h3><p class="text-sm text-stone-700 mt-1">Photographs are from Wikimedia Commons under the licences shown (CC0 and public domain need no credit; others are credited as required). Click a title for the original file page.</p><ul class="mt-3 text-sm space-y-1.5 list-disc pl-5">'+IMGS.map(m=>`<li><a class="underline" href="${imgPage(m)}" target="_blank" rel="noopener noreferrer">${m.n}</a>: ${m.a}, ${m.l}</li>`).join('')+'</ul>';sv.appendChild(c)}})();
+const sv=document.getElementById('view-sources');if(sv){const c=document.createElement('div');c.className='card p-6 mt-6';c.innerHTML='<h3 class="text-2xl font-semibold text-obsidian-900">Image credits</h3><p class="text-sm text-stone-700 mt-1">Photographs are from Wikimedia Commons under the licences shown (CC0 and public domain need no credit; others are credited as required). Click a title for the original file page.</p><ul class="mt-3 text-sm space-y-1.5 list-disc pl-5">'+IMGS.concat(Object.values(ANAT)).map(m=>`<li><a class="underline" href="${imgPage(m)}" target="_blank" rel="noopener noreferrer">${m.n}</a>: ${m.a}, ${m.l}</li>`).join('')+'</ul>';sv.appendChild(c)}})();
 drawTaxo();plInit();
 drawApo();initSim();drawSources();setLens('both');route();
 </script>
