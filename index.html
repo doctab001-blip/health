@@ -262,6 +262,12 @@ tailwind.config = {
     .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;backdrop-filter:none}
     details>*{display:block}
   }
+  .navlink{font-size:13.5px;padding:.4rem .6rem}
+  @media (min-width:1280px) and (max-width:1535px){.navlink{padding:.4rem .5rem;font-size:13px}#lensBar button{padding-left:.55rem!important;padding-right:.55rem!important}}
+  #navD{gap:.125rem}
+  #moreMenu .navlink{display:block;padding:.5rem .9rem;border-radius:12px;font-size:14px}
+  .cpanel.hidden{display:none}
+  @media print{.cpanel.hidden{display:block!important}.ctab,#medBar{display:none!important}}
 </style>
 </head>
 <body data-lens="both">
@@ -286,14 +292,14 @@ tailwind.config = {
             <path d="M16 8v20" stroke="#121715" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </div>
-        <span class="serif text-xl sm:text-2xl font-bold text-obsidian-900 tracking-tight">Natural Healing Atlas</span>
+        <span class="serif text-lg 2xl:text-2xl font-bold text-obsidian-900 tracking-tight whitespace-nowrap">Natural Healing Atlas</span>
       </a>
 
       <!-- Desktop Glass Pill Nav -->
       <nav class="hidden xl:flex items-center gap-1 p-1 rounded-full glass-pill-bar" id="navD"></nav>
 
       <!-- Right Controls: Lens Switcher Pill + Mobile Trigger -->
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-2.5 shrink-0">
         <div class="hidden sm:flex items-center p-1 rounded-full glass-pill-bar text-xs" id="lensBar" aria-label="Reasoning lens">
           <button data-l="trad" class="px-3 py-1 rounded-full transition-all">Traditional</button>
           <button data-l="both" class="px-3 py-1 rounded-full transition-all">Both</button>
@@ -538,12 +544,13 @@ tailwind.config = {
 <section id="view-conditions" class="view">
   <span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Find natural options by condition</span>
   <h1 class="text-4xl sm:text-5xl font-bold text-obsidian-900 mt-1">Conditions A–Z</h1>
-  <p class="mt-2 text-stone-700 max-w-3xl text-sm sm:text-base">Twelve common conditions. Each page shows what the named practitioners taught, what modern evidence supports, which natural measures are reasonably safe to try alongside medical care, and when to see a doctor. Every traditional statement is credited to the person who made it.</p>
+  <p class="mt-2 text-stone-700 max-w-3xl text-sm sm:text-base">Twelve common conditions. Six have a full guide with a clinical diet explained, a food matrix and a sample one-day plan. Each page shows what the named practitioners taught, what modern evidence supports, which natural measures are reasonably safe to try alongside medical care, and when to see a doctor. Every traditional statement is credited to the person who made it.</p>
   <div class="card p-4 mt-5 border-l-8 border-[#a33e30] text-sm text-stone-800"><b>Read first:</b> natural options here are meant to sit <u>beside</u> your doctor’s plan, not replace it. Never stop prescribed medicines because of something you read on this site. If you have a red-flag symptom listed under “See a doctor”, get care first.</div>
   <div class="grid sm:grid-cols-3 gap-3 mt-5">
     <div class="sm:col-span-2"><label for="cq" class="text-[12.3px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">Search conditions</label><input id="cq" placeholder="e.g. diabetes, eczema, constipation, blood pressure"></div>
     <div class="flex items-end"><button class="pill-btn w-full" id="printCond">Print / save as PDF</button></div>
   </div>
+  <div class="mt-4 card p-4"><div class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Medication &amp; safety filter <span class="normal-case font-normal">(optional: highlights the cautions that matter for you in every card)</span></div><div id="medBar" class="flex flex-wrap gap-2"></div></div>
   <p id="ccount" class="text-sm font-semibold text-obsidian-900 mt-4" aria-live="polite"></p>
   <div id="condList" class="grid lg:grid-cols-2 gap-4 mt-3"></div>
 </section>
@@ -1073,9 +1080,15 @@ const lens=(trad,mod)=>`<div class="trad lensL text-sm mb-2.5"><div class="text-
 
 /* ============ NAV & ROUTING ============ */
 const VIEWS=[['home','Home'],['conditions','Conditions'],['terrain','Practitioners'],['database','Database'],['protocols','Protocols'],['physiology','Physiology'],['safety','Safety'],['sources','Sources'],['learn','Glossary & FAQ'],['about','About']];
+const MORE=['sources','learn','about'];
+const DLAB={terrain:'Compare'};
 const TITLES={home:'Natural Healing Atlas — A free guide to natural health options',terms:'Terms, Privacy & Disclaimer'};
 VIEWS.forEach(([k,l])=>TITLES[k]=TITLES[k]||l+' · Natural Healing Atlas');TITLES.terms+=' · Natural Healing Atlas';
-$('#navD').innerHTML=VIEWS.map(([k,l])=>`<a class="navlink" data-v="${k}" href="#${k}">${l}</a>`).join('');
+$('#navD').innerHTML=VIEWS.filter(v=>!MORE.includes(v[0])).map(([k,l])=>`<a class="navlink" data-v="${k}" href="#${k}">${DLAB[k]||l}</a>`).join('')+`<div class="relative" id="moreWrap"><button type="button" id="moreBtn" class="navlink" aria-haspopup="true" aria-expanded="false" aria-controls="moreMenu">More <span aria-hidden="true">▾</span></button><div id="moreMenu" class="hidden absolute right-0 top-full mt-3 min-w-[210px] glass-header rounded-2xl p-2 flex-col gap-0.5 z-50 shadow-xl">${VIEWS.filter(v=>MORE.includes(v[0])).map(([k,l])=>`<a class="navlink block" data-v="${k}" href="#${k}">${l}</a>`).join('')}</div></div>`;
+function closeMore(){const m=$('#moreMenu');m.classList.add('hidden');m.classList.remove('flex');$('#moreBtn').setAttribute('aria-expanded','false')}
+$('#moreBtn').onclick=e=>{e.stopPropagation();const m=$('#moreMenu'),o=m.classList.contains('hidden');m.classList.toggle('hidden',!o);m.classList.toggle('flex',o);$('#moreBtn').setAttribute('aria-expanded',o)};
+document.addEventListener('click',e=>{if(!e.target.closest('#moreWrap'))closeMore()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMore()});
 $('#navM').innerHTML=VIEWS.map(([k,l])=>`<a class="navlink" data-v="${k}" href="#${k}">${l}</a>`).join('');
 $('#burger').onclick=()=>{const m=$('#navM');m.classList.toggle('hidden');m.classList.toggle('flex')};
 function route(){
@@ -1083,6 +1096,7 @@ function route(){
   document.title=TITLES[h];
   $$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+h));
   $$('.navlink').forEach(a=>a.classList.toggle('active',a.dataset.v===h));
+  $('#moreBtn').classList.toggle('active',MORE.includes(h));closeMore();
   $('#navM').classList.add('hidden');$('#navM').classList.remove('flex');
   window.scrollTo({top:0,behavior:'smooth'});
   const m=$('#main');if(m&&document.activeElement&&document.activeElement.tagName==='A')m.focus({preventScroll:true});
@@ -1094,7 +1108,7 @@ function setLens(l){
   document.body.dataset.lens=l;
   $$('#lensBar button,#lensBarM button').forEach(b=>{
     const on=b.dataset.l===l;
-    b.className=`px-3.5 py-1 rounded-full transition-all ${on?'bg-obsidian-900 text-white font-semibold shadow-sm':'text-stone-600 hover:text-obsidian-900'}`;
+    b.className=`px-2.5 xl:px-3 py-1 rounded-full transition-all whitespace-nowrap ${on?'bg-obsidian-900 text-white font-semibold shadow-sm':'text-stone-600 hover:text-obsidian-900'}`;
   });
 }
 $$('#lensBar button,#lensBarM button').forEach(b=>b.onclick=()=>setLens(b.dataset.l));
@@ -1402,7 +1416,7 @@ const CONDS=[
  safe:['Ask your oncology team or dietitian for a plan','Eat plenty of vegetables, fruit, whole grains and enough protein','Tell the team about every herb or supplement; some alter chemotherapy'],
  doctor:'Any new lump, unexplained weight loss, bleeding, or a change in a mole or bowel habit needs prompt assessment. Never delay or replace surgery, chemotherapy, radiotherapy or other proven treatment with a natural regimen.',
  rel:['Coffee enemas','Delaying conventional care','High-potassium juicing','Herb–drug interactions','Mushrooms']},
-{id:'digestive',n:'Constipation, IBS & digestion',icon:'🌀',ev:'some',
+{id:'digestive',n:'Chronic constipation & IBS',icon:'🌀',ev:'some',
  sum:'Irregular bowels, bloating, cramps and reflux, mostly functional rather than dangerous.',
  taught:[['Jensen','Held that bowel health is the base of all health and promoted cleansing and fibre.'],['Ehret','Said a mucusless fruit and vegetable diet, with fasting, clears the intestines.'],['Morse','Teaches fruit-based eating and herbs for the colon and lymph.'],['Sebi','Used laxative herbs such as cascara sagrada and yellow dock.']],
  modern:'More fibre, fluids and activity treat most constipation; psyllium has the best evidence. Ginger eases nausea. In IBS, a short low-FODMAP trial and peppermint oil can help. Repeated stimulant laxatives and enemas can cause dependence and electrolyte problems.',
@@ -1459,31 +1473,255 @@ const CONDS=[
  doctor:'Thoughts of harming yourself, hopelessness lasting over two weeks, panic attacks, or not coping at work or home: contact your doctor or local crisis line now. Do not stop antidepressants suddenly; some herbs interact with them.',
  rel:['Damiana','Blue vervain','Herb–drug interactions']}
 ];
+/* ============ CONDITIONS: MEDICATION NOTES + FULL GUIDES ============ */
+const MEDS={bp:'Blood pressure meds / ACEi / ARBs',dm:'Insulin / diabetes meds',kid:'Kidney disease'};
+const MEDNOTE={
+ diabetes:{bp:'ACE inhibitors and ARBs raise blood potassium. Go easy on potassium-chloride salt substitutes and very large potassium-rich juices. Beta-blockers can hide the shaky, racing warning signs of low blood sugar.',
+  dm:'Insulin and sulfonylureas can cause low blood sugar if you fast, cut carbohydrate suddenly, or add glucose-lowering herbs (large amounts of cinnamon, bitter melon, fenugreek). With SGLT2 inhibitors, fasting or very-low-carbohydrate eating carries a ketoacidosis risk. Talk to your team before changing meals.',
+  kid:'Diabetic kidney disease often needs limits on protein, potassium and phosphate. High-protein plans and large green juices may not suit you. Ask a renal dietitian for your own numbers.'},
+ bp:{bp:'ACE inhibitors, ARBs and spironolactone raise potassium, so avoid potassium-chloride salt substitutes and large potassium juices unless told otherwise. Grapefruit can raise levels of some calcium-channel blockers (for example felodipine). Liquorice raises blood pressure and lowers potassium.',
+  dm:'Beta-blockers can mask the warning signs of low blood sugar, and thiazide diuretics can nudge glucose up. Keep monitoring as advised.',
+  kid:'The DASH targets for potassium, phosphorus (dairy, nuts) and protein may be too high in advanced kidney disease. Get individual limits first.'},
+ cholesterol:{bp:'If you also take blood-pressure tablets, the same potassium and grapefruit cautions apply. Large amounts of grapefruit juice raise levels of simvastatin and atorvastatin.',
+  dm:'Statins can raise blood sugar slightly; keep monitoring. Psyllium and other fibre can lower glucose and slow the absorption of tablets.',
+  kid:'Red yeast rice contains a statin-like compound that can harm muscle, liver and kidneys, especially on top of a statin.'},
+ cancer:{bp:'Some chemotherapy and targeted drugs raise blood pressure or change potassium. Juice-heavy regimens can cause dangerous electrolyte shifts.',
+  dm:'Steroids given with chemotherapy raise blood sugar, and juice-heavy diets add a large sugar load.',
+  kid:'Several chemotherapy drugs are toxic to the kidney. High-potassium juice regimens and herbal diuretics add risk.'},
+ digestive:{bp:'Stimulant laxatives (senna, cascara) together with diuretics can drop potassium and disturb the heart rhythm.',
+  dm:'Psyllium and other fibre can lower glucose and slow absorption of some tablets. Take medicines about two hours apart from fibre and monitor your sugar.',
+  kid:'Magnesium laxatives and phosphate enemas can build up dangerously in kidney disease. Prunes and other high-potassium fruit may need limiting.'},
+ arthritis:{bp:'NSAIDs (ibuprofen, naproxen, diclofenac) raise blood pressure and blunt ACE inhibitors and diuretics. Steroids cause salt and fluid retention, so keep sodium low.',
+  dm:'Steroids raise blood sugar. Ask whether your diabetes plan needs adjusting during a course.',
+  kid:'NSAIDs can injure the kidneys, especially alongside ACE inhibitors and diuretics. Turmeric supplements are high in oxalate and can add to stone risk.'},
+ skin:{bp:'Ciclosporin, used for severe eczema and psoriasis, raises blood pressure. Avoid grapefruit and potassium supplements while taking it.',
+  dm:'Oral steroids raise blood sugar, and a high-sugar diet tends to worsen both psoriasis and glucose control.',
+  kid:'Ciclosporin and methotrexate are cleared by the kidneys and can harm them. Avoid NSAIDs and herbal diuretics.'},
+ respiratory:{bp:'Decongestants such as pseudoephedrine and liquorice-containing cough remedies can raise blood pressure.',
+  dm:'Syrups and honey add sugar, and oral steroids for asthma raise glucose.',
+  kid:'Avoid NSAIDs for cold pain and potassium-heavy remedies if your kidney function is low.'},
+ thyroid:{bp:'Beta-blockers are often used for the symptoms of an overactive thyroid. Seaweed iodine can upset treatment.',
+  dm:'Thyroid disease and diabetes often coexist; changes in thyroid dose can shift glucose control.',
+  kid:'Kidney disease changes how iodine is handled. Avoid kelp and sea moss supplements unless your doctor agrees.'},
+ kidney:{bp:'ACE inhibitors or ARBs combined with high-potassium juices or salt substitutes can cause hyperkalaemia, which can stop the heart.',
+  dm:'Diabetes is the commonest cause of kidney disease. Very low-carbohydrate, high-protein plans can overload the kidney.',
+  kid:'Avoid Gerson-type juice volumes, potassium salt substitutes and herbal diuretics. Ask for personal potassium, phosphate and protein limits.'},
+ liver:{bp:'Grapefruit interacts with some statins and calcium-channel blockers. Liquorice raises blood pressure.',
+  dm:'Metabolic syndrome usually travels with diabetes risk. Avoid fasting and very-low-carbohydrate plans if you take insulin or sulfonylureas.',
+  kid:'Rapid-weight-loss and very high-protein plans strain the kidneys, and herbs such as chaparral can harm both liver and kidney.'},
+ mood:{bp:'St John’s wort lowers blood levels of many medicines, including some for blood pressure. Liquorice and high caffeine raise pressure.',
+  dm:'Some antidepressants and antipsychotics raise weight and sugar. Watch carbohydrate quality.',
+  kid:'Lithium is cleared by the kidneys and is affected by salt and dehydration. Do not change salt or fluid intake suddenly while taking it.'}
+};
+const CEXT={
+diabetes:{full:true,
+ diet:{title:'Mediterranean & fibre-first glycaemic sequencing',
+  intro:'The best-studied way of eating for type 2 diabetes combines a Mediterranean pattern with a few simple habits that flatten the rise in blood sugar after meals. The aim is slow, steady glucose, gradual weight loss and better cholesterol and blood pressure, not a ban on any one food.',
+  targets:[['Fibre','25–38 g a day (about 14 g per 1,000 kcal); build up slowly'],['Non-starchy vegetables','At least 5 servings (about 400 g) a day; fill half the plate'],['Legumes','3–4 servings a week or more (1 serving = ½ cup cooked)'],['Whole grains','Replace refined grains; about ½ cup cooked per meal, not more'],['Oily fish','2 servings a week (about 140 g each)'],['Nuts','About 30 g a day (a small handful)'],['Olive oil','2–3 tablespoons a day as the main added fat'],['Added sugar','Under 10% of calories (WHO); under 5% is better; no sugary drinks'],['Fruit','2–3 whole pieces a day; avoid juice']],
+  steps:['Eat in order: start the meal with vegetables and protein, and finish with the starchy carbohydrate. In small trials this lowered the after-meal glucose rise compared with eating the same food carbohydrate-first.','Keep carbohydrate to a steady portion at each meal (about a quarter of the plate), rather than one large serving.','Choose intact whole foods over blended or juiced versions: fibre slows absorption and juice removes it.','Walk for 10–15 minutes after the main meal; this lowers the glucose peak.','Check your sugar two hours after a new meal to learn how you personally respond.'],
+  cmpT:'How this compares with the practitioners',
+  cmp:'<b>Gerson</b> and <b>Ehret</b> relied heavily on raw juice and fruit. Juicing strips the fibre, so sugar arrives quickly, and fruit-only eating can be a large sugar load. <b>Dr. Sebi</b>’s approved list is plant-based and high in vegetables, which fits the evidence, but it allows concentrated sugars such as dates and agave and bans foods that help (such as most beans and fish). The shared strength is whole plant food; the weakness is the claim that it removes “mucus” or replaces medicine.'},
+ mx:{pri:[
+  {h:'Soluble-fibre sources',why:'Form a gel that slows gastric emptying and carbohydrate absorption.',items:[['Oats and barley'],['Lentils, chickpeas, beans'],['Psyllium husk',['dm'],'Can lower glucose and slow absorption of tablets; take medicines about 2 hours apart'],['Chia and ground flaxseed'],['Okra']]},
+  {h:'Non-starchy vegetables',why:'Very low glycaemic load, high in fibre, magnesium and potassium.',items:[['Leafy greens (kale, spinach, amaranth greens)',['kid'],'High in potassium; limit if you have advanced kidney disease'],['Broccoli and cauliflower'],['Nopales (prickly pear pads)'],['Cucumber, courgette, tomato'],['Peppers and aubergine']]},
+  {h:'Protein and healthy fats',why:'Slow digestion and blunt the glucose rise; support fullness.',items:[['Oily fish (salmon, sardines)'],['Eggs, tofu, skinless poultry'],['Olive oil'],['Walnuts and almonds'],['Plain unsweetened yoghurt']]},
+  {h:'Lower-sugar whole fruit',why:'Fibre and polyphenols; small glucose effect when eaten whole.',items:[['Berries'],['Apples and pears (with skin)'],['Citrus']]}],
+ lim:[
+  {h:'Fast sugars',why:'Rapid glucose and insulin spikes.',items:[['Fruit juice, including fresh and green juices',['dm'],'Concentrated sugar load; can cause a spike or, if you take insulin, mismatch your dose'],['Sugary drinks, sweets, pastries'],['Honey, agave, date syrup'],['Dried fruit, dates and figs in large amounts']]},
+  {h:'Refined starch',why:'High glycaemic load without fibre.',items:[['White bread, white rice, large pasta portions'],['Breakfast cereals and instant porridge'],['Potato chips and fries']]},
+  {h:'Heart-risk foods',why:'Diabetes multiplies cardiovascular risk.',items:[['Processed and red meat'],['Fried and ultra-processed foods'],['Excess alcohol',['dm'],'Can cause delayed low blood sugar with insulin or sulfonylureas']]}],
+ cau:[
+  {h:'Herbs and regimens that clash with treatment',why:'Often marketed as diabetes aids; effects vary between products.',items:[['Cinnamon, bitter melon, fenugreek, ginseng in concentrated form',['dm'],'Add to the effect of diabetes drugs and can cause low sugar'],['Prolonged fasting or juice-only fasts',['dm'],'Low sugar with insulin or sulfonylureas; ketoacidosis risk with SGLT2 inhibitors'],['Potassium-chloride salt substitutes',['bp','kid'],'Raise potassium with ACE inhibitors, ARBs and kidney disease'],['High-protein or very high-potassium plans',['kid'],'Can worsen diabetic kidney disease']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: leafy greens, nopales, okra, courgette, cucumber, tomato, nuts and seeds, avocado, olive oil, whole grains such as spelt and teff.',
+ differ:'Differs: Sebi’s list excludes most legumes and fish, and allows dates, figs and agave; the evidence supports legumes and fish and favours limiting concentrated sugars.'},
+ plan:{slots:[['Morning','🌅','Rolled oats (40 g dry, about ½ cup) cooked with water or unsweetened milk, topped with ½ cup berries, 1 tablespoon ground flaxseed and a few walnuts. Unsweetened tea or coffee.'],['Midday','☀️','Eat first: a large salad (2 cups leaves, cucumber, tomato) with ½ cup chickpeas, 1 tablespoon olive oil and lemon, plus 100–120 g grilled fish or tofu. Then a small wholegrain pitta or ½ cup cooked barley.'],['Snack','🍎','One apple with 1 tablespoon nut butter, or a small handful (20–30 g) of almonds.'],['Evening','🌙','Vegetables and protein first: lentil and vegetable stew (about 1 cup cooked lentils) with 2 cups sautéed greens, then ½ cup brown rice or quinoa.'],['Hydration','💧','1.5–2 litres of water or unsweetened herbal tea across the day. No juice or sugary drinks.']],
+  notes:['Plate method: half non-starchy vegetables, a quarter protein, a quarter whole-grain carbohydrate.','Check your glucose about two hours after a new meal and adjust the carbohydrate portion, not the vegetables.','If you take insulin or sulfonylureas, ask your team before changing carbohydrate amounts or meal times.'],
+  clin:'This is a pattern, not a prescription. Calories and carbohydrate targets depend on your weight, medicines and kidney function; a dietitian can individualise them.'}},
+bp:{full:true,
+ diet:{title:'The DASH diet explained',
+  intro:'DASH (Dietary Approaches to Stop Hypertension) was tested in US trials and lowers systolic blood pressure by roughly 6–11 mmHg in people with high pressure, more when combined with lower sodium. It works by adding potassium, magnesium and calcium from food while cutting sodium and saturated fat.',
+  targets:[['Sodium','2,300 mg a day at most; 1,500 mg a day for the larger effect (about ¾ teaspoon of salt)'],['Potassium','About 4,700 mg a day from food (unless kidney disease or certain tablets)'],['Magnesium','About 500 mg a day from food'],['Calcium','About 1,250 mg a day from food'],['Grains','6–8 servings a day, mostly whole'],['Vegetables','4–5 servings a day'],['Fruit','4–5 servings a day'],['Low-fat dairy','2–3 servings a day'],['Fish, poultry, lean meat','6 servings or fewer a day, each about 30 g (up to about 170 g in total)'],['Nuts, seeds, legumes','4–5 servings a week'],['Fats and oils','2–3 servings a day'],['Sweets','5 or fewer a week'],['Saturated fat','About 6% of calories']],
+  steps:['Cut sodium first. Most salt comes from bread, processed meat, canned soup, sauces, cheese and restaurant food, not the salt shaker.','Add potassium-rich whole foods at every meal: beans, potatoes with skin, tomatoes, bananas, oranges, leafy greens, yoghurt.','Use herbs, garlic, lemon, vinegar and spices instead of salt.','Read labels: 5% of the daily value or less per serving is low in sodium; 20% or more is high.','Combine with weight loss, 150 minutes of activity a week and limited alcohol for the biggest effect.'],
+  cmpT:'DASH compared with Gerson’s salt-free protocol',
+  cmp:'<b>Gerson</b> banned all added salt and relied on a very large daily volume of fresh juices for potassium. Cutting salt is sound, and DASH shares that principle, but DASH does not need zero salt: 1,500–2,300 mg of sodium is the target. The large juice volumes can be dangerous for people with kidney disease or those taking ACE inhibitors, ARBs or spironolactone, because potassium can build up to a level that disturbs the heart rhythm. DASH also includes low-fat dairy for calcium and fish for omega-3, which the original Gerson plan excluded. <b>Dr. Sebi</b> and <b>Barbara O’Neill</b> favour plant foods and avoid processed food, which overlaps with DASH.'},
+ mx:{pri:[
+  {h:'Nitric-oxide boosters',why:'Dietary nitrate is converted to nitric oxide, which relaxes blood vessels.',items:[['Beetroot and beetroot juice',['kid'],'High in oxalate and potassium; check with your kidney team'],['Spinach, rocket (arugula), lettuce, celery'],['Pomegranate'],['Garlic (modest effect)']]},
+  {h:'Potassium-rich whole foods',why:'Potassium helps the kidney excrete sodium and relaxes vessel walls.',items:[['White beans, lentils, chickpeas',['kid'],'High potassium and phosphorus in advanced kidney disease'],['Sweet and baked potatoes with skin',['kid'],'Very high in potassium; discuss portions if you have kidney disease'],['Bananas and burro bananas',['kid'],'High potassium'],['Tomatoes, oranges, avocado',['kid'],'High potassium'],['Plain yoghurt']]},
+  {h:'Magnesium and calcium partners',why:'Work with potassium to lower vascular tone; dairy-based calcium shows the strongest DASH effect.',items:[['Almonds, pumpkin seeds'],['Black beans'],['Low-fat milk or fortified unsweetened soy milk'],['Sardines with bones'],['Tahini']]},
+  {h:'Fibre and omega-3 fats',why:'Improve cholesterol and lower blood pressure modestly.',items:[['Oats and barley'],['Salmon, mackerel, sardines'],['Walnuts and ground flaxseed']]}],
+ lim:[
+  {h:'Hidden sodium',why:'Sodium raises blood pressure, especially in salt-sensitive people.',items:[['Bread, rolls and wraps (check labels)'],['Processed and cured meats'],['Canned soups, stock cubes and sauces (soy sauce)'],['Pickles, olives, salted nuts'],['Cheese and takeaway food']]},
+  {h:'Saturated fat and sugar',why:'Raise heart risk alongside blood pressure.',items:[['Fatty meats and full-fat dairy in excess'],['Sugary drinks and sweets'],['Fried and ultra-processed foods']]},
+  {h:'Alcohol and caffeine load',why:'Alcohol raises pressure; heavy caffeine raises it briefly.',items:[['More than 1–2 alcoholic drinks a day'],['Energy drinks']]}],
+ cau:[
+  {h:'Interaction cautions',why:'Foods and herbs that change the effect of blood-pressure tablets or potassium handling.',items:[['Liquorice root and liquorice sweets',['bp'],'Raise blood pressure and lower potassium; counteract tablets'],['Potassium-chloride salt substitutes',['bp','kid'],'Can cause dangerous potassium levels with ACE inhibitors, ARBs, spironolactone or kidney disease'],['Grapefruit and grapefruit juice',['bp'],'Raises levels of some calcium-channel blockers such as felodipine'],['Large volumes of potassium-rich juices (Gerson style)',['bp','kid'],'Hyperkalaemia risk'],['Sea moss, kelp and iodine-rich seaweeds',[],'Very variable sodium and iodine'],['Black cohosh, St John’s wort and ephedra-type herbs',['bp'],'May raise pressure or change medicine levels']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: leafy greens, avocado, burro bananas, nuts and seeds, whole grains, and cutting processed food and added salt.',
+ differ:'Differs: DASH includes low-fat dairy and fish; Sebi excludes both. DASH accepts modest salt; Gerson bans it.'},
+ plan:{slots:[['Morning','🌅','1 cup cooked oats with 1 sliced banana, 1 tablespoon chopped almonds or ground flaxseed, and 1 cup low-fat milk or fortified unsweetened soy milk. Herbal tea.'],['Midday','☀️','Lentil and spinach salad: 1 cup cooked lentils, 2 cups spinach or rocket, grated beetroot, tomato, 1 tablespoon olive oil and lemon. 1 slice wholegrain bread (choose one with 150 mg sodium or less).'],['Snack','🥜','¾ cup plain unsalted yoghurt with berries, or 30 g unsalted nuts.'],['Evening','🌙','120–150 g baked salmon (or a chickpea and vegetable curry), 1 baked sweet potato, 1½ cups steamed broccoli. Season with garlic, lemon and herbs, not salt.'],['Hydration','💧','1.5–2 litres of water. Optional 250 ml beetroot juice with a meal if your kidneys are healthy.']],
+  notes:['Sodium budget: 1,500 mg a day is about 500 mg a meal. Most of it is already in bought food.','Cook from scratch where you can, and rinse canned beans and vegetables to remove about a third of the sodium.','Measure your own pressure at home as advised and note the trend over 4 weeks.'],
+  clin:'Do not stop or reduce blood-pressure tablets because of diet changes; as your pressure falls your doctor may lower the dose. People with kidney disease or on ACE inhibitors, ARBs or spironolactone need individual potassium targets before following the 4,700 mg figure.'}},
+skin:{full:true,
+ diet:{title:'Anti-inflammatory eating, with supervised elimination only where needed',
+  intro:'No diet cures eczema or psoriasis, and the skin is a barrier rather than a detox organ. The most useful food measures are a Mediterranean-style pattern, a healthy weight (weight loss clearly improves psoriasis), limiting alcohol and finding genuine individual triggers. Skin care and prescribed treatment remain the foundation.',
+  targets:[['Oily fish','2–3 servings a week (about 140 g each)'],['Vegetables and fruit','5–7 servings a day, colourful variety'],['Fibre','25–30 g a day from whole grains, legumes, vegetables'],['Olive oil','As the main added fat'],['Alcohol','As little as possible; it worsens psoriasis and interacts with methotrexate'],['Weight','If overweight, a 5–10% loss improves psoriasis severity']],
+  steps:['Keep a 4-week diary of foods, flares, stress and sleep before cutting anything out.','Test only one suspected food at a time, and only with a doctor or dietitian, especially in children, where over-restriction harms growth.','Add oily fish or fish oil if you are not allergic; evidence is modest but safe.','Check for coeliac disease before going gluten-free. Avoiding gluten helps psoriasis mainly in people with coeliac antibodies.','Moisturise within three minutes of bathing: this is skin care, not food, but it matters more than any diet.'],
+  cmpT:'How this compares with the practitioners',
+  cmp:'<b>Dr. Sebi</b>, <b>Dr. Robert Morse</b> and <b>Dr. Bernard Jensen</b> described the skin as an organ through which the body eliminates mucus or toxins and prescribed fasting, fruit diets and “blood-cleansing” herbs. The skin does not clear toxins; flares reflect immune signalling and barrier damage. Prolonged fasting or fruit-only diets risk deficiencies, especially in children. The helpful overlap is the emphasis on whole plant food and avoiding ultra-processed food.'},
+ mx:{pri:[
+  {h:'Omega-3 sources',why:'Anti-inflammatory fats; small benefit for psoriasis and general inflammation.',items:[['Salmon, sardines, mackerel, trout'],['Walnuts'],['Ground flaxseed and chia']]},
+  {h:'Colourful plant foods',why:'Polyphenols and carotenoids support an anti-inflammatory pattern.',items:[['Berries'],['Leafy greens (kale, amaranth greens)',['kid'],'High in potassium and oxalate in advanced kidney disease'],['Carrots, pumpkin, tomatoes'],['Olive oil and avocado']]},
+  {h:'Gut-friendly fibre',why:'Whole grains, legumes and fermented foods feed beneficial gut bacteria; skin evidence is limited.',items:[['Oats and whole grains'],['Beans and lentils'],['Yoghurt or kefir']]}],
+ lim:[
+  {h:'Pro-inflammatory pattern',why:'Linked with worse psoriasis and weight gain.',items:[['Alcohol'],['Sugary drinks and sweets',['dm'],'Raise blood sugar if you take oral steroids or diabetes medicines'],['Processed meat and fried food'],['Ultra-processed snacks']]},
+  {h:'Possible individual triggers',why:'Only worth removing if a clear pattern or allergy test points to them.',items:[['Cow’s milk and egg in children with confirmed allergy'],['Foods with a clear personal reaction in your diary'],['Fragranced or irritant skin products (not food)']]}],
+ cau:[
+  {h:'Herbs, fasts and drug clashes',why:'Common in “skin detox” routines.',items:[['Prolonged fasting or fruit-only diets',[],'Deficiency risk; harmful in children'],['Echinacea and immune-stimulating herbs',[],'Can counteract immunosuppressants and biologics'],['St John’s wort',[],'Makes skin more sun-sensitive and lowers levels of many medicines, including ciclosporin'],['Grapefruit with ciclosporin',['bp','kid'],'Raises ciclosporin levels, which raise blood pressure and strain the kidney'],['High-potassium supplements with ciclosporin',['bp','kid'],'Ciclosporin already raises potassium'],['Alcohol with methotrexate',[],'Adds liver injury risk']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: leafy greens, berries, nuts and seeds, avocado, olive oil, avoiding processed food and sugar.',
+ differ:'Differs: Sebi and Morse’s fasting and fruit-only phases are not supported; evidence-based care adds emollients and prescribed treatment.'},
+ plan:{slots:[['Morning','🌅','Oat porridge with blueberries, 1 tablespoon ground flaxseed or chia, and ¾ cup plain yoghurt. Green tea.'],['Midday','☀️','1 tin (about 90–120 g) sardines or mackerel on wholegrain toast with tomato, with a side salad dressed in olive oil; or a chickpea and vegetable salad.'],['Snack','🍊','1 orange and 20 g walnuts.'],['Evening','🌙','140 g baked salmon, roasted carrot and pumpkin, steamed kale, ½ cup cooked quinoa.'],['Hydration','💧','1.5–2 litres of water. Limit alcohol. Moisturise skin within three minutes of bathing (skin care, not diet).']],
+  notes:['Keep a daily diary for 4 weeks before removing any food.','Avoid hot showers and harsh soaps; use fragrance-free emollients.','Sun in moderation helps psoriasis, but never burn.'],
+  clin:'Never stop prescribed creams, light therapy, methotrexate, ciclosporin or biologics because of diet. Stopping steroid creams suddenly can cause rebound flares. See a doctor for infected, weeping, widespread or painful skin, or joint pain with psoriasis.'}},
+digestive:{n:'Chronic constipation & IBS',full:true,
+ diet:{title:'The fibre ladder and the low-FODMAP approach',
+  intro:'Most chronic constipation improves with more fibre, fluid, activity and a regular toilet routine. Irritable bowel syndrome (IBS) is different: some fibres help (soluble) while others and some fermentable carbohydrates (FODMAPs) worsen bloating. A step-by-step approach finds what suits your gut.',
+  targets:[['Fibre','25–30 g a day, increased by about 5 g a week to avoid gas'],['Fluid','1.5–2 litres a day, mostly water and herbal tea'],['Kiwifruit','Two a day helped constipation in trials'],['Prunes','Several a day help many people (about 50 g); stop if you have diarrhoea or IBS-D'],['Physical activity','20–30 minutes of walking most days'],['Toilet routine','Sit for about 10 minutes after breakfast; a footstool helps posture'],['Low-FODMAP trial','Strict phase 2–6 weeks, then reintroduce; use a dietitian']],
+  steps:['Step 1: add soluble fibre first (oats, psyllium husk, chia, ground flaxseed, kiwi, oranges), with a full glass of water each time.','Step 2: add insoluble fibre (whole grains, vegetables) slowly. Wheat bran can worsen IBS bloating.','Step 3: add movement and a morning routine; coffee or a warm drink can trigger the gastrocolic reflex.','Step 4: if IBS-type bloating persists, try a time-limited low-FODMAP diet with a dietitian, then reintroduce foods one group at a time.','Step 5: peppermint oil capsules and cognitive behavioural therapy have evidence in IBS; a doctor can advise.'],
+  cmpT:'How this compares with the practitioners',
+  cmp:'<b>Dr. Bernard Jensen</b>, <b>Arnold Ehret</b> and <b>Dr. Robert Morse</b> taught that colon cleansing, fasting and enemas are essential. <b>Dr. Sebi</b> used laxative herbs such as cascara sagrada and yellow dock, and <b>Max Gerson</b> used coffee enemas. Modern practice finds no need to “cleanse”; stimulant laxatives and repeated enemas can cause dependence, electrolyte disturbance and, with coffee enemas, deaths have been reported. The shared principle that gut health comes first, with plenty of plant fibre, is sound.'},
+ mx:{pri:[
+  {h:'Gel-forming and soluble fibre',why:'Soften stool and add bulk; the best evidence in constipation.',items:[['Oats and oat bran'],['Psyllium husk',['dm'],'Take medicines about 2 hours apart; can lower sugar'],['Chia and ground flaxseed'],['Kiwifruit and oranges']]},
+  {h:'Natural osmotic foods',why:'Sugar alcohols and fermentable fibre draw water into the bowel.',items:[['Prunes',['kid'],'High in potassium; limit in advanced kidney disease'],['Plums and pears (only if you do not have IBS; they are high in FODMAPs)'],['Ripe bananas, if stools are hard']]},
+  {h:'Gentle low-FODMAP choices (IBS)',why:'Lower in fermentable carbohydrate, so less gas.',items:[['Rice, quinoa, oats'],['Carrots, courgette, spinach, cucumber'],['Firm tofu, eggs, fish, poultry'],['Strawberries, blueberries, oranges'],['Lactose-free yoghurt'],['Ginger and peppermint tea']]},
+  {h:'Hydration and gut motility',why:'Fibre only works with enough fluid.',items:[['Water and herbal tea'],['Warm drink on waking'],['Coffee in moderation (stimulates the bowel reflex)']]}],
+ lim:[
+  {h:'High-FODMAP triggers (if IBS)',why:'Ferment quickly in the bowel and cause gas and pain.',items:[['Onion and garlic in large amounts'],['Wheat and rye in large servings'],['Apples, mango, watermelon'],['Large servings of beans and lentils'],['Dates and figs in quantity'],['Sorbitol-sweetened foods']]},
+  {h:'Constipating habits',why:'Slow the bowel or dry the stool.',items:[['Low-fibre, ultra-processed diets'],['Too little water'],['Ignoring the urge to go']]}],
+ cau:[
+  {h:'Laxative herbs, cleanses and supplements',why:'Common in “colon cleanse” programmes.',items:[['Senna, cascara sagrada, aloe latex, buckthorn',['bp'],'Long use lowers potassium and can disturb the heart rhythm, especially with diuretics or digoxin'],['Magnesium laxatives and phosphate enemas',['kid'],'Can build up to dangerous levels in kidney disease'],['Coffee enemas',[],'Linked with infections, electrolyte disturbance and deaths'],['Prolonged fasting or colon cleanse kits',['dm'],'Low sugar and dehydration with diabetes medicines'],['Wheat bran in IBS',[],'Often worsens bloating']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: okra, courgette and squash, nopales, leafy greens, chia, flaxseed, whole grains such as oats and spelt.',
+ differ:'Differs: Sebi’s laxative herbs and Gerson’s coffee enemas are not recommended; the evidence supports fibre, fluid and movement, and low-FODMAP diets for IBS.'},
+ plan:{slots:[['Morning','🌅','On waking: a glass of warm water. Breakfast: 2 kiwifruit, then ½ cup oats cooked in water or lactose-free milk with 1 tablespoon ground flaxseed. Coffee or tea if you like. Sit on the toilet for about 10 minutes afterwards.'],['Midday','☀️','Bowl of ¾ cup cooked quinoa or brown rice, roasted carrot and courgette, a handful of spinach, 100 g chicken or firm tofu, 1 tablespoon olive oil.'],['Snack','🍐','¾ cup plain yoghurt or kefir with 4–5 prunes (leave out the prunes if you have IBS with diarrhoea or high-FODMAP sensitivity).'],['Evening','🌙','Baked fish or small portion of canned lentils (about ¼ cup) in vegetable soup with carrots, courgette and herbs. Ginger or peppermint tea. A 20–30 minute walk.'],['Hydration','💧','6–8 glasses of water or herbal tea through the day, spread evenly.']],
+  notes:['Increase fibre gradually over 2–3 weeks.','Change one thing at a time so you know what works.','Take fibre supplements and medicines about two hours apart.'],
+  clin:'See a doctor before any cleanse, and promptly for blood in the stool, black stools, unexplained weight loss, persistent vomiting, difficulty swallowing, anaemia, a new change in bowels after age 50, or waking at night with pain. A dietitian should lead a low-FODMAP trial.'}},
+liver:{n:'Fatty liver & metabolic syndrome',full:true,
+ diet:{title:'The Mediterranean diet and gradual weight loss',
+  intro:'Metabolic dysfunction-associated steatotic liver disease (MASLD, formerly NAFLD) is fat in the liver linked to excess weight, diabetes, high blood pressure and cholesterol. Weight loss and a Mediterranean-style diet reduce liver fat, and a 7–10% weight loss can improve inflammation and early scarring. There is no proven “liver cleanse”.',
+  targets:[['Weight loss','5% reduces liver fat; 7–10% helps inflammation; aim for about 0.5 kg a week'],['Exercise','150–300 minutes of moderate activity a week plus 2 strength sessions'],['Vegetables','5+ servings a day'],['Fibre','About 30 g a day from whole grains, beans, vegetables'],['Oily fish','2 servings a week'],['Olive oil','As the main added fat'],['Sugar-sweetened drinks and juice','None'],['Alcohol','None or minimal'],['Coffee','2–3 cups a day (black) is linked with lower risk; observational evidence']],
+  steps:['Cut sugary drinks and fruit juice first; fructose goes to the liver and turns into fat.','Replace refined carbohydrate and processed meat with beans, whole grains, fish and vegetables.','Lose weight gradually: very rapid weight loss or prolonged fasting can worsen liver inflammation.','Move daily; exercise reduces liver fat even without weight loss.','Repeat liver tests and fibrosis assessment with your doctor.'],
+  cmpT:'How this compares with the practitioners',
+  cmp:'<b>Dr. Bernard Jensen</b>, <b>Max Gerson</b> and <b>Dr. Robert Morse</b> prescribed liver flushes, castor oil packs, juice fasts and coffee enemas to “detoxify” the liver. These are not supported; liver flushes can provoke gallstone pain and juice fasts add sugar. Some herbs promoted for the liver, including <b>Dr. Sebi</b>’s chaparral, have caused liver failure. The helpful common ground is eating whole plant foods and cutting processed food and alcohol.'},
+ mx:{pri:[
+  {h:'Monounsaturated and omega-3 fats',why:'Replace saturated fat and improve liver fat and cholesterol.',items:[['Extra-virgin olive oil'],['Salmon, sardines, mackerel'],['Walnuts, almonds'],['Avocado']]},
+  {h:'Fibre-rich plant foods',why:'Slow absorption, improve insulin sensitivity and satiety.',items:[['Beans, lentils, chickpeas'],['Oats, barley, brown rice'],['Broccoli, kale, rocket',['kid'],'Leafy greens are high in potassium in advanced kidney disease']]},
+  {h:'Lean protein and low-fat dairy',why:'Support muscle while losing weight.',items:[['Eggs, tofu, skinless poultry'],['Plain yoghurt']]},
+  {h:'Drinks linked with benefit',why:'Observational data show lower risk with regular coffee.',items:[['Black coffee'],['Green tea as a drink (not extracts)']]}],
+ lim:[
+  {h:'Fructose and refined carbohydrate',why:'Converted to liver fat.',items:[['Soft drinks, fruit juice, sweetened tea',['dm'],'Raise glucose; hazardous if you take insulin'],['White bread, pastries, sweets'],['Large amounts of dried fruit']]},
+  {h:'Saturated and processed fats',why:'Worsen liver fat and cardiovascular risk.',items:[['Processed and red meat'],['Fried food, fast food'],['Excess alcohol']]}],
+ cau:[
+  {h:'Herbs and regimens that can injure the liver',why:'Several popular products have caused liver failure.',items:[['Chaparral (internal use)',[],'Documented liver failure'],['Green tea extract capsules, kava, comfrey',[],'Reported liver injury'],['High-dose concentrated turmeric extracts',[],'Rare liver injury; also high in oxalate and a risk with anticoagulants'],['“Liver cleanse” kits and liver flushes',[],'Unproven; can provoke gallstone pain'],['Fasting and very-low-carbohydrate diets',['dm'],'Low sugar with insulin or sulfonylureas'],['High-protein crash diets',['kid'],'Strain the kidneys'],['Grapefruit with certain statins and calcium-channel blockers',['bp'],'Raises drug levels'],['Liquorice',['bp'],'Raises blood pressure']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: leafy greens, avocado, olive oil, nuts and seeds, whole grains, cutting sugar and processed food.',
+ differ:'Differs: liver “detoxes”, chaparral and juice fasts are not supported; evidence favours steady weight loss, exercise and a Mediterranean pattern.'},
+ plan:{slots:[['Morning','🌅','Two-egg omelette with spinach and tomato cooked in 1 teaspoon olive oil, 1 slice wholegrain toast; or oats with berries. Black coffee or tea.'],['Midday','☀️','Mediterranean bowl: ½ cup cooked chickpeas or lentils, 2 cups mixed salad with cucumber and tomato, a few olives, 1 tablespoon olive oil, 1 small wholegrain pitta. One piece of fruit.'],['Snack','🥜','30 g unsalted nuts, or a small pot of plain yoghurt.'],['Evening','🌙','140 g baked or grilled fish (or tofu), 1½ cups roasted broccoli, courgette and peppers, ½ cup cooked brown rice or bulgur.'],['Hydration','💧','About 2 litres of water; no soft drinks or juice; no alcohol.']],
+  notes:['Plate method: half vegetables, a quarter protein, a quarter whole grain.','Aim to lose about 0.5 kg a week; faster is not better for the liver.','Walk 30 minutes most days and add two strength sessions a week.'],
+  clin:'See a doctor for yellow skin or eyes, dark urine, abdominal swelling, vomiting blood, or persistent pain under the right ribs. Get an assessment for liver scarring and cardiovascular risk. Tell your doctor about every herb and supplement before starting.'}},
+arthritis:{n:'Autoimmune & inflammatory joint pain',full:true,
+ sum:'Rheumatoid arthritis, psoriatic arthritis, lupus-related joint pain and gout. Osteoarthritis (wear) is also common and is helped by weight loss and exercise.',
+ diet:{title:'An anti-inflammatory Mediterranean pattern around your medicines',
+  intro:'Diet cannot replace disease-modifying drugs, which prevent permanent joint damage in rheumatoid and psoriatic arthritis. A Mediterranean-style pattern, a healthy weight and omega-3 fats offer modest additional benefit, and bone protection matters if you take steroids.',
+  targets:[['Oily fish','2–3 servings a week (about 140 g each)'],['Vegetables and fruit','5–7 servings a day'],['Whole grains and legumes','Daily; fibre 25–30 g'],['Olive oil','As the main added fat'],['Calcium','About 1,000–1,200 mg a day from food and supplements if on steroids'],['Vitamin D','Ask your doctor to check; supplements are common in winter'],['Sodium','Under 2,300 mg a day, lower while on steroids'],['Alcohol','Minimal; none with methotrexate unless your team says otherwise']],
+  steps:['Build meals around vegetables, legumes, fish and olive oil, and cut ultra-processed food and sugary drinks.','Aim for a healthy weight; each kilo lost takes about four kilos of load off the knees.','Eat calcium-rich foods and get vitamin D checked if on long-term steroids.','For gout: limit alcohol (especially beer), sugary drinks, organ meats and shellfish; cherries and low-fat dairy may help.','Try one change at a time and track your symptoms before making further changes.'],
+  cmpT:'How this compares with the practitioners',
+  cmp:'<b>Max Gerson</b>, <b>Dr. Sebi</b> and <b>Dr. Robert Morse</b> claimed their diets and herbs reverse arthritis by clearing mucus, acid or lymph congestion. <b>Arnold Ehret</b> used fasting, which can reduce symptoms temporarily but they return. <b>Barbara O’Neill</b> advises a plant diet, hydration and home remedies such as warm compresses and charcoal poultices. Plant-rich eating and warm compresses can ease symptoms, but they do not stop joint erosion, and stopping disease-modifying drugs for a natural regimen risks permanent damage. The “nightshades worsen arthritis” idea has no good evidence.'},
+ mx:{pri:[
+  {h:'Omega-3 fats',why:'May modestly reduce joint tenderness and the need for anti-inflammatory tablets.',items:[['Salmon, sardines, mackerel, trout'],['Walnuts'],['Ground flaxseed and chia']]},
+  {h:'Polyphenol-rich foods and spices',why:'Antioxidant and anti-inflammatory plant compounds; modest clinical effect.',items:[['Berries and tart cherries (also helpful in gout)'],['Leafy greens (kale, rocket)',['kid'],'High in potassium and oxalate in advanced kidney disease'],['Olive oil'],['Ginger and turmeric as culinary spices']]},
+  {h:'Bone-protective foods',why:'Steroids and inflammation thin bone.',items:[['Plain yoghurt and fortified plant milk'],['Sardines with bones'],['Tahini and kale'],['Eggs and fortified foods for vitamin D']]},
+  {h:'Fibre-rich whole foods',why:'Support gut health and weight control.',items:[['Oats, barley, brown rice'],['Beans, lentils, chickpeas']]}],
+ lim:[
+  {h:'Pro-inflammatory pattern',why:'Associated with higher inflammatory markers and weight gain.',items:[['Sugary drinks and sweets',['dm'],'Steroids already raise blood sugar'],['Processed meat and fried food'],['Ultra-processed snacks']]},
+  {h:'Gout and bone triggers',why:'Raise uric acid or drain calcium.',items:[['Beer and spirits'],['Organ meats, shellfish and fructose drinks'],['Excess salt and caffeine on steroids',['bp'],'Steroids already cause fluid retention and raise pressure']]}],
+ cau:[
+  {h:'Supplements, herbs and drug clashes',why:'Common in “arthritis cures”.',items:[['Turmeric / curcumin supplements',['kid'],'High oxalate (stone risk) and may add to blood thinners'],['Echinacea and immune-stimulating herbs',[],'Can counteract immunosuppressants and biologics'],['St John’s wort',[],'Lowers levels of many medicines, including ciclosporin'],['Grapefruit with ciclosporin or tacrolimus',['bp','kid'],'Raises levels and kidney toxicity'],['Willow bark and high-dose NSAIDs',['bp','kid'],'Raise blood pressure and can harm the kidneys'],['Prolonged fasting or juice cleanses',['dm'],'Stress and low sugar when on steroids or diabetes medicines'],['Sarsaparilla, burdock and diuretic herbs',['bp'],'Can add to diuretic effects and upset potassium']]}],
+ overlap:'Overlaps with Dr. Sebi and Barbara O’Neill: leafy greens, berries, nuts and seeds, olive oil, ginger, and avoiding processed food.',
+ differ:'Differs: Sebi and Gerson’s claims of reversal, fasting phases and herbal diuretics are not supported; fish, low-fat dairy and legumes are encouraged by the evidence.'},
+ plan:{slots:[['Morning','🌅','Oat porridge made with fortified milk, topped with blueberries, 1 tablespoon ground flaxseed or chia and about 6 walnut halves. Green tea.'],['Midday','☀️','Sardine and white bean salad: 1 tin sardines in olive oil (or ½ cup beans), rocket or leaves, lemon and olive oil, with 1–2 slices wholegrain bread.'],['Snack','🍒','Plain yoghurt with tart cherries or an orange.'],['Evening','🌙','140 g baked salmon (or tofu), cauliflower and vegetables roasted with a pinch of turmeric and black pepper, ½ cup cooked quinoa, steamed greens.'],['Hydration','💧','About 2 litres of water; ginger tea if you like. Limit alcohol.']],
+  notes:['Take methotrexate, steroids and other medicines exactly as prescribed, with food if instructed.','If taking methotrexate, your team may prescribe folic acid; do not self-adjust.','Warm baths or compresses ease stiffness; gentle movement keeps joints supple.'],
+  clin:'Never stop disease-modifying drugs, biologics or steroids because of diet. See a doctor urgently for a hot, swollen joint with fever, morning stiffness lasting over an hour, or several joints affected. Ask about bone density if you take steroids long term.'}}
+};
+Object.entries(CEXT).forEach(([id,e])=>{const c=CONDS.find(x=>x.id===id);if(c)Object.assign(c,e)});
+CONDS.forEach(c=>{c.med=MEDNOTE[c.id]||{}});
+
+/* ============ CONDITIONS RENDER ============ */
+const medSel=new Set(),tabState={};
+const TABS=[['Overview & Practitioners','ov'],['Clinical Diet Explained','diet'],['Food Matrix','mx'],['Sample 1-Day Meal Plan','plan']];
 const condRel=c=>c.rel.map(nm=>DB.find(x=>x.n.toLowerCase().startsWith(nm.toLowerCase()))).filter(Boolean);
+function mxItem(it){
+  const [n,f=[],w='']=it, hit=f.filter(m=>medSel.has(m));
+  const note=hit.length?`<div class="text-[11.5px] mt-0.5 font-normal">⚠ ${hit.map(m=>MEDS[m]).join(' · ')}: ${w}</div>`:'';
+  return `<li class="${hit.length?'p-1.5 rounded-lg bg-[#a33e30]/10 border border-[#a33e30]/30 text-[#7a261b] font-medium':''}">${n}${note}</li>`;
+}
+function mxCol(title,cls,groups){
+  return `<div class="rounded-2xl p-4 border ${cls}"><h4 class="text-lg font-bold mb-2">${title}</h4>${groups.map(g=>`<div class="mb-3"><div class="font-semibold text-sm">${g.h}</div><p class="text-[12px] text-stone-600 italic mb-1">${g.why}</p><ul class="list-disc pl-5 space-y-0.5 text-sm">${g.items.map(mxItem).join('')}</ul></div>`).join('')}</div>`;
+}
+function medCount(c){
+  let n=[...medSel].filter(m=>c.med&&c.med[m]).length;
+  if(c.mx)[...c.mx.pri,...c.mx.lim,...c.mx.cau].forEach(g=>g.items.forEach(it=>{if((it[1]||[]).some(m=>medSel.has(m)))n++}));
+  return n;
+}
+function panels(c){
+  const medBox=medSel.size?`<div class="mb-3 p-3 rounded-xl border-l-8 border-[#a33e30] bg-[#a33e30]/10 text-sm text-[#7a261b]"><b>For your selection</b>${[...medSel].map(m=>c.med&&c.med[m]?`<p class="mt-1.5"><b>${MEDS[m]}:</b> ${c.med[m]}</p>`:'').join('')}</div>`:'';
+  const ov=`${medBox}<div class="trad lensL text-sm mb-2.5"><div class="text-[10px] uppercase tracking-widest text-champagne-600 font-bold mb-1">What the practitioners taught</div>
+    <ul class="space-y-1.5">${c.taught.map(([k,t])=>`<li><b>${PR[k].name}:</b> ${t}</li>`).join('')}</ul></div>
+    <div class="modern lensM text-sm"><div class="text-[10px] uppercase tracking-widest text-sage-700 font-bold mb-0.5">What modern evidence says</div>${c.modern}</div>
+    <div class="mt-3 p-3 rounded-xl bg-sage-50 border border-sage-100 text-sm"><b class="text-sage-800">Reasonable to try alongside medical care</b><ul class="list-disc pl-5 mt-1 space-y-0.5">${c.safe.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+    <div class="mt-3 p-3 rounded-xl bg-[#a33e30]/10 border border-[#a33e30]/20 text-sm text-[#7a261b]"><b>See a doctor:</b> ${c.doctor}</div>
+    ${condRel(c).length?`<div class="mt-3 text-xs"><span class="text-stone-500 font-semibold uppercase tracking-wider">Related database entries</span><div class="mt-1">${condRel(c).map(x=>`<a href="#database" class="tag hover:bg-black/10" data-q="${x.n.replace(/"/g,'')}">${x.n}</a>`).join('')}</div></div>`:''}`;
+  if(!c.full)return [ov];
+  const d=c.diet,m=c.mx,p=c.plan;
+  const diet=`${medBox}<h3 class="text-2xl font-semibold text-obsidian-900">${d.title}</h3><p class="text-sm mt-1.5 text-stone-700">${d.intro}</p>
+    <div class="mt-3 rounded-2xl border border-black/5 overflow-hidden"><table class="w-full text-sm"><tbody>${d.targets.map(([a,b])=>`<tr class="border-b border-black/5 last:border-0"><th scope="row" class="text-left font-semibold p-2.5 w-2/5 bg-alabaster-200/60 align-top">${a}</th><td class="p-2.5">${b}</td></tr>`).join('')}</tbody></table></div>
+    <h4 class="font-bold mt-4 mb-1">How to apply it</h4><ol class="list-decimal pl-5 space-y-1 text-sm">${d.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+    <div class="mt-4 p-3 rounded-xl bg-alabaster-200/70 border border-champagne-300/60 text-sm"><b>${d.cmpT}</b><p class="mt-1">${d.cmp}</p></div>`;
+  const mx=`${medBox}<div class="grid xl:grid-cols-3 gap-3">${mxCol('Prioritize','bg-sage-50 border-sage-200 text-sage-800',m.pri)}${mxCol('Limit','bg-[#fbf3df] border-champagne-300 text-[#755320]',m.lim)}${mxCol('Caution','bg-[#a33e30]/5 border-[#a33e30]/25 text-[#7a261b]',m.cau)}</div>
+    <div class="mt-3 grid md:grid-cols-2 gap-3 text-sm"><div class="p-3 rounded-xl bg-sage-50 border border-sage-100"><b class="text-sage-800">Overlap with Dr. Sebi / O’Neill</b><p class="mt-1">${m.overlap.replace(/^Overlaps with Dr\. Sebi and Barbara O’Neill:\s*/,'')}</p></div><div class="p-3 rounded-xl bg-alabaster-200/70 border border-black/5"><b>Where they differ</b><p class="mt-1">${m.differ.replace(/^Differs:\s*/,'')}</p></div></div>`;
+  const plan=`${medBox}<div class="grid md:grid-cols-2 gap-3">${p.slots.map(([t,i,x])=>`<div class="rounded-2xl p-4 border border-black/5 bg-white/70"><div class="flex items-center gap-2 font-bold text-obsidian-900"><span class="text-xl">${i}</span>${t}</div><p class="text-sm mt-1.5 text-stone-700">${x}</p></div>`).join('')}</div>
+    <h4 class="font-bold mt-4 mb-1">Practical notes</h4><ul class="list-disc pl-5 space-y-1 text-sm">${p.notes.map(s=>`<li>${s}</li>`).join('')}</ul>
+    <div class="mt-3 p-3 rounded-xl bg-[#a33e30]/10 border border-[#a33e30]/20 text-sm text-[#7a261b]"><b>Clinical note:</b> ${p.clin}</div>
+    <p class="text-xs text-stone-500 mt-2">A sample pattern for education, not a prescription. Portions are guides; ask a dietitian for amounts that fit your weight, medicines and kidney function.</p>`;
+  return [ov,diet,mx,plan];
+}
 function drawConds(){
   const q=$('#cq').value.trim().toLowerCase();
-  const res=CONDS.filter(c=>!q||(c.n+' '+c.sum+' '+c.modern).toLowerCase().includes(q));
-  $('#ccount').textContent=res.length+' of '+CONDS.length+' conditions';
-  $('#condList').innerHTML=res.length?res.map(c=>`
-  <details class="card p-5" id="c-${c.id}">
+  const res=CONDS.filter(c=>!q||(c.n+' '+c.sum+' '+c.modern+(c.diet?c.diet.title:'')).toLowerCase().includes(q));
+  $('#ccount').textContent=res.length+' of '+CONDS.length+' conditions'+(medSel.size?' · cautions highlighted for: '+[...medSel].map(m=>MEDS[m]).join(', '):'');
+  $('#condList').innerHTML=res.length?res.map(c=>{
+    const t=tabState[c.id]||0, ps=panels(c), n=medSel.size?medCount(c):0;
+    return `
+  <details class="card p-5 ${c.full?'lg:col-span-2':''} ${n?'flagcard':''}" id="c-${c.id}" ${tabState['open-'+c.id]?'open':''}>
     <summary class="flex justify-between gap-3 items-start">
-      <div><div class="text-2xl">${c.icon}</div><h2 class="text-2xl font-semibold text-obsidian-900 leading-tight mt-1">${c.n}</h2><p class="text-sm text-stone-600 mt-1">${c.sum}</p></div>
-      <div class="shrink-0 text-right"><div class="text-[11.2px] uppercase tracking-wider text-stone-500 mb-1">Natural claims</div>${evBadge(c.ev)}</div>
+      <div><div class="text-2xl">${c.icon}</div><h2 class="text-2xl font-semibold text-obsidian-900 leading-tight mt-1">${c.n}</h2><p class="text-sm text-stone-600 mt-1">${c.sum}</p>
+        <div class="mt-1.5">${c.full?'<span class="tag" style="background:#dce8e3">Full diet guide</span>':''}${n?`<span class="fl">⚠ ${n} caution${n>1?'s':''} for your selection</span>`:''}</div></div>
+      <div class="shrink-0 text-right"><div class="text-[10px] uppercase tracking-wider text-stone-500 mb-1">Natural claims</div>${evBadge(c.ev)}</div>
     </summary>
     <div class="mt-4">
-      <div class="trad lensL text-sm mb-2.5"><div class="text-[11.2px] uppercase tracking-widest text-champagne-600 font-bold mb-1">What the practitioners taught</div>
-        <ul class="space-y-1.5">${c.taught.map(([k,t])=>`<li><b>${PR[k].name}:</b> ${t}</li>`).join('')}</ul></div>
-      <div class="modern lensM text-sm"><div class="text-[11.2px] uppercase tracking-widest text-sage-700 font-bold mb-0.5">What modern evidence says</div>${c.modern}</div>
-      <div class="mt-3 p-3 rounded-xl bg-sage-50 border border-sage-100 text-sm"><b class="text-sage-800">Reasonable to try alongside medical care</b><ul class="list-disc pl-5 mt-1 space-y-0.5">${c.safe.map(s=>`<li>${s}</li>`).join('')}</ul></div>
-      <div class="mt-3 p-3 rounded-xl bg-[#a33e30]/10 border border-[#a33e30]/20 text-sm text-[#7a261b]"><b>See a doctor:</b> ${c.doctor}</div>
-      ${condRel(c).length?`<div class="mt-3 text-xs"><span class="text-stone-500 font-semibold uppercase tracking-wider">Related database entries</span><div class="mt-1">${condRel(c).map(x=>`<a href="#database" class="tag hover:bg-black/10" data-q="${x.n.replace(/"/g,'')}">${x.n}</a>`).join('')}</div></div>`:''}
+      ${c.full?`<div class="inline-flex flex-wrap gap-1 p-1 rounded-3xl glass-pill-bar mb-4" role="tablist" aria-label="${c.n} sections">${TABS.map(([l],i)=>`<button role="tab" aria-selected="${i===t}" data-c="${c.id}" data-t="${i}" class="ctab px-3.5 py-1.5 rounded-full text-[13px] transition-all ${i===t?'bg-obsidian-900 text-white font-semibold shadow-sm':'text-stone-700 hover:text-obsidian-900'}">${l}</button>`).join('')}</div>`:''}
+      ${ps.map((h,i)=>`<div class="cpanel ${i===t?'':'hidden'}" data-p="${i}" role="tabpanel">${h}</div>`).join('')}
     </div>
-  </details>`).join(''):'<p class="col-span-full text-center text-stone-600 py-10">No conditions match. Try a different word.</p>';
+  </details>`}).join(''):'<p class="col-span-full text-center text-stone-600 py-10">No conditions match. Try a different word.</p>';
   $$('#condList a[data-q]').forEach(a=>a.onclick=()=>{setTimeout(()=>{$('#q').value=a.dataset.q;['#fKind','#fP','#fO','#fM','#fPr','#fE'].forEach(s=>$(s).value='');drawDB()},0)});
 }
+$('#condList').addEventListener('click',e=>{
+  const b=e.target.closest('.ctab');
+  if(b){tabState[b.dataset.c]=+b.dataset.t;drawConds();const d=$('#c-'+b.dataset.c);if(d)d.open=true;return}
+});
+$('#condList').addEventListener('toggle',e=>{if(e.target.id&&e.target.id.startsWith('c-'))tabState['open-'+e.target.id.slice(2)]=e.target.open},true);
+$('#medBar').innerHTML=Object.entries(MEDS).map(([k,l])=>`<button class="pill-btn" data-m="${k}" aria-pressed="false">${l}</button>`).join('');
+$$('#medBar button').forEach(b=>b.onclick=()=>{const k=b.dataset.m;medSel.has(k)?medSel.delete(k):medSel.add(k);b.classList.toggle('on',medSel.has(k));b.setAttribute('aria-pressed',medSel.has(k));drawConds()});
 $('#cq').addEventListener('input',drawConds);
 $('#printCond').onclick=()=>window.print();
 drawConds();
+
 
 /* ============ FAQ & GLOSSARY ============ */
 const FAQ=[
