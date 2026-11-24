@@ -264,10 +264,12 @@ tailwind.config = {
     .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;backdrop-filter:none}
     details>*{display:block}
   }
-  .navlink{font-size:13.5px;padding:.4rem .6rem}
-  @media (min-width:1280px) and (max-width:1535px){.navlink{padding:.4rem .5rem;font-size:13px}#lensBar button{padding-left:.55rem!important;padding-right:.55rem!important}}
+  .navlink{font-size:16.2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.5rem .85rem;white-space:nowrap}
+  @media (min-width:1280px) and (max-width:1535px){.navlink{padding:.5rem .6rem;letter-spacing:.03em}#lensBar button{padding-left:.6rem!important;padding-right:.6rem!important}}
+  #lensBar button{font-size:15px!important;font-weight:700}
   #navD{gap:.125rem}
-  #moreMenu .navlink{display:block;padding:.5rem .9rem;border-radius:12px;font-size:14px}
+  #moreMenu{background:#faf9f6!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 18px 40px rgba(18,23,21,.28)!important;border:1px solid rgba(18,23,21,.12)!important;min-width:15rem}
+  #moreMenu .navlink{display:block;padding:.65rem 1rem;border-radius:12px;font-size:16.2px}
   .cpanel.hidden{display:none}
   @media print{.mcards{flex-wrap:wrap!important;overflow:visible!important}.mcards>article{width:48%!important}.pl-noprint{display:none!important}.pl-panel.hidden{display:block!important}.pl-panel{break-before:auto}.cpanel.hidden{display:block!important}.ctab,#medBar{display:none!important}}
   /* TEXT-SIZE FLOOR: nothing below ~14.5px anywhere except the header nav. Keep when adding new UI. */
@@ -277,7 +279,7 @@ tailwind.config = {
   [class*="text-[10px]"],[class*="text-[11.2px]"],[class*="text-[10.5px]"],[class*="text-[11px]"],[class*="text-[12px]"],[class*="text-[12.3px]"],[class*="text-[13px]"],[class*="text-[13.5px]"]{font-size:.8rem!important}
   [class*="text-[15px]"]{font-size:.92rem!important}
   #planRoot .card,#planRoot li,#planRoot td,#planRoot label,#planRoot p{font-size:max(1em,.94rem)}
-  header .navlink{font-size:13.5px!important}
+  header .navlink{font-size:16.2px!important}
 </style>
 </head>
 <body data-lens="both">
@@ -1097,7 +1099,7 @@ const lens=(trad,mod)=>`<div class="trad lensL text-sm mb-2.5"><div class="text-
 
 /* ============ NAV & ROUTING ============ */
 const VIEWS=[['home','Home'],['conditions','Conditions'],['plan','My Plan'],['terrain','Practitioners'],['database','Database'],['protocols','Protocols'],['physiology','Physiology'],['safety','Safety'],['sources','Sources'],['learn','Glossary & FAQ'],['about','About']];
-const MORE=['physiology','safety','sources','learn','about'];
+const MORE=['protocols','physiology','safety','sources','learn','about'];
 const DLAB={terrain:'Compare'};
 const TITLES={home:'Natural Healing Atlas — A free guide to natural health options',terms:'Terms, Privacy & Disclaimer'};
 VIEWS.forEach(([k,l])=>TITLES[k]=TITLES[k]||l+' · Natural Healing Atlas');TITLES.terms+=' · Natural Healing Atlas';
