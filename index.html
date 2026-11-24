@@ -264,12 +264,12 @@ tailwind.config = {
     .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;backdrop-filter:none}
     details>*{display:block}
   }
-  .navlink{font-size:16.2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.5rem .85rem;white-space:nowrap}
+  .navlink{font-size:14.6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.5rem .85rem;white-space:nowrap}
   @media (min-width:1280px) and (max-width:1535px){.navlink{padding:.5rem .6rem;letter-spacing:.03em}#lensBar button{padding-left:.6rem!important;padding-right:.6rem!important}}
-  #lensBar button{font-size:15px!important;font-weight:700}
+  #lensBar button{font-size:13.5px!important;font-weight:700}
   #navD{gap:.125rem}
   #moreMenu{background:#faf9f6!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 18px 40px rgba(18,23,21,.28)!important;border:1px solid rgba(18,23,21,.12)!important;min-width:15rem}
-  #moreMenu .navlink{display:block;padding:.65rem 1rem;border-radius:12px;font-size:16.2px}
+  #moreMenu .navlink{display:block;padding:.65rem 1rem;border-radius:12px;font-size:14.6px}
   .cpanel.hidden{display:none}
   @media print{.mcards{flex-wrap:wrap!important;overflow:visible!important}.mcards>article{width:48%!important}.pl-noprint{display:none!important}.pl-panel.hidden{display:block!important}.pl-panel{break-before:auto}.cpanel.hidden{display:block!important}.ctab,#medBar{display:none!important}}
   /* TEXT-SIZE FLOOR: nothing below ~14.5px anywhere except the header nav. Keep when adding new UI. */
@@ -279,7 +279,7 @@ tailwind.config = {
   [class*="text-[10px]"],[class*="text-[11.2px]"],[class*="text-[10.5px]"],[class*="text-[11px]"],[class*="text-[12px]"],[class*="text-[12.3px]"],[class*="text-[13px]"],[class*="text-[13.5px]"]{font-size:.8rem!important}
   [class*="text-[15px]"]{font-size:.92rem!important}
   #planRoot .card,#planRoot li,#planRoot td,#planRoot label,#planRoot p{font-size:max(1em,.94rem)}
-  header .navlink{font-size:16.2px!important}
+  header .navlink{font-size:14.6px!important}
 </style>
 </head>
 <body data-lens="both">
@@ -293,7 +293,7 @@ tailwind.config = {
 </div>
 
 <!-- FLOATING GLASSIFIED HEADER -->
-<div class="sticky top-3 z-40 px-3 sm:px-6 pt-3 pointer-events-none">
+<div class="relative z-40 px-3 sm:px-6 pt-3 pointer-events-none">
   <header class="glass-header max-w-7xl mx-auto rounded-full px-4 sm:px-6 py-2.5 pointer-events-auto transition-all">
     <div class="flex items-center justify-between gap-3">
       <!-- Brand -->
@@ -2399,7 +2399,7 @@ function planHTML(){const p=PL.cur,G=planG(p),st=stats(G,p);const gdef=GROUPS.fi
   <div class="flex flex-wrap gap-2 mt-6 pl-noprint no-print"><button class="pill-btn" data-act="editplan">✏️ Switch / Edit Condition</button><button class="pill-btn" data-act="print">🖨️ Print PDF Chart</button><button class="pill-btn" data-act="exportjson">⬇ Export JSON</button><button class="pill-btn" data-act="exportmd">⬇ Markdown</button></div></div>
   <p id="plMsg" class="text-sm font-semibold text-[#275c4d] mt-2" aria-live="polite"></p>
   <details class="mt-4 rounded-3xl border-2 border-[#a33e30]/40 bg-white shadow-lg"><summary class="cursor-pointer list-none p-4 sm:p-5 flex items-center gap-3"><span class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl text-white shrink-0" style="background:#a33e30">🛡️</span><span><span class="block text-[11px] font-bold uppercase tracking-[.22em] text-[#a33e30]">Safety guardrails · ${G.alerts.length?G.alerts.length+' active':'none flagged'}</span><span class="block font-serif text-[26px] font-bold text-obsidian-900 leading-tight">Your safety screen</span></span><span class="ml-auto text-sm font-semibold text-[#a33e30] no-print">Tap to view ▾</span></summary><div class="grid gap-2 px-4 pb-4 sm:px-5 sm:pb-5">${G.alerts.map(alertBox).join('')}</div></details>`;
- const tabs=`<div class="sticky top-24 z-30 mt-6 py-2 pl-noprint no-print"><div class="flex flex-wrap gap-2 p-2 rounded-[1.75rem] border border-white/60 shadow-xl" style="background:rgba(250,249,246,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)" role="tablist">${PTABS.map(([k,l,n])=>`<button class="ctab pill-btn !text-[15px] !px-4 !py-2.5 flex items-center gap-2 ${PL.tab===k?'on':''}" role="tab" aria-selected="${PL.tab===k}" data-act="ptab" data-id="${k}"><span class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${PL.tab===k?'bg-champagne-400 text-obsidian-950':'bg-obsidian-900 text-white'}">${n}</span>${l}</button>`).join('')}</div></div>`;
+ const tabs=`<div class="sticky top-3 z-30 mt-6 py-2 pl-noprint no-print"><div class="flex flex-wrap gap-2 p-2 rounded-[1.75rem] border border-white/60 shadow-xl" style="background:rgba(250,249,246,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)" role="tablist">${PTABS.map(([k,l,n])=>`<button class="ctab pill-btn !text-[15px] !px-4 !py-2.5 flex items-center gap-2 ${PL.tab===k?'on':''}" role="tab" aria-selected="${PL.tab===k}" data-act="ptab" data-id="${k}"><span class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${PL.tab===k?'bg-champagne-400 text-obsidian-950':'bg-obsidian-900 text-white'}">${n}</span>${l}</button>`).join('')}</div></div>`;
  const panels=PTABS.map(([k])=>`<div class="pl-panel ${PL.tab===k?'':'hidden'} mt-4" data-panel="${k}"><h2 class="hidden print:block font-serif text-3xl font-bold mt-6">${PTABS.find(t=>t[0]===k)[1]}</h2>${panel(k,G,p)}</div>`).join('');
  return hero+tabs+panels}
 function ringHTML(pct){const r=52,c=2*Math.PI*r,o=c*(1-pct/100);return `<div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto"><svg viewBox="0 0 130 130" class="w-full h-full -rotate-90" aria-hidden="true"><circle cx="65" cy="65" r="${r}" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="11"/><circle cx="65" cy="65" r="${r}" fill="none" stroke="#cfa96e" stroke-width="11" stroke-linecap="round" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${o.toFixed(1)}" style="transition:stroke-dashoffset .6s"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="font-serif text-4xl sm:text-5xl font-bold">${pct}<span class="text-xl">%</span></span></div></div>`}
