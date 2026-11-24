@@ -690,6 +690,86 @@ const ANAT={
  resp:{n:'Respiratory system',f:'Respiratory system complete en.svg',a:'Mariana Ruiz (LadyofHats) and contributors',l:'See file page'}
 };
 const anatImg=(g,cls,w)=>{const m=ANAT[g];return m?`<img src="${imgUrl(m,w||700)}" alt="${m.n} illustration" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="${cls}" onerror="var f=this.closest('.imgwrap');if(f)f.remove();else this.remove()">`:''};
+
+/* ===== Database images and popular names: each item's Wikipedia lead image, loaded live ===== */
+const WIKI={
+'Sea moss':{w:['Chondrus crispus','Irish moss'],a:'Irish moss, carrageen moss'},
+'Bladderwrack':{w:['Fucus vesiculosus'],a:'Sea oak, black tang, rockweed'},
+'Burdock root':{w:['Arctium lappa','Burdock'],a:'Gobo (Japan), greater burdock, beggar’s buttons'},
+'Sarsaparilla':{w:['Smilax regelii','Sarsaparilla'],a:'Zarzaparrilla, Jamaican or Honduran sarsaparilla'},
+'Chaparral':{w:['Larrea tridentata'],a:'Creosote bush, greasewood, gobernadora'},
+'Dandelion (root and leaf)':{w:['Taraxacum officinale','Taraxacum'],a:'Lion’s tooth, blowball; Arabic hindiba (هندباء)'},
+'Yellow dock':{w:['Rumex crispus'],a:'Curly dock, sour dock'},
+'Cascara sagrada':{w:['Frangula purshiana','Cascara sagrada'],a:'Sacred bark, chittem bark'},
+'Elderberry':{w:['Sambucus nigra','Sambucus'],a:'Black elder, European elder'},
+'Nettle':{w:['Urtica dioica'],a:'Stinging nettle; Arabic qurays (قريص); Hindi bichhu buti'},
+'Red clover':{w:['Trifolium pratense'],a:'Purple clover, meadow clover'},
+'Cleavers':{w:['Galium aparine'],a:'Goosegrass, stickyweed, sticky willy'},
+'Echinacea':{w:['Echinacea purpurea','Echinacea'],a:'Purple coneflower'},
+'Poke root':{w:['Phytolacca americana'],a:'Pokeweed, inkberry, pigeonberry'},
+'Blue vervain':{w:['Verbena hastata'],a:'Swamp verbena, wild hyssop'},
+'Damiana':{w:['Turnera diffusa','Turnera'],a:'Mexican damiana, oreganillo'},
+'Kale and dark leafy greens':{w:['Kale'],a:'Borecole, collard greens, Swiss chard'},
+'Amaranth greens (callaloo)':{w:['Amaranth','Amaranthus'],a:'Callaloo, tampala; Hindi chaulai'},
+'Nopales':{w:['Opuntia ficus-indica','Nopal'],a:'Prickly-pear pads, cactus paddles; Hindi nagphani'},
+'Burro (baby) banana':{w:['Banana'],a:'Orinoco or horse banana, short chunky cooking banana'},
+'Avocado':{w:['Avocado'],a:'Alligator pear; Hindi makkhanphal'},
+'Ancient grains (spelt, kamut, teff, fonio, wild rice)':{w:['Teff','Ancient grains'],a:'Spelt, khorasan wheat (kamut), teff, fonio, wild rice'},
+'Walnuts, Brazil nuts, hemp seed':{w:['Walnut'],a:'Arabic jawz (جوز); Hindi akhrot (walnut); hemp seed = hemp hearts'},
+'Dates and figs':{w:['Date palm','Ficus carica'],a:'Arabic tamr (تمر) and teen (تين); Hindi khajoor and anjeer'},
+'Ripe fruit (apples, grapes, citrus)':{w:['Fruit'],a:'Seasonal tree and vine fruit'},
+'Carrot-apple juice':{w:['Carrot juice','Carrot'],a:'Arabic asir jazar (عصير جزر); Hindi gajar ka ras'},
+'Green-leaf juice':{w:['Juice','Juicing'],a:'Green juice, lettuce–chard–endive juice'},
+'Castor oil':{w:['Castor oil'],a:'Arabic zayt al-khirwa’ (زيت الخروع); Hindi arandi ka tel'},
+'Activated charcoal':{w:['Activated carbon'],a:'Activated carbon; Arabic faham munashshat (فحم منشط)'},
+'Ginger':{w:['Ginger'],a:'Arabic zanjabil (زنجبيل); Hindi/Urdu adrak'},
+'Garlic':{w:['Garlic'],a:'Arabic thum (ثوم); Hindi lahsun'},
+'Slippery elm':{w:['Ulmus rubra'],a:'Red elm, Indian elm, sweet elm'},
+'Mullein':{w:['Verbascum thapsus','Verbascum'],a:'Great mullein, Aaron’s rod, torch plant'},
+'Apple cider vinegar':{w:['Apple cider vinegar','Cider vinegar'],a:'ACV, cider vinegar; Hindi seb ka sirka; Arabic khall al-tuffah (خل التفاح)'},
+'Psyllium and flaxseed':{w:['Psyllium','Plantago ovata'],a:'Psyllium = isabgol or ispaghula (Hindi/Urdu); flaxseed = linseed, alsi (Hindi)'},
+'Okra':{w:['Okra'],a:'Lady’s fingers, gumbo; Hindi bhindi; Arabic bamya (بامية)'},
+'Turmeric':{w:['Turmeric'],a:'Indian saffron; Hindi/Urdu haldi; Arabic kurkum (كركم)'},
+'Lemon and key lime':{w:['Lemon'],a:'Hindi nimbu; Arabic laymun (ليمون); key lime = Mexican lime'},
+'Cayenne pepper':{w:['Cayenne pepper'],a:'Red chilli powder; Hindi lal mirch'},
+'Onion':{w:['Onion'],a:'Hindi pyaaz; Arabic basal (بصل)'},
+'Bentonite and clay':{w:['Bentonite'],a:'Montmorillonite or healing clay; Fuller’s earth is a related clay'},
+'Epsom salt baths':{w:['Magnesium sulfate','Epsom salt'],a:'Epsom salts, bitter salt, magnesium sulphate'},
+'Oatmeal':{w:['Oatmeal'],a:'Porridge, rolled oats; Arabic shufan (شوفان)'},
+'Baked potato':{w:['Baked potato'],a:'Jacket potato; Hindi aloo; Arabic batata (بطاطا)'},
+'Flaxseed oil':{w:['Flaxseed oil','Flax'],a:'Linseed oil (edible), alsi oil'},
+'Hippocrates soup':{w:['Celeriac'],a:'Hippocratic soup, celeriac–leek–tomato soup'},
+'Cucumber':{w:['Cucumber'],a:'Hindi kheera; Arabic khiyar (خيار)'},
+'Squash and zucchini':{w:['Zucchini'],a:'Courgette; Arabic kusa (كوسا)'},
+'Tomatoes (cherry and plum)':{w:['Cherry tomato','Tomato'],a:'Hindi tamatar; Arabic tamatim (طماطم)'},
+'Mushrooms':{w:['Mushroom'],a:'Hindi khumb; Arabic futr (فطر)'},
+'Olive oil':{w:['Olive oil'],a:'Arabic zayt zaytun (زيت زيتون)'},
+'Sesame and tahini':{w:['Tahini','Sesame'],a:'Hindi til; Arabic simsim (سمسم) and tahina'},
+'Grapes (seeded)':{w:['Grape'],a:'Arabic inab (عنب); Hindi angoor'},
+'Papaya':{w:['Papaya'],a:'Pawpaw; Hindi papita; Arabic babaya (بابايا)'},
+'Berries':{w:['Berry'],a:'Blackberry, blueberry, strawberry; Arabic tut (توت)'},
+'Soft jelly coconut':{w:['Coconut'],a:'Young or tender coconut; Hindi nariyal; Arabic jawz al-hind (جوز الهند)'},
+'Tamarind':{w:['Tamarind'],a:'Hindi imli; Arabic tamr hindi (تمر هندي)'},
+'Vegetable broth (potassium broth)':{w:['Broth','Vegetable broth'],a:'Potassium broth, vegetable stock'}
+};
+const _wc=(()=>{try{return JSON.parse(localStorage.getItem('nha:wimg')||'{}')}catch(e){return{}}})();
+const _wsave=()=>{try{localStorage.setItem('nha:wimg',JSON.stringify(_wc))}catch(e){}};
+const wikiPage=t=>'https://en.wikipedia.org/wiki/'+encodeURIComponent(t.replace(/ /g,'_'));
+async function wikiThumb(name){
+ if(_wc[name]!==undefined)return _wc[name];
+ const ts=(WIKI[name]&&WIKI[name].w)||[name];
+ for(const t of ts){
+  try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(t.replace(/ /g,'_')));
+   if(!r.ok)continue;const j=await r.json();const src=j.thumbnail&&j.thumbnail.source;
+   if(src){_wc[name]={u:src,t:j.title||t};_wsave();return _wc[name]}}catch(e){}
+ }
+ return null;
+}
+let _wq=[],_wrun=0;
+function _wpump(){while(_wrun<5&&_wq.length){const el=_wq.shift();_wrun++;wikiThumb(el.dataset.w).then(r=>{if(r&&el.isConnected){el.innerHTML=`<img src="${r.u}" alt="${el.dataset.w}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-cover" onerror="this.remove()">`;el.dataset.src=wikiPage(r.t)}}).finally(()=>{_wrun--;_wpump()})}}
+function hydrateWiki(root){(root||document).querySelectorAll('[data-w]:not([data-done])').forEach(el=>{el.dataset.done='1';_wq.push(el)});_wpump()}
+const wikiBox=(name,cls)=>`<span data-w="${String(name).replace(/"/g,'&quot;')}" class="imgwrap ${cls||'w-20 h-20'} shrink-0 rounded-xl overflow-hidden bg-[#e8efe9] flex items-center justify-center text-2xl text-sage-700" aria-hidden="false">🌿</span>`;
+new MutationObserver(()=>{clearTimeout(window._wt);window._wt=setTimeout(()=>hydrateWiki(),80)}).observe(document.documentElement,{childList:true,subtree:true});
 const imgBy=k=>IMGS.find(m=>m.k===k);
 const imgFor=t=>IMGS.find(m=>m.re.source!=='^$'&&m.re.test(t));
 const picTag=(m,cls,w)=>m?`<img src="${imgUrl(m,w)}" alt="${m.n}" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="${cls}" onerror="var f=this.closest('figure,.imgwrap');if(f)f.remove();else this.remove()">`:'';
@@ -1240,7 +1320,7 @@ function drawDB(){
   $('#dbGrid').innerHTML=res.length?res.map(x=>{const f=flags(x);return `
   <details class="card p-4 ${sel.length?(f.length?'flagcard':'okcard'):''}" ${allExpanded?'open':''}>
     <summary class="flex justify-between gap-2 items-start">
-      <div class="flex items-start gap-3">${(()=>{const m=imgFor(x.n);return m?`<span class="imgwrap shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-stone-200 block">${picTag(m,"w-full h-full object-cover",200)}</span>`:""})()}<div><h3 class="text-2xl font-semibold text-obsidian-900 leading-tight">${x.n}</h3><p class="text-xs italic text-stone-600">${x.lat}</p>
+      <div class="flex items-start gap-3">${wikiBox(x.n)}<div><h3 class="text-2xl font-semibold text-obsidian-900 leading-tight">${x.n}</h3><p class="text-xs italic text-stone-600">${x.lat}</p>${WIKI[x.n]?`<p class="text-[13.5px] text-stone-700 mt-0.5"><b>Also called:</b> ${WIKI[x.n].a}</p>`:""}
         ${sel.length?(f.length?`<div class="mt-1">${f.map(c=>`<span class="fl">⚠ ${COND[c].l}</span>`).join('')}</div>`:`<div class="mt-1 text-[12.3px] text-sage-700">No listed caution for your selection</div>`):''}</div></div>
       <div class="text-right shrink-0">${evBadge(x.ev)}<div class="text-[12.3px] text-stone-600 mt-1">${x.k}</div></div>
     </summary>
@@ -2492,7 +2572,7 @@ function pNutrition(G){const days=['Day 1','Day 2','Day 3','Day 4','Day 5','Day 
  <div class="card p-4 mt-4 text-sm"><b class="font-serif text-lg block mb-1">🔗 Where the traditional teachers overlap</b> ${esc(G.chart.overlap)}</div>`}
 function pHerbs(G){const h=G.herbs;
  return `<div class="card p-5 text-sm"><b class="font-serif text-lg block mb-1">🔍 How herbs are filtered</b> Each herb is checked against your medicines and conditions. Items below are allowed at the stated level; blocked herbs are listed with the reason. Introduce one at a time and tell your clinician or pharmacist. Evidence for most herbs is limited.</div>
- <div class="grid md:grid-cols-2 gap-4 mt-4">${h.allowed.length?h.allowed.map(x=>`<div class="card p-4 overflow-hidden">${(()=>{const m=imgFor(x.name);return m?`<div class="imgwrap -mx-4 -mt-4 mb-3 h-40 bg-stone-200">${picTag(m,"w-full h-full object-cover")}</div>`:""})()}<div class="flex flex-wrap items-center gap-2"><h3 class="font-serif text-2xl font-bold text-obsidian-900">🌿 ${esc(x.name)}</h3>${evBadge(x.g)}</div><div class="mt-1 text-xs font-semibold ${x.level==='ok'?'text-[#14332a]':'text-[#755320]'}">${esc(h.LV[x.level])}</div><div class="mt-2">${lens(x.trad,esc(x.mod))}</div>${x.caut?`<div class="mt-2 text-xs text-[#7a261b]"><b>Caution:</b> ${esc(x.caut)}</div>`:''}</div>`).join(''):'<div class="card p-4 text-sm md:col-span-2">No herb is cleared for your combination of conditions and medicines. This is intentional.</div>'}</div>
+ <div class="grid md:grid-cols-2 gap-4 mt-4">${h.allowed.length?h.allowed.map(x=>`<div class="card p-4 overflow-hidden"><div class="-mx-4 -mt-4 mb-3">${wikiBox(x.name,"w-full h-40 !rounded-none")}</div><div class="flex flex-wrap items-center gap-2"><h3 class="font-serif text-2xl font-bold text-obsidian-900">🌿 ${esc(x.name)}</h3>${evBadge(x.g)}</div><div class="mt-1 text-xs font-semibold ${x.level==='ok'?'text-[#14332a]':'text-[#755320]'}">${esc(h.LV[x.level])}</div><div class="mt-2">${lens(x.trad,esc(x.mod))}</div>${x.caut?`<div class="mt-2 text-xs text-[#7a261b]"><b>Caution:</b> ${esc(x.caut)}</div>`:''}</div>`).join(''):'<div class="card p-4 text-sm md:col-span-2">No herb is cleared for your combination of conditions and medicines. This is intentional.</div>'}</div>
  ${h.blocked.length?`<div class="card p-5 mt-4 border-l-8 border-[#a33e30]">${sec('🚫','Blocked for you, and why','Do not use these with your medicines or conditions','#a33e30')}<ul class="list-disc pl-5 space-y-1 text-sm">${h.blocked.map(x=>`<li><b>${esc(x.name)}</b>: ${x.why.map(w=>esc(BLOCKWHY[w]||w)).join('; ')}.</li>`).join('')}</ul></div>`:''}
  <div class="card p-5 mt-4 border-l-8 border-[#8c2318]">${sec('☠️','Never use (for anyone)','Documented harm','#8c2318')}<ul class="list-disc pl-5 space-y-1 text-sm">${G.never.map(n=>`<li><b>${esc(n[0])}:</b> ${esc(n[1])}</li>`).join('')}</ul></div>`}
 function pMove(G){return `<div class="grid gap-4">${G.move.stages.map((s,i)=>`<div class="card p-5 border-l-[10px]" style="border-left-color:#c0642b"><h3 class="font-serif text-2xl font-bold text-obsidian-900">🏃 Stage ${s}</h3><div class="text-xs uppercase tracking-wider text-[#c0642b] font-bold mb-1">${G.move.stages.length>1?(i===0?' · first weeks':i===1&&G.move.stages.length===2?' · later weeks':i===1?' · months 2–3':' · months 4–6'):''}</div>${list(G.move.base[s],'mt-2')}</div>`).join('')}
@@ -2578,7 +2658,7 @@ function drawTaxo(){const box=$('#taxo');if(!box)return;
 document.addEventListener('click',e=>{const t=e.target.closest('[data-tx]');if(t){TX.gid=TX.gid===t.dataset.tx?null:t.dataset.tx;drawTaxo();return}const p=e.target.closest('[data-plan]');if(p){const id=p.dataset.plan;location.hash='#plan';setTimeout(()=>{startWizard(id==='custom'?null:id);if(id==='custom'){PL.W.gid='cardio';PL.W.cid='custom';PL.W.cg='cardio';plRender()}},30)}});
 
 (function(){const hv=document.getElementById('view-home');if(hv){const keys=['salmon','olive','kale','berries','lentils','oats','walnuts','ginger'];const d=document.createElement('section');d.className='mt-12';d.innerHTML='<span class="text-xs font-semibold uppercase tracking-widest text-champagne-600">Food, plants and movement</span><h2 class="text-3xl sm:text-4xl font-bold text-obsidian-900 mt-1">What this looks like on the plate</h2><p class="mt-2 text-stone-700 max-w-3xl">Most natural-health advice, in practice, is food, plants, movement and sleep. A few of the staples that appear throughout the guide.</p><div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">'+keys.map(k=>fig(imgBy(k),'h-44')).join('')+'</div>';hv.appendChild(d)}
-const sv=document.getElementById('view-sources');if(sv){const c=document.createElement('div');c.className='card p-6 mt-6';c.innerHTML='<h3 class="text-2xl font-semibold text-obsidian-900">Image credits</h3><p class="text-sm text-stone-700 mt-1">Photographs are from Wikimedia Commons under the licences shown (CC0 and public domain need no credit; others are credited as required). Click a title for the original file page.</p><ul class="mt-3 text-sm space-y-1.5 list-disc pl-5">'+IMGS.concat(Object.values(ANAT)).map(m=>`<li><a class="underline" href="${imgPage(m)}" target="_blank" rel="noopener noreferrer">${m.n}</a>: ${m.a}, ${m.l}</li>`).join('')+'</ul>';sv.appendChild(c)}})();
+const sv=document.getElementById('view-sources');if(sv){const c=document.createElement('div');c.className='card p-6 mt-6';c.innerHTML='<h3 class="text-2xl font-semibold text-obsidian-900">Image credits</h3><p class="text-sm text-stone-700 mt-1">Photographs are from Wikimedia Commons under the licences shown (CC0 and public domain need no credit; others are credited as required). Click a title for the original file page. Pictures in the Food &amp; Botanical Database and in your plan\'s herb cards are each item\'s lead image from its Wikipedia article, loaded live (free licences; follow the article to the file page for author and licence).</p><ul class="mt-3 text-sm space-y-1.5 list-disc pl-5">'+IMGS.concat(Object.values(ANAT)).map(m=>`<li><a class="underline" href="${imgPage(m)}" target="_blank" rel="noopener noreferrer">${m.n}</a>: ${m.a}, ${m.l}</li>`).join('')+'</ul>';sv.appendChild(c)}})();
 drawTaxo();plInit();
 drawApo();initSim();drawSources();setLens('both');route();
 </script>
